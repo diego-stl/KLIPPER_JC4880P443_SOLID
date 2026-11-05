@@ -1,0 +1,266 @@
+[
+  {
+    "id": 1,
+    "label": "IMPRIMIR",
+    "name": "print",
+    "color": "#00e676",
+    "codepoint": 64181,
+    "size": 64
+  },
+  {
+    "id": 2,
+    "label": "MOVER / TOOLHEAD",
+    "name": "arrows",
+    "color": "#00c9f4",
+    "codepoint": 61901,
+    "size": 64
+  },
+  {
+    "id": 3,
+    "label": "ÚLTIMO TRABAJO",
+    "name": "file-circle-info",
+    "color": "#00c9f4",
+    "codepoint": 63052,
+    "size": 64
+  },
+  {
+    "id": 4,
+    "label": "AJUSTES",
+    "name": "settings",
+    "color": "#00c9f4",
+    "codepoint": 64428,
+    "size": 64
+  },
+  {
+    "id": 5,
+    "label": "MACROS",
+    "name": "square-terminal",
+    "color": "#00c9f4",
+    "codepoint": 64676,
+    "size": 64
+  },
+  {
+    "id": 6,
+    "label": "PARADA",
+    "name": "stop-circle",
+    "color": "#ff304d",
+    "codepoint": 64720,
+    "size": 64
+  },
+  {
+    "id": 7,
+    "label": "PAUSAR",
+    "name": "pause",
+    "color": "#ff9d00",
+    "codepoint": 63996,
+    "size": 64
+  },
+  {
+    "id": 8,
+    "label": "REANUDAR / EJECUTAR",
+    "name": "play",
+    "color": "#ffd740",
+    "codepoint": 64127,
+    "size": 64
+  },
+  {
+    "id": 9,
+    "label": "CANCELAR",
+    "name": "cross-circle",
+    "color": "#ff304d",
+    "codepoint": 62698,
+    "size": 64
+  },
+  {
+    "id": 10,
+    "label": "EXCLUIR OBJETOS",
+    "name": "layer-minus",
+    "color": "#00c9f4",
+    "codepoint": 63597,
+    "size": 64
+  },
+  {
+    "id": 11,
+    "label": "EXTRUIR",
+    "name": "arrow-to-bottom",
+    "color": "#00c9f4",
+    "codepoint": 61861,
+    "size": 64
+  },
+  {
+    "id": 12,
+    "label": "RETRAER",
+    "name": "arrow-from-bottom",
+    "color": "#00c9f4",
+    "codepoint": 61841,
+    "size": 64
+  },
+  {
+    "id": 13,
+    "label": "BOQUILLA",
+    "name": "temperature-high",
+    "color": "#ff9d00",
+    "source": {
+      "file": "boquilla-1518427.png",
+      "id": 1518427,
+      "url": "https://www.magnific.com/es/icono/alfiler_1518427"
+    },
+    "size": 64
+  },
+  {
+    "id": 14,
+    "label": "CAMA",
+    "name": "heat",
+    "color": "#ff9d00",
+    "source": {
+      "file": "cama-952538.png",
+      "id": 952538,
+      "url": "https://www.magnific.com/es/icono/caliente_952538"
+    },
+    "size": 64
+  },
+  {
+    "id": 15,
+    "label": "HOMING",
+    "name": "home",
+    "color": "#00e676",
+    "codepoint": 63405,
+    "size": 64
+  },
+  {
+    "id": 16,
+    "label": "REINICIAR KLIPPER",
+    "name": "refresh",
+    "color": "#00c9f4",
+    "codepoint": 64274,
+    "size": 64
+  },
+  {
+    "id": 17,
+    "label": "APAGAR HOST",
+    "name": "power",
+    "color": "#ff304d",
+    "codepoint": 64168,
+    "size": 64
+  },
+  {
+    "id": 18,
+    "label": "VOLVER",
+    "name": "arrow-left",
+    "color": "#00c9f4",
+    "codepoint": 61848,
+    "size": 64
+  },
+  {
+    "id": 19,
+    "label": "WI-FI",
+    "name": "wifi",
+    "color": "#00c9f4",
+    "codepoint": 65246,
+    "size": 64
+  },
+  {
+    "id": 20,
+    "label": "DETALLES",
+    "name": "info",
+    "color": "#00c9f4",
+    "codepoint": 63487,
+    "size": 64
+  },
+  {
+    "id": 21,
+    "label": "AUMENTAR",
+    "name": "plus",
+    "color": "#00c9f4",
+    "codepoint": 64140,
+    "size": 64
+  },
+  {
+    "id": 22,
+    "label": "DISMINUIR",
+    "name": "minus",
+    "color": "#00c9f4",
+    "codepoint": 63806,
+    "size": 64
+  },
+  {
+    "id": 23,
+    "label": "BORRAR",
+    "name": "delete",
+    "color": "#00c9f4",
+    "codepoint": 62753,
+    "size": 64
+  },
+  {
+    "id": 24,
+    "label": "IZQUIERDA / X−",
+    "name": "angle-left",
+    "color": "#00c9f4",
+    "codepoint": 61778,
+    "size": 64
+  },
+  {
+    "id": 25,
+    "label": "DERECHA / X+",
+    "name": "angle-right",
+    "color": "#00c9f4",
+    "codepoint": 61779,
+    "size": 64
+  },
+  {
+    "id": 26,
+    "label": "ARRIBA / Y+",
+    "name": "angle-up",
+    "color": "#00c9f4",
+    "codepoint": 61788,
+    "size": 64
+  },
+  {
+    "id": 27,
+    "label": "ABAJO / Y−",
+    "name": "angle-down",
+    "color": "#00c9f4",
+    "codepoint": 61777,
+    "size": 64
+  },
+  {
+    "id": 28,
+    "label": "G-CODES",
+    "name": "file-code",
+    "color": "#00c9f4",
+    "codepoint": 63054,
+    "size": 64
+  },
+  {
+    "id": 29,
+    "label": "AUDIO",
+    "name": "volume",
+    "color": "#00c9f4",
+    "codepoint": 65192,
+    "size": 64
+  },
+  {
+    "id": 30,
+    "label": "SILENCIO",
+    "name": "volume-slash",
+    "color": "#00c9f4",
+    "codepoint": 65191,
+    "size": 64
+  },
+  {
+    "id": 31,
+    "label": "ENFRIAR",
+    "name": "snowflake",
+    "color": "#00c9f4",
+    "codepoint": 64558,
+    "size": 64
+  },
+  {
+    "id": 32,
+    "label": "MOTORES OFF",
+    "name": "bolt-slash",
+    "color": "#00c9f4",
+    "codepoint": 62057,
+    "size": 64
+  }
+]

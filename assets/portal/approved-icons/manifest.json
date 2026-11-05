@@ -1,0 +1,363 @@
+{
+  "approval": "User approved lamina-iconos-logos-v2.png in this chat",
+  "size": 64,
+  "selection_sha256": "2b350733d1bb91bd07cb2741426f2176dcd3aa54f04c66e931591ba6efbb3520",
+  "font_sha256": "c50964d8b7ba5b6989ececf56fa9bf1aeddcd6b397a3239f84d7989c2281cf4b",
+  "icons": [
+    {
+      "name": "print",
+      "approved_id": 1,
+      "file": "print.png",
+      "sha256": "b84cb094f42a9a4db9e1f2b1338e00489307fec477db5b4547f499c8265c1ec1",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "print",
+        "codepoint": 64181
+      }
+    },
+    {
+      "name": "move",
+      "approved_id": 2,
+      "file": "move.png",
+      "sha256": "439670d9f86dc18e527bc4a7ff66f03718d94a66d3290a19ce16c13b6dc8cbb7",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrows",
+        "codepoint": 61901
+      }
+    },
+    {
+      "name": "last_job",
+      "approved_id": 3,
+      "file": "last_job.png",
+      "sha256": "54bd27e1b492ad10f0a9fdaba37a7f4744d03fb14acc471d7c426d2e1ff7f14a",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "file-circle-info",
+        "codepoint": 63052
+      }
+    },
+    {
+      "name": "settings",
+      "approved_id": 4,
+      "file": "settings.png",
+      "sha256": "6c3a5821b645f67eff7d303eb718007011d587dbaa8972b377af9684a61009be",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "settings",
+        "codepoint": 64428
+      }
+    },
+    {
+      "name": "macro",
+      "approved_id": 5,
+      "file": "macro.png",
+      "sha256": "8b7313768c7c16309bc0b75582cb4711d69bfcbde3d84fbcb2441b3fb1ff2300",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "square-terminal",
+        "codepoint": 64676
+      }
+    },
+    {
+      "name": "stop",
+      "approved_id": 6,
+      "file": "stop.png",
+      "sha256": "a96da9a703e94f0b5efbb1b218fa6f346d2e32fcc00e0ad7f8ce08e9b56e1fb7",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "stop-circle",
+        "codepoint": 64720
+      }
+    },
+    {
+      "name": "pause",
+      "approved_id": 7,
+      "file": "pause.png",
+      "sha256": "1b754a2352983b4a65d1eba806d23b2a1aeb5c88c389bb548b272b014e7a816c",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "pause",
+        "codepoint": 63996
+      }
+    },
+    {
+      "name": "play",
+      "approved_id": 8,
+      "file": "play.png",
+      "sha256": "4475dbe23019ad804d9ff6f4d63ae736c9b61ad336b0df51740816d102d111a0",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "play",
+        "codepoint": 64127
+      }
+    },
+    {
+      "name": "cancel",
+      "approved_id": 9,
+      "file": "cancel.png",
+      "sha256": "8c8d29114fee1cc076d1ee8d376485febe9d4a080affac089a4efa577dce5e6e",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "cross-circle",
+        "codepoint": 62698
+      }
+    },
+    {
+      "name": "exclude",
+      "approved_id": 10,
+      "file": "exclude.png",
+      "sha256": "f0cc85fcde1d2a154f754d4cec9385535c20c510dd664e5792c72628057a24b5",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "layer-minus",
+        "codepoint": 63597
+      }
+    },
+    {
+      "name": "extrude",
+      "approved_id": 11,
+      "file": "extrude.png",
+      "sha256": "01f7ae6f95271e73d35f299e8e45d0c3357e5400d29b008bd1a79b381cb3dc93",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrow-to-bottom",
+        "codepoint": 61861
+      }
+    },
+    {
+      "name": "retract",
+      "approved_id": 12,
+      "file": "retract.png",
+      "sha256": "9c63813f1a891881723fea1a3f885edd8eddb447ab28c3d99a116c358800b2ec",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrow-from-bottom",
+        "codepoint": 61841
+      }
+    },
+    {
+      "name": "nozzle",
+      "approved_id": 13,
+      "file": "nozzle.png",
+      "sha256": "082d96e1473e9d45dc65d2f615e23b6035ffa12a9856fc121457e92565c40bd5",
+      "source": {
+        "file": "boquilla-1518427.png",
+        "id": 1518427,
+        "url": "https://www.magnific.com/es/icono/alfiler_1518427",
+        "sha256": "464e7e707f3cefd16eb70ae5a2c758a9788b71573032894f2cac30c6563eaaf4"
+      }
+    },
+    {
+      "name": "bed",
+      "approved_id": 14,
+      "file": "bed.png",
+      "sha256": "f6f32a4b1b54b3cba0f081e53c81d9599612be19c32db07cb1c424a257d8967b",
+      "source": {
+        "file": "cama-952538.png",
+        "id": 952538,
+        "url": "https://www.magnific.com/es/icono/caliente_952538",
+        "sha256": "17ca236fb62400f76a522d1a0bda82d2cd396bdd8790acdc122b89c5c2c60184"
+      }
+    },
+    {
+      "name": "home",
+      "approved_id": 15,
+      "file": "home.png",
+      "sha256": "8160186a369c68d15559e57f6f20731540506ed5647f52910bbcd64085017395",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "home",
+        "codepoint": 63405
+      }
+    },
+    {
+      "name": "refresh",
+      "approved_id": 16,
+      "file": "refresh.png",
+      "sha256": "fb70ba683776f7f4271830708c1287381e3e30eab4732abe7cc87a5b2797feeb",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "refresh",
+        "codepoint": 64274
+      }
+    },
+    {
+      "name": "power",
+      "approved_id": 17,
+      "file": "power.png",
+      "sha256": "3f5af9df4a0140e3d35d28cf592c6ddf76d1b070bcc9bc5fcdc6e526efa45cec",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "power",
+        "codepoint": 64168
+      }
+    },
+    {
+      "name": "back",
+      "approved_id": 18,
+      "file": "back.png",
+      "sha256": "a0fbb984e2f51670fa8653f76b27f34ec48b6323498340a047140ee7ec2d0cd8",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrow-left",
+        "codepoint": 61848
+      }
+    },
+    {
+      "name": "wifi",
+      "approved_id": 19,
+      "file": "wifi.png",
+      "sha256": "4a96749a4279b0be8b872ce738bda6c4925642bd469bf1b7c2a2990d87a3c826",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "wifi",
+        "codepoint": 65246
+      }
+    },
+    {
+      "name": "details",
+      "approved_id": 20,
+      "file": "details.png",
+      "sha256": "b7fb2a1de53f6ca4f833800c05a6dc9ff70c10dac9f6591e9fec935c96a5c8f8",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "info",
+        "codepoint": 63487
+      }
+    },
+    {
+      "name": "plus",
+      "approved_id": 21,
+      "file": "plus.png",
+      "sha256": "b15adb3e78a7bbcefd58a56aa7634579520b0df8721c05fe889ed5548e8f0ffa",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "plus",
+        "codepoint": 64140
+      }
+    },
+    {
+      "name": "minus",
+      "approved_id": 22,
+      "file": "minus.png",
+      "sha256": "2f26d284aaf2d2daf8896c68dfa249229c58bd99c266ee01f2d22d6525e9fb4f",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "minus",
+        "codepoint": 63806
+      }
+    },
+    {
+      "name": "backspace",
+      "approved_id": 23,
+      "file": "backspace.png",
+      "sha256": "5a3885f8db06177bda0e33c8a194090e4e0715deb1a1c3366dc0add5a0964247",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "delete",
+        "codepoint": 62753
+      }
+    },
+    {
+      "name": "left",
+      "approved_id": 24,
+      "file": "left.png",
+      "sha256": "98eda6559541a659a929bea8fdfa081e733ad5442ada3eefaf6d32136c97e3fb",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-left",
+        "codepoint": 61778
+      }
+    },
+    {
+      "name": "right",
+      "approved_id": 25,
+      "file": "right.png",
+      "sha256": "cebb4d8bef5c893393e007fcd368187ffec99b02c786a846bbded7ba75d49d95",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-right",
+        "codepoint": 61779
+      }
+    },
+    {
+      "name": "up",
+      "approved_id": 26,
+      "file": "up.png",
+      "sha256": "89caae74b2130fae1f6a67732b56b365c09a2bbdba1b2023ce2b338bf221cc0c",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-up",
+        "codepoint": 61788
+      }
+    },
+    {
+      "name": "down",
+      "approved_id": 27,
+      "file": "down.png",
+      "sha256": "364f72e48fe7ba9722c2f71fcd01e473bef3a71e851650b8ea1688a12bb4b445",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-down",
+        "codepoint": 61777
+      }
+    },
+    {
+      "name": "file",
+      "approved_id": 28,
+      "file": "file.png",
+      "sha256": "dcd95e3af027a5244ad53c6ed88ff856b2d293006659f154f1e1b1a5ee7e5474",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "file-code",
+        "codepoint": 63054
+      }
+    },
+    {
+      "name": "audio",
+      "approved_id": 29,
+      "file": "audio.png",
+      "sha256": "7bd130330fd659ed0f21b870a9b80a9a5aa884f1a3ea5b8d8672069b76dc203d",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "volume",
+        "codepoint": 65192
+      }
+    },
+    {
+      "name": "mute",
+      "approved_id": 30,
+      "file": "mute.png",
+      "sha256": "4722b97d81abaf2429f3f8d9bad2b9d319d781086def11df1f5fc6876d1537d8",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "volume-slash",
+        "codepoint": 65191
+      }
+    },
+    {
+      "name": "cool",
+      "approved_id": 31,
+      "file": "cool.png",
+      "sha256": "066774d80c7d0ea637b3aa40438b6bba8709f4ddb180cd824b57edcc4b399676",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "snowflake",
+        "codepoint": 64558
+      }
+    },
+    {
+      "name": "motors_off",
+      "approved_id": 32,
+      "file": "motors_off.png",
+      "sha256": "68f6b9546b399c37c633af1fe81b8f28bc8a5259086fd9e6583573306f8704b1",
+      "source": {
+        "family": "UIcons Solid Rounded",
+        "name": "bolt-slash",
+        "codepoint": 62057
+      }
+    }
+  ],
+  "renderer": "156.0.4314.42"
+}

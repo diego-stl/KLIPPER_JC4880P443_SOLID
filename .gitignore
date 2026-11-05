@@ -1,0 +1,33 @@
+/build/
+/build-wifi/
+/sdkconfig.wifi.old
+/sdkconfig.old
+/managed_components/
+/eim.log
+/.cache/
+/backups/
+
+# Configuracion y temporales de cada equipo.
+/.vscode/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.tmp
+*.swp
+Thumbs.db
+.DS_Store
+
+# Resultados regenerables del simulador.
+/tests/portal_host/output/
+
+# Conservar informes y capturas, sin publicar volcados, logs ni respaldos.
+/verification/**
+!/verification/**/
+!/verification/**/*.md
+!/verification/**/*.png
+/verification/**/before/
+/verification/**/removed/
+/verification/**/firmware-*/
+/verification/**/first-attempt/

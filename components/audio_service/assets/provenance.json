@@ -1,0 +1,233 @@
+{
+  "source_directory": "D:\\PROYECTOS\\DISPOSITIVOS\\ES3C28P ESP32-S3 DISPLAY\\PROYECTOS\\KLIPPER_ES3C28P_SOLID\\src\\services",
+  "transformation": "Original WAV bytes unchanged; remove Arduino pgmspace include/PROGMEM, make const arrays translation-unit local. No transcoding, normalization, trimming or license grant inferred.",
+  "license_note": "User-provided project assets. Original headers contain no explicit asset license; no license is fabricated.",
+  "clips": [
+    {
+      "name": "wakeup",
+      "source_file": "glados_wakeup.h",
+      "source_header_sha256": "a9c66b5050544a89d0a29c56f50d7efc724411d419f119c6f535d6bb808b8d4e",
+      "wav_sha256": "a028ae972ff837b300df69c347650838071ff05f22439d2f99563e074d966154",
+      "wav_bytes": 96918,
+      "pcm_bytes": 96768,
+      "pcm_samples": 48384,
+      "duration_seconds": 2.1942857142857144,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 96768
+        },
+        {
+          "id": "LIST",
+          "offset": 96812,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 96866,
+          "size": 44
+        }
+      ]
+    },
+    {
+      "name": "printing",
+      "source_file": "glados_imprimiendo.h",
+      "source_header_sha256": "ff0c8c80b14edea2ed8a305a82fb7a9f0624a027e569ce33e4afb08eef9248f0",
+      "wav_sha256": "77258263c2c1e15e9eb8e2dfa5a8bb8dd597a32ad67091f63038277b96d1b831",
+      "wav_bytes": 75134,
+      "pcm_bytes": 74984,
+      "pcm_samples": 37492,
+      "duration_seconds": 1.7003174603174602,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 74984
+        },
+        {
+          "id": "LIST",
+          "offset": 75028,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 75082,
+          "size": 44
+        }
+      ]
+    },
+    {
+      "name": "pause",
+      "source_file": "glados_pause.h",
+      "source_header_sha256": "671d58a70d58e51bc88b32e3df3f33d23aca2cb9761f557dda77629853bfe6f8",
+      "wav_sha256": "ba02d676e13e50feb1756e2590f9f64faa51993a94745ff0aa80f548899f4da6",
+      "wav_bytes": 42774,
+      "pcm_bytes": 42624,
+      "pcm_samples": 21312,
+      "duration_seconds": 0.966530612244898,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 42624
+        },
+        {
+          "id": "LIST",
+          "offset": 42668,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 42722,
+          "size": 44
+        }
+      ]
+    },
+    {
+      "name": "cancel",
+      "source_file": "glados_cancelar.h",
+      "source_header_sha256": "a5786bec9a53d7d8656194d8d3b761d38c49eef13fac67f94e632e3f9945c525",
+      "wav_sha256": "47ca4b69aa73e8eaa629f20bb65e605894cab18660e5ff5f26de62ff94365d26",
+      "wav_bytes": 260898,
+      "pcm_bytes": 260748,
+      "pcm_samples": 130374,
+      "duration_seconds": 5.91265306122449,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 260748
+        },
+        {
+          "id": "LIST",
+          "offset": 260792,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 260846,
+          "size": 44
+        }
+      ]
+    },
+    {
+      "name": "error",
+      "source_file": "glados_error.h",
+      "source_header_sha256": "19840bf55436ad18c03d812bf18aed4e3b4b9d40866e835ef34de511c1a1b75d",
+      "wav_sha256": "d8d70210f0df67135f00c39e28a03b449877e0df8cc2fed5c34708433b1fc759",
+      "wav_bytes": 68206,
+      "pcm_bytes": 68056,
+      "pcm_samples": 34028,
+      "duration_seconds": 1.5432199546485261,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 68056
+        },
+        {
+          "id": "LIST",
+          "offset": 68100,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 68154,
+          "size": 44
+        }
+      ]
+    },
+    {
+      "name": "complete",
+      "source_file": "glados_completado.h",
+      "source_header_sha256": "3a5f648207dbb137eae95a537e02958223ba6fbb231b3cc0461e6d62aa48313e",
+      "wav_sha256": "6c766b3e909cd7e506aef624544e909d6e1bb8f0eed68e5abf3670f247adca47",
+      "wav_bytes": 60054,
+      "pcm_bytes": 59904,
+      "pcm_samples": 29952,
+      "duration_seconds": 1.3583673469387756,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 59904
+        },
+        {
+          "id": "LIST",
+          "offset": 59948,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 60002,
+          "size": 44
+        }
+      ]
+    },
+    {
+      "name": "standby",
+      "source_file": "glados_stanby.h",
+      "source_header_sha256": "89f4558b96405d3aefedae7e4049254411bdc34b80773036b09f27c8ff1f2f9d",
+      "wav_sha256": "b76117ab471d8de1f1fc51dce0b357d40c751f83f1db7f9abf81e8853e7b29ce",
+      "wav_bytes": 36234,
+      "pcm_bytes": 36084,
+      "pcm_samples": 18042,
+      "duration_seconds": 0.8182312925170068,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "size": 16
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "size": 36084
+        },
+        {
+          "id": "LIST",
+          "offset": 36128,
+          "size": 46
+        },
+        {
+          "id": "id3 ",
+          "offset": 36182,
+          "size": 44
+        }
+      ]
+    }
+  ],
+  "total_wav_bytes": 640218,
+  "total_pcm_bytes": 639168
+}

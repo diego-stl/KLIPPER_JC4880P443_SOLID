@@ -1,0 +1,16 @@
+Modo: herramienta integrada ImageGen.
+Edición del icono Klipper según la nueva referencia del usuario.
+
+Use case: precise-object-edit.
+Asset type: improved Klipper square pictogram, version 2.
+Input image 1 is the EDIT TARGET, the previously generated square Klipper icon. Preserve its pure white opaque square canvas and straight black square border with sharp corners, the frame placement and thickness.
+Input image 2 is the USER'S CORRECT KLIPPER SYMBOL REFERENCE. Its symbol geometry takes absolute priority over the old symbol in image 1. Replace the entire inner symbol in image 1 with a precise, clean, geometrically faithful redraw of the black Klipper emblem in image 2, scaled down to fit comfortably inside the frame. The new reference is not merely an inspiration; faithfully retain its topology, proportions and all its white separation channels.
+Required symbol structure:
+- TWO BROAD BLACK DIAGONAL OUTER WINGS descending inward from upper left and upper right, with short flat horizontal top cutoffs and angular lower ends;
+- a DISTINCT, MUCH THINNER BLACK Y-SHAPED CENTRAL FILAMENT running along the inside of both wings;
+- TWO NARROW CONTINUOUS WHITE CHANNELS separating this thin black Y filament from the heavy outer wings, running all the way down both diagonal sides and into the short vertical neck;
+- the thin black central filament descends a short distance vertically and bends left into a short horizontal extrusion line, with a subtly rounded endpoint, exactly as in the new user reference.
+Do not collapse these separated components into a single thick Y. The original generated symbol is too tall and its center filament too thick: correct both by matching the wider, more compact reference.
+Composition: faithfully maintain the reference symbol's width-to-height proportion of approximately 1.7 to 1; center the complete mark optically inside the square frame, width approximately 70% of the total canvas, ample and balanced whitespace. Keep all tips fully inside the border with a clean white gap on each side. The resulting logo should look like the user's reference accurately resized inside the original Portal-style square frame.
+Finish: crisp mathematical edges, balanced equal white channel widths, smooth diagonals, solid black on white, industrial pictogram. Exactly one perfectly square image, no mockup or grid.
+Do not add text, the word Klipper, letters, colors, shading, gradients, texture, shadows, watermark or additional shapes.

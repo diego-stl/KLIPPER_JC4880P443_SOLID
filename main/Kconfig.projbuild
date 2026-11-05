@@ -1,0 +1,8 @@
+menu "Klipper JC4880P443"
+    config PANEL_ORIENTATION_TEST
+        bool "Compilar la prueba de orientacion sin aplicacion Klipper"
+        default n
+        help
+            Para la aplicacion normal dejar desactivado. La prueba requiere
+            desactivar Hosted/Wi-Fi y usar su configuracion respaldada.
+endmenu

@@ -1,0 +1,25 @@
+{
+  "source": "https://github.com/freepik-company/flaticon-uicons",
+  "commit": "01c7cf8e403afdf879ff56c99235a34df81db6a2",
+  "family": "Solid Rounded",
+  "prefix": "fi-sr",
+  "credit": "Uicons by Flaticon \u2014 https://www.flaticon.com/uicons",
+  "approval": "User approved lamina-iconos-logos-v2.png for firmware integration and flashing",
+  "files": {
+    "solid-rounded.css": {
+      "url": "https://raw.githubusercontent.com/freepik-company/flaticon-uicons/01c7cf8e403afdf879ff56c99235a34df81db6a2/src/uicons/css/solid/rounded.css",
+      "sha256": "915430f5a6d0bd8d65375b0dbdf22dee9dc626eb2d70a92b2ec20893d1bd7679",
+      "bytes": 232002
+    },
+    "uicons-solid-rounded.woff2": {
+      "url": "https://raw.githubusercontent.com/freepik-company/flaticon-uicons/01c7cf8e403afdf879ff56c99235a34df81db6a2/src/uicons/webfonts/uicons-solid-rounded.woff2",
+      "sha256": "c50964d8b7ba5b6989ececf56fa9bf1aeddcd6b397a3239f84d7989c2281cf4b",
+      "bytes": 321276
+    },
+    "LICENSE.txt": {
+      "url": "https://raw.githubusercontent.com/freepik-company/flaticon-uicons/01c7cf8e403afdf879ff56c99235a34df81db6a2/LICENSE",
+      "sha256": "fb5651df9951685a33e6e8a450d9cc1194956d641b46e2521493c5d7395ece4f",
+      "bytes": 3212
+    }
+  }
+}

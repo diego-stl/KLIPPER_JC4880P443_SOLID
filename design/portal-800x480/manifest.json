@@ -1,0 +1,157 @@
+{
+  "date": "2026-10-24",
+  "logicalSize": [
+    800,
+    480
+  ],
+  "theme": "PORTAL",
+  "type": "visual-proposal",
+  "deviceAccess": false,
+  "networkAccess": false,
+  "variants": [
+    {
+      "name": "startup",
+      "label": "Arranque",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "4a4a32d0f5fe2d54452e9e05eea5ac59f3248af5ba8b933b04109b93aec163e8"
+    },
+    {
+      "name": "standby",
+      "label": "Espera",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "192aca22b49417c8470df081ab5fb6aa0ec644b41ef0b4838b5f494d58e9c9af"
+    },
+    {
+      "name": "printing",
+      "label": "Impresión",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "eeb0e21f45671634ac308c691feb542e001cc6b53b004e00ba055357e1af1765"
+    },
+    {
+      "name": "paused",
+      "label": "Pausa",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "058b5921a820808ec634278b9c75f91c0cdb6f2c97345e1f884f51e806308f61"
+    },
+    {
+      "name": "toolhead",
+      "label": "Toolhead",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "2c0c5bc32b6cdd27013d23f197d8b9c64ef6f6b56ef33b13863b1d926afb1c71"
+    },
+    {
+      "name": "files",
+      "label": "G-codes",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "e320e47b910bf0b8c2e2e017b5b84ec90b988a0f0c89b4cdb8103be6d3c9323a"
+    },
+    {
+      "name": "macros",
+      "label": "Macros",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "0c912de14a4904c44337a0f306c1b26927723a1895d6f4ff3559516b1b2c125f"
+    },
+    {
+      "name": "exclude",
+      "label": "Excluir",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "b6ca0d5a7f80fc19fde2ddaa6ce867ed8551e6285051d09fe1eaba3e32f7b689"
+    },
+    {
+      "name": "settings",
+      "label": "Ajustes",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "fb14e8e0b7b5111b93c5a02f11d4b93436b781f7c0a525f35da569b33d4a788b"
+    },
+    {
+      "name": "error",
+      "label": "Error",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "5830e71de23a6a7f7d21cb46a42d9b70747ac5346b8a588a9a20df9de3106a65"
+    },
+    {
+      "name": "details",
+      "label": "Detalles",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "eed1b60b6addda2cd9800c76a987304d91de8aa8a604e137687ff81c4ceea04f"
+    },
+    {
+      "name": "orientation-r90",
+      "label": "Horizontal R90",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "f09fad2845ffca525f2ff834aabe83ebb1c6f74661a6602120e897ed12f5d9dd"
+    },
+    {
+      "name": "orientation-r270",
+      "label": "Horizontal R270",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "f55046887148e0198856c3771601cd0948976c1a14ac5c30b6a7d2336b5983b1"
+    },
+    {
+      "name": "confirm-emergency",
+      "label": "Confirmación de emergencia",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "be2b79f6efe764480d69f599da0759d960369bc3e9ab6809930c80456238be2b"
+    },
+    {
+      "name": "edit-target",
+      "label": "Editar objetivo",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "b179773b5cd2941589a2e70fadf50a346604348de0fd5c47170367fc274b74d7"
+    },
+    {
+      "name": "printing-thumbnail",
+      "label": "Impresión con miniatura de prueba",
+      "size": [
+        800,
+        480
+      ],
+      "pngSha256": "091c5525d17200128fabcf62bbb4438fa5287f42c0bf0702aa2ecde9feafec58"
+    }
+  ]
+}
