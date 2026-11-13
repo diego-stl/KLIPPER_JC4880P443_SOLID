@@ -1,0 +1,91 @@
+{
+  "description": "Cambios de geometria y estilo del PowerPoint de interfaz del 2026-11-10 sobre el contrato de mosaico.",
+  "cases": {
+    "view_00": {
+      "geometry_sha256": "b36c9ee93944d156171f6cb79a0b75087a9beed2bd4fb06a3809f6f5504697b9",
+      "widgets": 26,
+      "protected_styles": {
+        "sha256": "97cdb2c63729c99ff3c7ba447ca0fb8abbc0571a61671a7f1aee3d373ffe7dd1",
+        "control_records": 0,
+        "painted_scrollbars": 1
+      }
+    },
+    "view_01": {
+      "geometry_sha256": "407d70899089299c462f1371907c1c73c2f5a9cdc73b7133cfc25aba85a534b0"
+    },
+    "view_02": {
+      "geometry_sha256": "5d4eff7b38fa6377ffea1c19fa9849f4e07e05db9fb85da9ee77eecb501c6bf4",
+      "widgets": 45
+    },
+    "view_03": {
+      "geometry_sha256": "ae2029f686fcc9e6efeaf84c15b2bd132bb1fa1f1d312c3087e1205bfba58dec",
+      "widgets": 45
+    },
+    "view_04": {
+      "geometry_sha256": "6086a8a82cbecfa8d4ed427f06898e7631e513c4b077ca256f7e21ecd1f82805",
+      "widgets": 67
+    },
+    "view_08": {
+      "geometry_sha256": "56329ee409cbd8fb0550942f8046c564fce3d1e17c7d421d516aa83444e947f4",
+      "widgets": 32
+    },
+    "view_09": {
+      "geometry_sha256": "809017e7cfd77af85123a98d406892c855fa35675e044016ae38a5f10106e697"
+    },
+    "material_dropdown": {
+      "geometry_sha256": "fd2e9f8e3cff472d332e0bcac9f373860d84aa68c7b2604bc2807804d20db9e8",
+      "widgets": 67
+    },
+    "step_dropdown": {
+      "geometry_sha256": "b0b3afb75e76921b00b5bedc0c3d3c55e7819beaf73e47ed96d3e56cdcb26891",
+      "widgets": 67
+    },
+    "sleep_dropdown": {
+      "geometry_sha256": "0b88050fc62150f9b888273e953846f4e79c591cd0ed7d479b4bd0f6725d6f3d",
+      "widgets": 32
+    },
+    "sound_off": {
+      "geometry_sha256": "99ad0fe253ce70780e85296edc0f5a52cf9e01496e659beed7c3a0175fbb0745",
+      "widgets": 32
+    },
+    "confirm_cancel": {
+      "geometry_sha256": "66b15695ffa6e8c68acc9bb9c1a9b99a1235f63ce1ceb8dd39b57ec8b7372e01",
+      "widgets": 54
+    },
+    "confirm_emergency": {
+      "geometry_sha256": "e63f2b4b8b93a24ca8c0206d37eeb50542facdfcf0953d00808b8c81f25f6621"
+    },
+    "target_keypad": {
+      "geometry_sha256": "f427a9de33caeb46a7b382fb37f9fe353d5b8ab65abf115065c47777c40c0b85",
+      "widgets": 100
+    },
+    "tuning": {
+      "geometry_sha256": "a224a7029fde73a32d88cb5ed0d8c363432552fcaa52c73f45a78d726442bde9",
+      "widgets": 90
+    },
+    "wifi": {
+      "geometry_sha256": "30aecce3b4096e5a921014595f6454cae85dee16255eb30665197ef6abf037b1",
+      "widgets": 71
+    },
+    "wifi_keyboard": {
+      "geometry_sha256": "615c4aa207bfb0acec71038b6f62fb4ba484d99b5f6c5a6fc46b06f5c359a4f4",
+      "widgets": 71
+    },
+    "wifi_password": {
+      "geometry_sha256": "30e45a83e75865190d884414b73017bf7869bb573cd48b26adc84ac9894af57c",
+      "widgets": 71
+    },
+    "moonraker": {
+      "geometry_sha256": "394d65430cd5c5bcd93ca267f1cd38e2317626acc01534e6186019fb297c1510",
+      "widgets": 71
+    },
+    "moonraker_keyboard": {
+      "geometry_sha256": "d35c3d24630ccf53e0ac1be14baf09aea981fb7a3817c0d90889c1b6c86cf934",
+      "widgets": 71
+    },
+    "wifi_dropdown": {
+      "geometry_sha256": "3fc7dfc9e355121a6c6092eb18d2a9e3b4ee9dccc6e29b17de6b96b46bd9167f",
+      "widgets": 71
+    }
+  }
+}

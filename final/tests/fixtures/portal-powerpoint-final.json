@@ -1,0 +1,222 @@
+{
+  "description": "Geometría y estilos de JC4880P443 - Interfaz final.pptx.",
+  "reference_sha256": "b65d67bd59a74eb70edd32ed5d05c4a4e5335e9a4d8d4d3d7f2ccdff8e6186e1",
+  "cases": {
+    "view_00": {
+      "geometry_sha256": "9731950b6b454467df20dba8d514cd10d0d41812795f821cdd4506eef999514b",
+      "widgets": 25
+    },
+    "view_01": {
+      "geometry_sha256": "eb4896e1c60f2a5f81e57656de23f9c66c5fa76ff80c6b3a456e0218d7fdfe4b",
+      "widgets": 38
+    },
+    "view_02": {
+      "geometry_sha256": "28ef70203635a94994603fe3fd4a41eb695e59e7032c23b3d027ac0ee6a95f7d",
+      "widgets": 44
+    },
+    "view_03": {
+      "geometry_sha256": "6f3f3787cdd851c6ff902f79a8f872b041364e3efbc1194c8c77b9efa6be8995",
+      "widgets": 44
+    },
+    "view_04": {
+      "geometry_sha256": "29dbe67c49614d2066af086087461b618f0a5f6d2013236610600819d4d9d28b",
+      "widgets": 74,
+      "protected_styles": {
+        "sha256": "ec030fdbc7e7b331b74720289cdde0b9f101b892f379d2f8e4ac9e0ee73737df",
+        "control_records": 392,
+        "painted_scrollbars": 0
+      }
+    },
+    "view_05": {
+      "geometry_sha256": "7f65061d03d2b927c32446e57532bdfff0d084af7ca79e42a40d9c07f6735f66",
+      "widgets": 26,
+      "protected_styles": {
+        "sha256": "76cd47558d2ab03aec6c410d2d625205e367037e773839f357f5e64381087b35",
+        "control_records": 392,
+        "painted_scrollbars": 2
+      },
+      "text_button_pixels": {
+        "disabled_interior": "c59f52a0aba70b64215c358098f93ba6709ef51bd16000531afb815151ff4e69"
+      }
+    },
+    "view_06": {
+      "geometry_sha256": "bce3d30338e699124269f25fe1ef47697176b7f6096b2465c01522f4b839285f",
+      "protected_styles": {
+        "sha256": "aaac0f7477636ab01880ecaf07443d7b4e2ac23c50a16a4c624522551c762c1f",
+        "control_records": 294,
+        "painted_scrollbars": 1
+      }
+    },
+    "view_07": {
+      "geometry_sha256": "c0a3c7685ef08522fc8ae13b5f399116316a854bd376cbbb64a7b770d37c928e",
+      "protected_styles": {
+        "sha256": "b68f81b574e64e25264004f6e87f7e4e7d9327676318d27dc204e218804f96ad",
+        "control_records": 588,
+        "painted_scrollbars": 1
+      }
+    },
+    "view_08": {
+      "geometry_sha256": "b1e1e48d91ffac5ad92db6a94e1bdac7124e48df3885bd2d3d760eb187d06e4a",
+      "protected_styles": {
+        "sha256": "08d571f3b8cd16157f130043265894ff861e81cfb34d58d5d15de28b764cd590",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      }
+    },
+    "view_09": {
+      "geometry_sha256": "267881953f66c4be56f2e0f9c8e6a2ac74ab6580370c51dc9bd5b4566a588041",
+      "widgets": 22
+    },
+    "view_10": {
+      "geometry_sha256": "ab0b8da1f2170c2540c612d8a307223426340f4f77a9aa3bbf85c0f875f3ee1f",
+      "widgets": 24,
+      "protected_styles": {
+        "sha256": "d8019060bbb40df4cb737c21227c0546590d57e004fe047a721a75f56c41d4f1",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      }
+    },
+    "file_selected": {
+      "geometry_sha256": "c5be6b05ecf2b6ced188b0c9ded5bbfa52103cef6b105dadffb75846bf76fe79",
+      "widgets": 24,
+      "protected_styles": {
+        "sha256": "c6f0e9ef3354a188b56b193fcfcf5278e28e38bdd984c3186bfd79254d634f5d",
+        "control_records": 392,
+        "painted_scrollbars": 2
+      }
+    },
+    "macro_selected": {
+      "geometry_sha256": "bce3d30338e699124269f25fe1ef47697176b7f6096b2465c01522f4b839285f",
+      "protected_styles": {
+        "sha256": "ff13cb7ac9f1ab8987eee82baa821d9367bdd06cd18d523ec3115ccc0cebb453",
+        "control_records": 294,
+        "painted_scrollbars": 1
+      }
+    },
+    "object_selected": {
+      "geometry_sha256": "c0a3c7685ef08522fc8ae13b5f399116316a854bd376cbbb64a7b770d37c928e",
+      "protected_styles": {
+        "sha256": "100bf74a94207f50740e54ba68c4be5d1e4a214a239074fa5161fdf4e5fc8854",
+        "control_records": 588,
+        "painted_scrollbars": 1
+      }
+    },
+    "material_dropdown": {
+      "geometry_sha256": "e254b21f0a0533a30ff693334f62c1ebcdcb24a2a4072143e230dd15866f8e5c",
+      "widgets": 74,
+      "protected_styles": {
+        "sha256": "4d3186a2e57134c2208c07fb561f93a095abd8ae9d22c1ed16afcc4518634ffc",
+        "control_records": 490,
+        "painted_scrollbars": 0
+      }
+    },
+    "step_dropdown": {
+      "geometry_sha256": "8e8dd0c8abac47b1fd4bc3ba37d4736cd1a36ca5f00ad3912631c463541a0151",
+      "widgets": 74,
+      "protected_styles": {
+        "sha256": "4d3186a2e57134c2208c07fb561f93a095abd8ae9d22c1ed16afcc4518634ffc",
+        "control_records": 490,
+        "painted_scrollbars": 0
+      }
+    },
+    "sleep_dropdown": {
+      "geometry_sha256": "0594acb2db69cde8919f9f5fa161c6d5dccdbd74c6ce1f85e509cfd78c784617",
+      "protected_styles": {
+        "sha256": "f16c9a7c3ba22ce6556817073e42f0278b1191a65a5064be85a001a87f5d6e95",
+        "control_records": 294,
+        "painted_scrollbars": 0
+      }
+    },
+    "sound_off": {
+      "geometry_sha256": "e4146f4885f3bc0158c8f1325444db8084c0d7bc2681b151e3acdf02103635c6",
+      "protected_styles": {
+        "sha256": "08d571f3b8cd16157f130043265894ff861e81cfb34d58d5d15de28b764cd590",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      }
+    },
+    "confirm_cancel": {
+      "geometry_sha256": "8db826430e1170d1884198caa41314441acf9502db22520ac3d11b5885a99d81",
+      "protected_styles": {
+        "sha256": "ae1a6698a7547220b4e32aa023eee10484c2afbba6b569ced1d51c028c9861be",
+        "control_records": 196,
+        "painted_scrollbars": 1
+      }
+    },
+    "confirm_emergency": {
+      "geometry_sha256": "f93dba2792b6d8a72dc4f10cc4a1bbee1ec4ffa1be4a4acfd161f2b3facb9393",
+      "widgets": 48,
+      "protected_styles": {
+        "sha256": "ae1a6698a7547220b4e32aa023eee10484c2afbba6b569ced1d51c028c9861be",
+        "control_records": 196,
+        "painted_scrollbars": 1
+      }
+    },
+    "target_keypad": {
+      "geometry_sha256": "356efe6c1badf2b5663d0687efe83123fdb5a15da0c7f5357f8b2a86cf9649b1",
+      "widgets": 107,
+      "protected_styles": {
+        "sha256": "a4860abbb62f24b03c099b8fc4798c24c6c2b41ad60dbdc79ed216cc92632d05",
+        "control_records": 1764,
+        "painted_scrollbars": 0
+      }
+    },
+    "tuning": {
+      "geometry_sha256": "1ad7a2e18e66c685359e941e6cf1dd9330fdb4adc2ffc60370cf181ed9e55706",
+      "widgets": 89,
+      "protected_styles": {
+        "sha256": "15f3dadae85c75d423940869f35a3593e84946062caf8482207b8bbabbbb0d6a",
+        "control_records": 392,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi": {
+      "geometry_sha256": "b6ad0f640d66d5a7f60fbc9c92befe43b6cae3a6e2d14b26429be53a38c0e242",
+      "protected_styles": {
+        "sha256": "51ac65d02ca3416f21c93b14c9873874529308ae0a5da7b41c0951c4a93d8112",
+        "control_records": 931,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi_keyboard": {
+      "geometry_sha256": "af2d1831375d139151e3cc54caf53a993b5e5911bd1d586852284d89d4736349",
+      "protected_styles": {
+        "sha256": "96667d9d880593105cd862838d11ba55b6859ac358975c084073976e20c77e90",
+        "control_records": 980,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi_password": {
+      "geometry_sha256": "3a8a97d3327f41d38ba39fdfa5b32448f1a96ff6e55939cc7e62a5f185e113f7",
+      "protected_styles": {
+        "sha256": "96667d9d880593105cd862838d11ba55b6859ac358975c084073976e20c77e90",
+        "control_records": 980,
+        "painted_scrollbars": 0
+      }
+    },
+    "moonraker": {
+      "geometry_sha256": "b75ce25f05d8562be77892a9e74742eaadc4445177974253f1a1141a0b52198a",
+      "protected_styles": {
+        "sha256": "a5da9f70ed404e389c213ddc1689dfef85a365e201d4d1f7d207c1b135d267b2",
+        "control_records": 882,
+        "painted_scrollbars": 0
+      }
+    },
+    "moonraker_keyboard": {
+      "geometry_sha256": "6964c0310f2be9712d9317735bf8412fc033e22b052b071eb87ea328fbf5dbaf",
+      "protected_styles": {
+        "sha256": "4664858a3579782f532ce7bae82a7561f9e4e6cb36acb1be37a900325b498561",
+        "control_records": 931,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi_dropdown": {
+      "geometry_sha256": "ba0b48bad1a835cb50720452fa8d700b9da1bcd7e6f9ce62d1e6735cf490a1c5",
+      "protected_styles": {
+        "sha256": "d554dfc49b97d7e4e87a4918e76242002d1ab5fd0ce64f2b0a4d281d9c5bfb79",
+        "control_records": 1029,
+        "painted_scrollbars": 0
+      }
+    }
+  }
+}

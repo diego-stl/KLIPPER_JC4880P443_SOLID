@@ -1,0 +1,186 @@
+{
+  "source_sha256": {
+    "components\\portal_ui\\portal_network_settings.c": "4b99a676ca4f75e72607ea23f6870e39e781c43c6c6cb6d20386a19db75d81e9",
+    "components\\portal_ui\\portal_ui.c": "d7486a37aef371129473e1e53b254cac8240c4f06cc5d02c7fccb82e2833c177",
+    "components\\portal_assets\\portal_assets.c": "cdcc996f3355223ebc6944426cdf483145f3eadde3ad289add08356012aa0e3b",
+    "tools\\render_portal_firmware.py": "146acacc7f639da8f5d8a5dad4c50034419b05e9a28f064627edd95cd2c3bf7b",
+    "tests\\portal_host\\lv_conf.h": "4ac852b01589023b2adb3dabbf3a59b257b12bfdccb178aa0d853c00a99a3ad6",
+    "tests\\portal_host\\portal_host.c": "41ca1ea26581ca2041e117e0ec30dec70819272b28c44e32644373ab12841e60",
+    "components\\portal_ui\\include\\portal_ui.h": "4235784394b6697b10ecac5958cbd3858f8f042e511818b0a40a73067f10e09b",
+    "components\\portal_ui\\portal_network_settings.h": "a746ffad4da8232f690040a4830cd63b673976abfc693490bb0787760c2b2f22",
+    "components\\portal_assets\\include\\portal_assets.h": "384597a46ff4d9725817929d40e13f29bcc5d224be3f5c077feafa427e7f627f",
+    "components\\device_network\\include\\device_network.h": "8536b3aee5979675165e625be269f23928ab419152769ccd35faef1ec5eb0e14",
+    "components\\device_network\\network_validation.h": "5c76e671162de5708c23b16a79afffa5f6ad67d8e49b39d66be1810fcf573768",
+    "components\\device_network\\serial_menu.h": "0a151c132d70d19f8b332da466751ee29356c729e1128de1357ba306d581bf69",
+    "components\\klipper_client\\include\\klipper_client.h": "39d8ff3557daaffcc5a97f6cb3a23f9d2b93b1865b3b0b8a9e444026cb3c26a5",
+    "components\\klipper_client\\include\\klipper_tuning.h": "849b33f32387814d226077677016f7698e6b74be10916c29ef2a518b32be8435",
+    "components\\klipper_client\\private\\client_core.h": "8e58c8961a42d69f7330ae0f46372632cffddbfdeeba0e7d8cfde51dbac03608",
+    "components\\klipper_client\\private\\CommandBatch.h": "893f53c289e1c335f0e320b739ebdf3438437f2b1c6307ba049b8379625d6e11",
+    "components\\klipper_client\\private\\CommandStatus.h": "503cfe7fd50e221b7d9afd6b74f2da7228a3b3d93cdceced7ac9097562ffc3a1",
+    "components\\klipper_client\\private\\JobPolicy.h": "75153017ed990dcb9c561ba2327a173339d865c93b7ef14e195b788627f5ac9f",
+    "components\\klipper_client\\private\\KlipperTransfer.h": "b9d44c118dc46c3beaba75f47087668f1c5ff31ec168cf34cba8012f1c20192f",
+    "components\\klipper_client\\private\\MetadataRules.h": "acf62f6f21d1173817b2617417f8712601d3acf779f150d10ec2a55afab02163",
+    "components\\klipper_client\\private\\MoonrakerStatus.h": "58ebae646cd0bc8f5c99af1b2f9606e1203f569bb518ef398def907075944414",
+    "components\\klipper_client\\private\\NumericRules.h": "2cd7bd395de4d82e1e85f00f6b9e62e2c3411e0985786f9a46710cb29e704bbc",
+    "components\\klipper_client\\private\\PrintTuning.h": "d79730d5525940e5da7525babf624a481ad938499f72faf493b4949991487ac0",
+    "components\\klipper_client\\private\\QueryPolicy.h": "48d68be4751a170151ea203210d690eed3c56dd73719b013c2aa972fb1c998cf",
+    "components\\board_jc4880\\include\\board_config.h": "6359847abec1076631f4385d0cdfa628f19b70283720499d0e0504eac96ee136",
+    "components\\board_jc4880\\include\\board_display.h": "beebdd72e7aeb9421f84d34f633e9049b12721e78e4d0a7c58707c3ff0d78d48",
+    "components\\board_jc4880\\include\\board_touch.h": "fbdea9ac8e16d44f4a7605206a505188957a2b3ee2509d5d6d89163009bdc8b9",
+    "components\\audio_service\\include\\audio_clips.h": "3afb0bc95694cee2f1bf69383d3850f4edbbf6368f62e6d2f4a8a491a89af0fd",
+    "components\\audio_service\\include\\audio_service.h": "aa9e1c364010166e997ad1118f8030c9823c068538d8f86fce567bc1b8d90448",
+    "components\\audio_events\\audio_events.c": "161ba6deb743441468f11e38e618171e14be5edc5c809b8e201d50562f5d0614",
+    "components\\audio_events\\audio_events_logic.h": "d66166d309be2c80466035844864dc911d3de12c27fc955ec93e381e76d5b269",
+    "components\\audio_events\\include\\audio_events.h": "5ab39227b79fefb5401082a9c5a330a7b42fb2fda28211a63e6a93129531e5a6",
+    "tests\\portal_host\\esp_err.h": "4bc5765d240fd3bcf8e0ba20c14ca4c074af69b151c7dc9d0ef7088d3bcd8b56",
+    "tests\\portal_host\\esp_heap_caps.h": "357013e18de89830367e9f2424b5837659ea1d9d67a23e17ce600d9e4d3ac38b",
+    "tests\\portal_host\\esp_log.h": "5a6d0ad9d2cbfe78f343574a778a3301d7a40e7634c6ee3751413d2518eef902",
+    "tests\\portal_host\\esp_timer.h": "82a7c14acf5d1cdcbea1b23bab880c69562da88013adc34ff5f2ae2115fb08d1",
+    "tests\\portal_host\\fixtures_png.h": "3789a8a3d8b59b0588511f20766c5948f49656df5c2eedad3b3812658cbd3e47",
+    "tests\\portal_host\\freertos\\FreeRTOS.h": "471bb5941039d7c50d8c4cd0a22c11d1d3b88d554629991f8c85d56fd1b28dd9"
+  },
+  "cases": {
+    "view_00": {
+      "sha256": "b1b27fd4d9911eccfe59822967e042e83c00024bc57065dfe8b3461eb8e52e7d",
+      "control_records": 147,
+      "painted_scrollbars": 0
+    },
+    "view_01": {
+      "sha256": "24700f4d95eb0b0e300b04549ed4a5006821f95303155a3acf80a73870507007",
+      "control_records": 882,
+      "painted_scrollbars": 0
+    },
+    "view_02": {
+      "sha256": "d5cb53ecf6c0fb70360365005d203b3eabe79991bf263e70d8ca3ea4671c48a8",
+      "control_records": 882,
+      "painted_scrollbars": 0
+    },
+    "view_03": {
+      "sha256": "2baede827302d56d43847b9b632ec65848c966c3b933c0dafde74db65ff953c4",
+      "control_records": 882,
+      "painted_scrollbars": 0
+    },
+    "view_04": {
+      "sha256": "55451bed45d071b8fbccaacbe6ba61c3afef01ecd35e7d63583cbb2d5b947830",
+      "control_records": 2009,
+      "painted_scrollbars": 0
+    },
+    "view_05": {
+      "sha256": "33b1ea75a449b7b5f2d5e0ae01ea0d566f301284f6876e0739cf816cd1aca77f",
+      "control_records": 392,
+      "painted_scrollbars": 2
+    },
+    "view_06": {
+      "sha256": "774b981e81f9b25b185a91c8242f18cc233c6624c0c04001316e7a566f6d65f6",
+      "control_records": 441,
+      "painted_scrollbars": 1
+    },
+    "view_07": {
+      "sha256": "8f43dd2f75c6fb7ed071063326a4d4f2bf0df67d9225030b9b2f3cddda0e83ad",
+      "control_records": 735,
+      "painted_scrollbars": 1
+    },
+    "view_08": {
+      "sha256": "cb5fed94186058ad7026048ab83e86e94677305b00523765185d8fdfe1d4bad3",
+      "control_records": 490,
+      "painted_scrollbars": 0
+    },
+    "view_09": {
+      "sha256": "c6231f54aae8241ef0ca2490e90e2db0052842e05f5f56fc4d16217682e60451",
+      "control_records": 441,
+      "painted_scrollbars": 1
+    },
+    "view_10": {
+      "sha256": "311854b52fa3d975c989b1458a437d00bd79709886b6676d87f82bb7b3ef8660",
+      "control_records": 196,
+      "painted_scrollbars": 0
+    },
+    "file_selected": {
+      "sha256": "4afb11c0e4b29b58f14a8ef153400edbb2d968fbe02b49453f5407e10ac44634",
+      "control_records": 392,
+      "painted_scrollbars": 2
+    },
+    "macro_selected": {
+      "sha256": "f2f48ba4504e3313e8339ef8c2e537d02ae0514f2727bfac5916a16edcd6da1b",
+      "control_records": 441,
+      "painted_scrollbars": 1
+    },
+    "object_selected": {
+      "sha256": "f2352748ec0313ec60a141b3405a9956cd0d56224353352a58dcb7845bead4a8",
+      "control_records": 735,
+      "painted_scrollbars": 1
+    },
+    "material_dropdown": {
+      "sha256": "3ca80d51b283d0d899ae47d6a98bf0c20c54fc085db33cd1ac6e6e044450fdf5",
+      "control_records": 2107,
+      "painted_scrollbars": 0
+    },
+    "step_dropdown": {
+      "sha256": "3ca80d51b283d0d899ae47d6a98bf0c20c54fc085db33cd1ac6e6e044450fdf5",
+      "control_records": 2107,
+      "painted_scrollbars": 0
+    },
+    "sleep_dropdown": {
+      "sha256": "180ad5a0a9893fceca2ebe6a334196893dc8d8bd661152b08caffd103f36427a",
+      "control_records": 588,
+      "painted_scrollbars": 0
+    },
+    "sound_off": {
+      "sha256": "cb5fed94186058ad7026048ab83e86e94677305b00523765185d8fdfe1d4bad3",
+      "control_records": 490,
+      "painted_scrollbars": 0
+    },
+    "confirm_cancel": {
+      "sha256": "1e83593547498a68b8a62f4d77f6549d5aaf52f2b58719b7e48566b82a1a60ea",
+      "control_records": 1078,
+      "painted_scrollbars": 1
+    },
+    "confirm_emergency": {
+      "sha256": "3481101392c74897f8f951fb26f915df18d52c8117b3ec0daefcda35c7b98f02",
+      "control_records": 1078,
+      "painted_scrollbars": 1
+    },
+    "target_keypad": {
+      "sha256": "63adf418f21f357a1a4f0dfef5a903a4155489239eea35009d0e9c8031c479ac",
+      "control_records": 3381,
+      "painted_scrollbars": 0
+    },
+    "tuning": {
+      "sha256": "4545ec09c3ea110ec1a3a9e3cdb565d7fa08ceb00efe37d76ea8cd8659363d0a",
+      "control_records": 1862,
+      "painted_scrollbars": 0
+    },
+    "wifi": {
+      "sha256": "8a6cb2b2cb60ce281650c65e3eaf85363840ef9c604059384236023385ac1e1c",
+      "control_records": 1225,
+      "painted_scrollbars": 0
+    },
+    "wifi_keyboard": {
+      "sha256": "25e11b9c045424793d01684f503e9e53344c60352b3f67e0ca4c1e492f761f75",
+      "control_records": 1274,
+      "painted_scrollbars": 0
+    },
+    "wifi_password": {
+      "sha256": "25e11b9c045424793d01684f503e9e53344c60352b3f67e0ca4c1e492f761f75",
+      "control_records": 1274,
+      "painted_scrollbars": 0
+    },
+    "moonraker": {
+      "sha256": "2b2019007bb2a67c0ef1700e9e4e0306c5ccf921dbd483b5c120da679532b6c0",
+      "control_records": 1176,
+      "painted_scrollbars": 0
+    },
+    "moonraker_keyboard": {
+      "sha256": "77d81dd3055baeef46b8a312532942b1761d2d1e085146f1b8e327e2e5ad284b",
+      "control_records": 1225,
+      "painted_scrollbars": 0
+    },
+    "wifi_dropdown": {
+      "sha256": "0a9153593f8b8789172e1f3db6b6bfdebae6ea8f98d249923404a9fb0bd8feae",
+      "control_records": 1323,
+      "painted_scrollbars": 0
+    }
+  },
+  "description": "Original 0.6.5 UI before removal of the header and new surface colors; resolved LVGL widget colors and painted scrollbar styles.",
+  "base_commit": "b691ea5b12ecddf2db7dea14a5049a046856e985"
+}

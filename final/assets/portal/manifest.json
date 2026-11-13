@@ -1,0 +1,942 @@
+{
+  "pillow_version": "13.0.0",
+  "alpha_crop_threshold": 16,
+  "margin_per_side": 4,
+  "approved_selection_sha256": "2b350733d1bb91bd07cb2741426f2176dcd3aa54f04c66e931591ba6efbb3520",
+  "approval": "User approved lamina-iconos-logos-v2.png in this chat",
+  "credit": "Uicons by Flaticon - www.flaticon.com/uicons",
+  "format": "LVGL9 RGB565A8 planar, little endian",
+  "source_project": "KLIPPER_ES3C28P_SOLID/assets/glados",
+  "images": [
+    {
+      "source": "glados_suspended.png",
+      "source_sha256": "3cbbbfe544f49b2245f7183f0db45b51cc00977b9082a12220f17326ca975171",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop": [
+        77,
+        0,
+        1221,
+        1212
+      ],
+      "scaled_size": [
+        227,
+        240
+      ],
+      "offset": [
+        30,
+        4
+      ],
+      "lens_source": [
+        690,
+        712,
+        33
+      ],
+      "lens_canvas": [
+        152,
+        145,
+        7
+      ],
+      "canvas": [
+        288,
+        248
+      ],
+      "stride": 576,
+      "data_size": 214272,
+      "packed_sha256": "a1f2b267ebec8a5c79dd43d7407005ed8565a46e380e47eb52ba54fd6f9c4438"
+    },
+    {
+      "source": "potatOS.png",
+      "source_sha256": "a73ce1e12aec365602ba42c7d2381555dcd072e0a72e08cb402064e5bad2be9e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop": [
+        53,
+        52,
+        1176,
+        1172
+      ],
+      "scaled_size": [
+        233,
+        232
+      ],
+      "offset": [
+        7,
+        4
+      ],
+      "canvas": [
+        248,
+        240
+      ],
+      "stride": 496,
+      "data_size": 178560,
+      "packed_sha256": "d5a16706d86ec0157c3b4469745854d195007f21c18a14f94b47770d3afe950d"
+    },
+    {
+      "source": "design\\revision-0.6.1\\logos\\aperture-transparente.png",
+      "source_sha256": "ece1b48abe8b0e9ff1ab346ed03b09e5fb07eea8cf3f1213492207802f570f6d",
+      "recolorable": false,
+      "canvas": [
+        118,
+        118
+      ],
+      "stride": 236,
+      "data_size": 41772,
+      "packed_sha256": "add0c4ec3a2ca05647802b95557853fa39672f03c7905c6a39770f3c1bb82e08"
+    },
+    {
+      "source": "IMAGENES\\klipper.png",
+      "source_sha256": "ba8d40e85baa896d11f2a2b26ece6d4cb46b50c0b48b7a674d458c7ef8bd9b9b",
+      "recolorable": false,
+      "canvas": [
+        100,
+        80
+      ],
+      "stride": 200,
+      "data_size": 24000,
+      "packed_sha256": "ef702f79eda2ca86639517a75500b79889c6739bc98f050656e9ac8d85487ccc"
+    },
+    {
+      "source": "IMAGENES\\aperture inicio.png",
+      "source_sha256": "1494d4ca2360b08cf7cd4fca2fa3117f3f324019dc9876c2ed8b902a5eb7631f",
+      "recolorable": false,
+      "canvas": [
+        120,
+        120
+      ],
+      "stride": 240,
+      "data_size": 43200,
+      "packed_sha256": "33e046278f01230dd25f8ee8d7d3937cacd837d79e1e0d798a01518433e8a904"
+    },
+    {
+      "source": "IMAGENES\\WIFI.png",
+      "source_sha256": "66fdc3e6ce76ef0b7bea8f735ac5bd3b24fbca354a34a06e0f067fdb8e74911a",
+      "recolorable": false,
+      "canvas": [
+        76,
+        84
+      ],
+      "stride": 152,
+      "data_size": 19152,
+      "packed_sha256": "3b68e61cca71d2b52200f3773007516e05ebf445052705784a44877d7b7bdeb9"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\print.png",
+      "source_sha256": "b84cb094f42a9a4db9e1f2b1338e00489307fec477db5b4547f499c8265c1ec1",
+      "approved_id": 1,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "print",
+        "codepoint": 64181
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "3eff574a1b3a7f4cdf7da73daa0ad9afd30654eeff1d70e9604bfe224e5214a7"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\file.png",
+      "source_sha256": "dcd95e3af027a5244ad53c6ed88ff856b2d293006659f154f1e1b1a5ee7e5474",
+      "approved_id": 28,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "file-code",
+        "codepoint": 63054
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "e2030404e8cc48b52f85c01aab3923cca454b3d1e34e126d39a0ceabb8f18f4c"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\move.png",
+      "source_sha256": "439670d9f86dc18e527bc4a7ff66f03718d94a66d3290a19ce16c13b6dc8cbb7",
+      "approved_id": 2,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrows",
+        "codepoint": 61901
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "bfb8d538430f5f3a14df1a9938f04c556427918a577c043d743c66e3d154ab8f"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\details.png",
+      "source_sha256": "b7fb2a1de53f6ca4f833800c05a6dc9ff70c10dac9f6591e9fec935c96a5c8f8",
+      "approved_id": 20,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "info",
+        "codepoint": 63487
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "3eae2e36333b40aa4f589ac9906a4cb3558096e90a1dedf663b3aa0969476d9a"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\settings.png",
+      "source_sha256": "6c3a5821b645f67eff7d303eb718007011d587dbaa8972b377af9684a61009be",
+      "approved_id": 4,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "settings",
+        "codepoint": 64428
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "c9b25c67442a325da7d63c0ea484c4effe07dbdc42318d9260dbe6052e389480"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\macro.png",
+      "source_sha256": "8b7313768c7c16309bc0b75582cb4711d69bfcbde3d84fbcb2441b3fb1ff2300",
+      "approved_id": 5,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "square-terminal",
+        "codepoint": 64676
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "221d7f9b9054108f1b77d0eb79f72f4957914cc160c74fc6ab149a140134f32e"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\stop.png",
+      "source_sha256": "a96da9a703e94f0b5efbb1b218fa6f346d2e32fcc00e0ad7f8ce08e9b56e1fb7",
+      "approved_id": 6,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "stop-circle",
+        "codepoint": 64720
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "6ac868180328ae3e4652ac22dc7067ab770f62f23714ba23543fcb0c28656469"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\pause.png",
+      "source_sha256": "1b754a2352983b4a65d1eba806d23b2a1aeb5c88c389bb548b272b014e7a816c",
+      "approved_id": 7,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "pause",
+        "codepoint": 63996
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "8083a7e5a6d3c4b48c15a989084536d8a65d7bd072da4f8b48ac6c2a151331e0"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\play.png",
+      "source_sha256": "4475dbe23019ad804d9ff6f4d63ae736c9b61ad336b0df51740816d102d111a0",
+      "approved_id": 8,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "play",
+        "codepoint": 64127
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "6506262b102966ca4a76af9d2d3b7675fa33ea0d178dcf8ec23d465cb9e96f4e"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\cancel.png",
+      "source_sha256": "8c8d29114fee1cc076d1ee8d376485febe9d4a080affac089a4efa577dce5e6e",
+      "approved_id": 9,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "cross-circle",
+        "codepoint": 62698
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "bd35dd027cedb05c824075f3c976018c7c982bedbbf3d7b7f624872679ea63b4"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\extrude.png",
+      "source_sha256": "01f7ae6f95271e73d35f299e8e45d0c3357e5400d29b008bd1a79b381cb3dc93",
+      "approved_id": 11,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrow-to-bottom",
+        "codepoint": 61861
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "79b65e8eb80639d2b740aa2496f94d7f8b806dfaf663801a7dc6e3d25db6a8a8"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\retract.png",
+      "source_sha256": "9c63813f1a891881723fea1a3f885edd8eddb447ab28c3d99a116c358800b2ec",
+      "approved_id": 12,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrow-from-bottom",
+        "codepoint": 61841
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "3ffa8b27e76d648cd66b6af2d339c13ec55824cf322ee2451e1d3e729d037413"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\nozzle.png",
+      "source_sha256": "082d96e1473e9d45dc65d2f615e23b6035ffa12a9856fc121457e92565c40bd5",
+      "approved_id": 13,
+      "provenance": {
+        "file": "boquilla-1518427.png",
+        "id": 1518427,
+        "url": "https://www.magnific.com/es/icono/alfiler_1518427",
+        "sha256": "464e7e707f3cefd16eb70ae5a2c758a9788b71573032894f2cac30c6563eaaf4"
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "541fa1e5ae971dc21a2696802c41af8b0a8fbf918404ff3c36c4449f59ce53c4"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\bed.png",
+      "source_sha256": "f6f32a4b1b54b3cba0f081e53c81d9599612be19c32db07cb1c424a257d8967b",
+      "approved_id": 14,
+      "provenance": {
+        "file": "cama-952538.png",
+        "id": 952538,
+        "url": "https://www.magnific.com/es/icono/caliente_952538",
+        "sha256": "17ca236fb62400f76a522d1a0bda82d2cd396bdd8790acdc122b89c5c2c60184"
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "ca51e614303b5d05b2d23786d79231ff2b05604c4d7fb852917678f88ddce391"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\home.png",
+      "source_sha256": "8160186a369c68d15559e57f6f20731540506ed5647f52910bbcd64085017395",
+      "approved_id": 15,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "home",
+        "codepoint": 63405
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "a7d40d756015751cd2381e563a76e994dc6aa11b351e8f1e8355dd7e9dde2aa1"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\refresh.png",
+      "source_sha256": "fb70ba683776f7f4271830708c1287381e3e30eab4732abe7cc87a5b2797feeb",
+      "approved_id": 16,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "refresh",
+        "codepoint": 64274
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "3cc0b51d203d5f9b91581550bbd84b6da2ecec7e736840248559c9d1d06553a0"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\power.png",
+      "source_sha256": "3f5af9df4a0140e3d35d28cf592c6ddf76d1b070bcc9bc5fcdc6e526efa45cec",
+      "approved_id": 17,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "power",
+        "codepoint": 64168
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "03c54c433f9f8831c578e04bc68594706a0d86b488036e739d58c4f8815fda81"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\back.png",
+      "source_sha256": "a0fbb984e2f51670fa8653f76b27f34ec48b6323498340a047140ee7ec2d0cd8",
+      "approved_id": 18,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "arrow-left",
+        "codepoint": 61848
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "4cef9b4806483b8aeaab17dde3f3724199403755a9020467ed2200ea4009b120"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\plus.png",
+      "source_sha256": "b15adb3e78a7bbcefd58a56aa7634579520b0df8721c05fe889ed5548e8f0ffa",
+      "approved_id": 21,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "plus",
+        "codepoint": 64140
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "83835b364961aa2c8ba0ca5a5d363ce7b447c501bfa51118d5345b24652830e4"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\minus.png",
+      "source_sha256": "2f26d284aaf2d2daf8896c68dfa249229c58bd99c266ee01f2d22d6525e9fb4f",
+      "approved_id": 22,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "minus",
+        "codepoint": 63806
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "37a9e2a45af5bb988a6b0f26c882fc2f653957a577feee3ca43c47b3a7d6cf83"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\backspace.png",
+      "source_sha256": "5a3885f8db06177bda0e33c8a194090e4e0715deb1a1c3366dc0add5a0964247",
+      "approved_id": 23,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "delete",
+        "codepoint": 62753
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "0aad62b80b5064e8e33635e887c7a9f0e50ec48ab9a9a235365084ebc359624d"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\up.png",
+      "source_sha256": "89caae74b2130fae1f6a67732b56b365c09a2bbdba1b2023ce2b338bf221cc0c",
+      "approved_id": 26,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-up",
+        "codepoint": 61788
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "f26ef07deb1ea9a94133047fe9060dd9a809f2d1455e41d1d053e85520a82d70"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\down.png",
+      "source_sha256": "364f72e48fe7ba9722c2f71fcd01e473bef3a71e851650b8ea1688a12bb4b445",
+      "approved_id": 27,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-down",
+        "codepoint": 61777
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "67eb0c7e70e466c174cb5cb78d6c80c0e87a43cc90f9274026f12cf516e2704f"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\left.png",
+      "source_sha256": "98eda6559541a659a929bea8fdfa081e733ad5442ada3eefaf6d32136c97e3fb",
+      "approved_id": 24,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-left",
+        "codepoint": 61778
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "104bf8902787dbfda4c15ab2394ffe3d2e4ad02aeac8571caa6888b4fb9e14ba"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\right.png",
+      "source_sha256": "cebb4d8bef5c893393e007fcd368187ffec99b02c786a846bbded7ba75d49d95",
+      "approved_id": 25,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "angle-right",
+        "codepoint": 61779
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "cca7d962bc073ae8cec0098b22abbfb89c1a20e7ac009ade4a2f998f66cb8fcd"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\wifi.png",
+      "source_sha256": "4a96749a4279b0be8b872ce738bda6c4925642bd469bf1b7c2a2990d87a3c826",
+      "approved_id": 19,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "wifi",
+        "codepoint": 65246
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "a5e7e7738142a1cfc487eca87cd5f9758b537243e77c11a2a8204fa2b2563e50"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\exclude.png",
+      "source_sha256": "f0cc85fcde1d2a154f754d4cec9385535c20c510dd664e5792c72628057a24b5",
+      "approved_id": 10,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "layer-minus",
+        "codepoint": 63597
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "e5773a130029b680b98033f2ebe623ee84b5fc924966200eb7b3a9c2b6427eed"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\last_job.png",
+      "source_sha256": "54bd27e1b492ad10f0a9fdaba37a7f4744d03fb14acc471d7c426d2e1ff7f14a",
+      "approved_id": 3,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "file-circle-info",
+        "codepoint": 63052
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "e2f4ee8726422a0923f518a04fa38723b41f071df7aaef50331fbc25f2c4313a"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\audio.png",
+      "source_sha256": "7bd130330fd659ed0f21b870a9b80a9a5aa884f1a3ea5b8d8672069b76dc203d",
+      "approved_id": 29,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "volume",
+        "codepoint": 65192
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "925b6958bfd8187fb5f8cf5d2a615ad4ba75dded03a3e31ae2e70e62fb4f5d99"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\mute.png",
+      "source_sha256": "4722b97d81abaf2429f3f8d9bad2b9d319d781086def11df1f5fc6876d1537d8",
+      "approved_id": 30,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "volume-slash",
+        "codepoint": 65191
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "23b583eccfb3a65105e591ce1104e4636fa749058f58c9cf77e6e8c09723ad1f"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\cool.png",
+      "source_sha256": "066774d80c7d0ea637b3aa40438b6bba8709f4ddb180cd824b57edcc4b399676",
+      "approved_id": 31,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "snowflake",
+        "codepoint": 64558
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "5948d55ef3aeb6945ca5c384a5b2a5cba10ab5d4aae6e4571cb652be1c00bd9b"
+    },
+    {
+      "source": "assets\\portal\\approved-icons\\motors_off.png",
+      "source_sha256": "68f6b9546b399c37c633af1fe81b8f28bc8a5259086fd9e6583573306f8704b1",
+      "approved_id": 32,
+      "provenance": {
+        "family": "UIcons Solid Rounded",
+        "name": "bolt-slash",
+        "codepoint": 62057
+      },
+      "recolorable": true,
+      "canvas": [
+        64,
+        64
+      ],
+      "stride": 128,
+      "data_size": 12288,
+      "packed_sha256": "f8fc84791733cfc97cafb09848b8d94b2e6fd0727f4b2e6b68798db610005303"
+    },
+    {
+      "source": "IMAGENES/fondo.png",
+      "source_sha256": "f7dbaef73099de573d69ae10eaa211956d3d3260f1fca994eeeedc01977d60d6",
+      "canvas": [
+        800,
+        480
+      ],
+      "format": "L8",
+      "stride": 800,
+      "data_size": 384000,
+      "packed_sha256": "7eb2c254760f6776e66e631d1b44ef5d01c152b152aca0033beea699d79dd0d2",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/base.png",
+      "source_sha256": "3083bae68541436b285cb8496fb6711db74d2646a8a02a1608b768def5a074da",
+      "canvas": [
+        255,
+        303
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 9905,
+      "packed_sha256": "fa63c3b4ba94844f905d164ca19cedda2b38fa93dbc5b4ef2be6540a9ab80c8f",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/complete.png",
+      "source_sha256": "aef7aa803c5ca9b0597ff389dd8539a1bd6d58720b647e8537e0e3f294b7540f",
+      "canvas": [
+        255,
+        303
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 9949,
+      "packed_sha256": "25872f7db32b6e875bc75cd740e98b442b871e75f299b72563f67e79905c0565",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/cancelled.png",
+      "source_sha256": "3a5ca8dde0889783242dca5f0020711ef96385e77e5c73d53921cce724cca8eb",
+      "canvas": [
+        255,
+        303
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 10055,
+      "packed_sha256": "2a2320677b40d597d993f26a7ff74795136486cb4ba712d57ffd712c7bd062c8",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/offline.png",
+      "source_sha256": "f7c37700ddaaa6ffa5f40307ddccdefd88e1aff7c961dfcd915769a3d8a42c0f",
+      "canvas": [
+        255,
+        303
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 9362,
+      "packed_sha256": "941df0d1ceca48d85a5d981555276bdb81a2f3df095e0087bbf46a01d9f1982e",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/error.png",
+      "source_sha256": "695e9fac6606c7a14e8db94bc25cabce32a19a982d6f538f1c4c1594d77ea33a",
+      "canvas": [
+        255,
+        303
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 10012,
+      "packed_sha256": "d033d1fc5197ccf7180fd65cbaa61c0b79a03b0f42aad13c88f8afef33223ed4",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/warning.png",
+      "source_sha256": "51e150bef1feb96e0bd87a31c6970d87c27fb6c974f6be0b68db60f50f18f01a",
+      "canvas": [
+        209,
+        251
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 7853,
+      "packed_sha256": "f10ec87a6e4da0272c16f704c35685f738624b0bccd7285ecc369f44ec789f59",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/shell.png",
+      "source_sha256": "088592d3883e506c24281db740d053ccf8f33c0a36ea8bc40d2fc7a8b3a48638",
+      "canvas": [
+        255,
+        303
+      ],
+      "format": "RAW_ALPHA",
+      "stride": 0,
+      "data_size": 7765,
+      "packed_sha256": "7fa0a8db195cc7553a198157d38ca48f1d9186a397a957aa008a3a1ed980d340",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/blue-iris.png",
+      "source_sha256": "b3011e0ef556c3d8b8cb8008966b8fa59191d943bf38560848a5ddc1d04cfd8c",
+      "canvas": [
+        136,
+        135
+      ],
+      "format": "RGB565",
+      "stride": 272,
+      "data_size": 36720,
+      "packed_sha256": "ab592852679e629025f637ac875cd3ddb1a7911d4ffeed45f4824892612c99a1",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/blue-lens.png",
+      "source_sha256": "4f2605105265c357107a3a9ea4cdb009a189aba4b4d290e270dccf38934bb276",
+      "canvas": [
+        55,
+        55
+      ],
+      "format": "RGB565A8",
+      "stride": 110,
+      "data_size": 9075,
+      "packed_sha256": "38f15ac65cfc8726bbd4607b7e82e2258fafe28684714c41b7281940941c8e2b",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/green-iris.png",
+      "source_sha256": "201bb3122258147240c40545f546c7a3f2042b6c8326fa942b6719554cffeab6",
+      "canvas": [
+        136,
+        135
+      ],
+      "format": "RGB565",
+      "stride": 272,
+      "data_size": 36720,
+      "packed_sha256": "fe78dcdf4f091dfa6c6a671d93c1865dbc7a48237da9b9ff6059663c2b7eaa34",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/green-lens.png",
+      "source_sha256": "cbe387e2c38e5e8b511078689e61a88ff9c0d5d3b22d03ff7e40d6ba98bcc1fd",
+      "canvas": [
+        65,
+        57
+      ],
+      "format": "RGB565A8",
+      "stride": 130,
+      "data_size": 11115,
+      "packed_sha256": "d216d2a09c6088dca3219a33513d17a16c1f83cde2b8ab40b083dce89c0195be",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/yellow-iris.png",
+      "source_sha256": "bf0834eecd706eee066bca225338a507d26c6bfa6637bc3e648bf680509868bc",
+      "canvas": [
+        136,
+        135
+      ],
+      "format": "RGB565",
+      "stride": 272,
+      "data_size": 36720,
+      "packed_sha256": "aa051dd9b9cce0e00585d9718f41c012cf4cf6d202bd944e7f9cd03509e6200c",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/yellow-lens.png",
+      "source_sha256": "0106cbc64fd4c638bbb93569cc257212ab7f075902642af55cc5fc9aef0b198d",
+      "canvas": [
+        56,
+        56
+      ],
+      "format": "RGB565A8",
+      "stride": 112,
+      "data_size": 9408,
+      "packed_sha256": "3097f3819eb0d3bbfff631da3403589e1421cc0254c6437397a30291c0f6a5ac",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/red-iris.png",
+      "source_sha256": "dec0169d2450259407dcf994cc953802567a5c80175c4c18579a5bf4a5a4d1d3",
+      "canvas": [
+        136,
+        135
+      ],
+      "format": "RGB565",
+      "stride": 272,
+      "data_size": 36720,
+      "packed_sha256": "2b18fce2c6eba570c617311fa8e78295c19985d255c17ce310b68c28514a18f3",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/red-lens.png",
+      "source_sha256": "e060a04d327f7d4d4e4b6b7b84e01f7dc39fdc144e5520194d2f6eaabb26476d",
+      "canvas": [
+        61,
+        61
+      ],
+      "format": "RGB565A8",
+      "stride": 122,
+      "data_size": 11163,
+      "packed_sha256": "9527d43980d8bf3a5e6de0a3a425f7bcb5736841791157caa2bdadb08f9d88ae",
+      "recolorable": false
+    }
+  ],
+  "total_pixel_bytes": 1550714,
+  "icon_pixel_bytes": 393216,
+  "symbol_aliases": {
+    "FILE": "file",
+    "DIRECTORY": "file",
+    "SHUFFLE": "move",
+    "SETTINGS": "settings",
+    "EDIT": "macro",
+    "STOP": "stop",
+    "PAUSE": "pause",
+    "PLAY": "play",
+    "CLOSE": "cancel",
+    "CHARGE": "nozzle",
+    "IMAGE": "bed",
+    "HOME": "home",
+    "REFRESH": "refresh",
+    "POWER": "power",
+    "PLUS": "plus",
+    "MINUS": "minus",
+    "BACKSPACE": "backspace",
+    "UP": "up",
+    "DOWN": "down",
+    "LEFT": "left",
+    "RIGHT": "right",
+    "WIFI": "wifi",
+    "LIST": "exclude",
+    "EYE_OPEN": "details"
+  }
+}

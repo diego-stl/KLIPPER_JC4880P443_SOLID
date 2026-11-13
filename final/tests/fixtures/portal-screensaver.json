@@ -1,0 +1,14 @@
+{
+  "description": "Rótulo de Ajustes para el tiempo de activación del salvapantallas.",
+  "cases": {
+    "view_08": {"geometry_sha256": "c24098b5ac36df4dfa4fb8e34b56afe8635b1cfea02941009de39fcaca20135c"},
+    "sleep_dropdown": {"geometry_sha256": "2fac51897f8a2fbfda4a4c7c2e52f8e794e6339fe69f947d2913c9b538ac52ec"},
+    "sound_off": {"geometry_sha256": "5f702fa6fe765e40fde19609e05d0b68f896cf9be7b2445bed1328ffbd2d4633"},
+    "wifi": {"geometry_sha256": "890d19b1ed4e990bbbcbb828f09aae4cf686277f51936daed85a7c5f2cc26b4d"},
+    "wifi_keyboard": {"geometry_sha256": "ffb93e7640bf94a808a361977cbce1d455006bbd802918ba36ca0d4ef2938db8"},
+    "wifi_password": {"geometry_sha256": "9bd7b12fb76ef34f95db37e9bf41ab14426aa033d21d0454deb49ed12b484cac"},
+    "moonraker": {"geometry_sha256": "b96a670319301322f94a31db81b358eef38c51bc3aa222b1a16901822ecd5347"},
+    "moonraker_keyboard": {"geometry_sha256": "30a321e7adb100ac21cc292951e898d69d77bfac6fb8661dfc99880fced48e9f"},
+    "wifi_dropdown": {"geometry_sha256": "60d633bdb83ff34bdc2f93cf84aa93e421ca362d5663d423e0b7c0910b503591"}
+  }
+}

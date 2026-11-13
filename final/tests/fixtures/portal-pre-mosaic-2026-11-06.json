@@ -1,0 +1,372 @@
+{
+  "description": "Working tree before Portal mosaic restyling; all pre-existing edits retained",
+  "source_sha256": {
+    "components\\portal_ui\\portal_network_settings.c": "fc0cdb13e1aa9d65eeec7a8256c1c84d3d93bbd25acb7c12fcdde003bd6394d0",
+    "components\\portal_ui\\portal_ui.c": "4f0364def654e12ad6732f6c5befc19bbaba187e16a1e853486302d88101abb0",
+    "components\\portal_assets\\portal_assets.c": "cdcc996f3355223ebc6944426cdf483145f3eadde3ad289add08356012aa0e3b",
+    "tools\\render_portal_firmware.py": "146acacc7f639da8f5d8a5dad4c50034419b05e9a28f064627edd95cd2c3bf7b",
+    "tests\\portal_host\\lv_conf.h": "4ac852b01589023b2adb3dabbf3a59b257b12bfdccb178aa0d853c00a99a3ad6",
+    "tests\\portal_host\\portal_host.c": "5e1277f437f7411d7a41c40fc1e2cb2abb5cf6f14e4709888c213c3dd8ae331f",
+    "components\\portal_ui\\include\\portal_ui.h": "4235784394b6697b10ecac5958cbd3858f8f042e511818b0a40a73067f10e09b",
+    "components\\portal_ui\\portal_network_settings.h": "a746ffad4da8232f690040a4830cd63b673976abfc693490bb0787760c2b2f22",
+    "components\\portal_ui\\portal_surfaces.h": "e966a586673e83528687f6211b8f1dd6c5c7b375ef91f97643aad5d9be93e38e",
+    "components\\portal_assets\\include\\portal_assets.h": "384597a46ff4d9725817929d40e13f29bcc5d224be3f5c077feafa427e7f627f",
+    "components\\device_network\\include\\device_network.h": "8536b3aee5979675165e625be269f23928ab419152769ccd35faef1ec5eb0e14",
+    "components\\device_network\\network_validation.h": "5c76e671162de5708c23b16a79afffa5f6ad67d8e49b39d66be1810fcf573768",
+    "components\\device_network\\serial_menu.h": "0a151c132d70d19f8b332da466751ee29356c729e1128de1357ba306d581bf69",
+    "components\\klipper_client\\include\\klipper_client.h": "39d8ff3557daaffcc5a97f6cb3a23f9d2b93b1865b3b0b8a9e444026cb3c26a5",
+    "components\\klipper_client\\include\\klipper_tuning.h": "849b33f32387814d226077677016f7698e6b74be10916c29ef2a518b32be8435",
+    "components\\klipper_client\\private\\client_core.h": "8e58c8961a42d69f7330ae0f46372632cffddbfdeeba0e7d8cfde51dbac03608",
+    "components\\klipper_client\\private\\CommandBatch.h": "893f53c289e1c335f0e320b739ebdf3438437f2b1c6307ba049b8379625d6e11",
+    "components\\klipper_client\\private\\CommandStatus.h": "503cfe7fd50e221b7d9afd6b74f2da7228a3b3d93cdceced7ac9097562ffc3a1",
+    "components\\klipper_client\\private\\JobPolicy.h": "75153017ed990dcb9c561ba2327a173339d865c93b7ef14e195b788627f5ac9f",
+    "components\\klipper_client\\private\\KlipperTransfer.h": "b9d44c118dc46c3beaba75f47087668f1c5ff31ec168cf34cba8012f1c20192f",
+    "components\\klipper_client\\private\\MetadataRules.h": "acf62f6f21d1173817b2617417f8712601d3acf779f150d10ec2a55afab02163",
+    "components\\klipper_client\\private\\MoonrakerStatus.h": "58ebae646cd0bc8f5c99af1b2f9606e1203f569bb518ef398def907075944414",
+    "components\\klipper_client\\private\\NumericRules.h": "2cd7bd395de4d82e1e85f00f6b9e62e2c3411e0985786f9a46710cb29e704bbc",
+    "components\\klipper_client\\private\\PrintTuning.h": "d79730d5525940e5da7525babf624a481ad938499f72faf493b4949991487ac0",
+    "components\\klipper_client\\private\\QueryPolicy.h": "48d68be4751a170151ea203210d690eed3c56dd73719b013c2aa972fb1c998cf",
+    "components\\board_jc4880\\include\\board_config.h": "6359847abec1076631f4385d0cdfa628f19b70283720499d0e0504eac96ee136",
+    "components\\board_jc4880\\include\\board_display.h": "beebdd72e7aeb9421f84d34f633e9049b12721e78e4d0a7c58707c3ff0d78d48",
+    "components\\board_jc4880\\include\\board_touch.h": "fbdea9ac8e16d44f4a7605206a505188957a2b3ee2509d5d6d89163009bdc8b9",
+    "components\\audio_service\\include\\audio_clips.h": "3afb0bc95694cee2f1bf69383d3850f4edbbf6368f62e6d2f4a8a491a89af0fd",
+    "components\\audio_service\\include\\audio_service.h": "aa9e1c364010166e997ad1118f8030c9823c068538d8f86fce567bc1b8d90448",
+    "components\\audio_events\\audio_events.c": "161ba6deb743441468f11e38e618171e14be5edc5c809b8e201d50562f5d0614",
+    "components\\audio_events\\audio_events_logic.h": "d66166d309be2c80466035844864dc911d3de12c27fc955ec93e381e76d5b269",
+    "components\\audio_events\\include\\audio_events.h": "5ab39227b79fefb5401082a9c5a330a7b42fb2fda28211a63e6a93129531e5a6",
+    "tests\\portal_host\\esp_err.h": "4bc5765d240fd3bcf8e0ba20c14ca4c074af69b151c7dc9d0ef7088d3bcd8b56",
+    "tests\\portal_host\\esp_heap_caps.h": "357013e18de89830367e9f2424b5837659ea1d9d67a23e17ce600d9e4d3ac38b",
+    "tests\\portal_host\\esp_log.h": "5a6d0ad9d2cbfe78f343574a778a3301d7a40e7634c6ee3751413d2518eef902",
+    "tests\\portal_host\\esp_timer.h": "82a7c14acf5d1cdcbea1b23bab880c69562da88013adc34ff5f2ae2115fb08d1",
+    "tests\\portal_host\\fixtures_png.h": "3789a8a3d8b59b0588511f20766c5948f49656df5c2eedad3b3812658cbd3e47",
+    "tests\\portal_host\\freertos\\FreeRTOS.h": "471bb5941039d7c50d8c4cd0a22c11d1d3b88d554629991f8c85d56fd1b28dd9"
+  },
+  "cases": {
+    "view_00": {
+      "geometry_sha256": "a54628400da8616a03c12eff261f28b5c41b93b6c4758cd37c55af69d6becc1e",
+      "widgets": 22,
+      "protected_styles": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "control_records": 0,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "view_01": {
+      "geometry_sha256": "5aa761b28aeb5344dc7b9f31df892a68c90f1ca125a7999ff246230e8b78c9c3",
+      "widgets": 41,
+      "protected_styles": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "control_records": 0,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {
+        "350": "b8f70a87d2216d261d54d2428aae4117d052c820084d40d39c2cf44fce4a05c7",
+        "408": "2d8f3cf03a629b5e7cd362dbb72269ae734318c0208b83343c3f2934e0b3d33e"
+      },
+      "text_button_pixels": {}
+    },
+    "view_02": {
+      "geometry_sha256": "f6077cb985efe94b532eb70199350ac7bd061fce2d074ac59121f4d949e6c7c6",
+      "widgets": 44,
+      "protected_styles": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "control_records": 0,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {
+        "350": "b8f70a87d2216d261d54d2428aae4117d052c820084d40d39c2cf44fce4a05c7",
+        "408": "2d8f3cf03a629b5e7cd362dbb72269ae734318c0208b83343c3f2934e0b3d33e"
+      },
+      "text_button_pixels": {}
+    },
+    "view_03": {
+      "geometry_sha256": "1a8d3a95c2038a90cfd78ff8dc23058bf43bde71c4e67e018f70b838a75b2c98",
+      "widgets": 44,
+      "protected_styles": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "control_records": 0,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {
+        "350": "b8f70a87d2216d261d54d2428aae4117d052c820084d40d39c2cf44fce4a05c7",
+        "408": "2d8f3cf03a629b5e7cd362dbb72269ae734318c0208b83343c3f2934e0b3d33e"
+      },
+      "text_button_pixels": {}
+    },
+    "view_04": {
+      "geometry_sha256": "63a35df51097c356f0f11b890c8f89a893178751333d5a08a4c9825f080f4396",
+      "widgets": 69,
+      "protected_styles": {
+        "sha256": "c25821d26d16508e116196936bd1116e5b61e4b6e0d57433035120f0b6d24ce1",
+        "control_records": 392,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {
+        "12": "043db47031288aa52076dd7d90a8f0da596d9e3bacc77d5ba6f35a337f0c07ca",
+        "158": "29bd069ad6ad081f431879bcf6712cdf3382ee3f2acef7aa2025a0fe5517a2df",
+        "416": "7c6bb82331149a74dd371b0a99d0cd9841ff8802f48a02de99cb49fe1aea1e82"
+      },
+      "text_button_pixels": {}
+    },
+    "view_05": {
+      "geometry_sha256": "0aeced1445d47ea69eb8fedae4a34ae7d84ea87e744efea2e83c27e258accd98",
+      "widgets": 27,
+      "protected_styles": {
+        "sha256": "33b1ea75a449b7b5f2d5e0ae01ea0d566f301284f6876e0739cf816cd1aca77f",
+        "control_records": 392,
+        "painted_scrollbars": 2
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {
+        "disabled_interior": "654573e95ca61a9dd46e06ee9bfe20383dddc1b65d88bfc5d0463b231d57e2ac"
+      }
+    },
+    "view_06": {
+      "geometry_sha256": "a2b3498448c225c420bd86fb2cd146d7002711dcc44b037e91dc69dfacbc7075",
+      "widgets": 24,
+      "protected_styles": {
+        "sha256": "13aabdba028c8d4f5b684be30962ec3826616484bcd855836866f60a087369fa",
+        "control_records": 294,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "view_07": {
+      "geometry_sha256": "82ca7eab876435f3ffedf4190d09f13e1aebe96ade9ab70a5c5e7b34206feca1",
+      "widgets": 31,
+      "protected_styles": {
+        "sha256": "96db5411cf1b564abdb0cb6bd9c70e4a116dce048f82525143ea79bb48e48137",
+        "control_records": 588,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "view_08": {
+      "geometry_sha256": "7ec26b5aee8e39cf3dd22c3bc885c26ab0012bb5f88ce47ff12678ca6132bb8e",
+      "widgets": 33,
+      "protected_styles": {
+        "sha256": "1b4f744ae11e297495c2e3942dbc08d742785d64cbdd1e8076ae55827bb7a3fa",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "view_09": {
+      "geometry_sha256": "de8dee577b9b3921e80129004161e458d9b848582f5530547ad17f0cbcaa8254",
+      "widgets": 25,
+      "protected_styles": {
+        "sha256": "97cdb2c63729c99ff3c7ba447ca0fb8abbc0571a61671a7f1aee3d373ffe7dd1",
+        "control_records": 0,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "view_10": {
+      "geometry_sha256": "99cb48ebe3c3bcf0df6a96a9cffc2d5d02d6f5137e1194f477ca4705f71d8c44",
+      "widgets": 25,
+      "protected_styles": {
+        "sha256": "311854b52fa3d975c989b1458a437d00bd79709886b6676d87f82bb7b3ef8660",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {
+        "disabled_interior": "25dd060b4bda916c426779d20d30a3403ecd732d2145b96d59f384ff433cceed"
+      }
+    },
+    "file_selected": {
+      "geometry_sha256": "d56629301b61272b9b36392420c6b91ebbcaca8491bf689ec96acd0f7ee03221",
+      "widgets": 25,
+      "protected_styles": {
+        "sha256": "4afb11c0e4b29b58f14a8ef153400edbb2d968fbe02b49453f5407e10ac44634",
+        "control_records": 392,
+        "painted_scrollbars": 2
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "macro_selected": {
+      "geometry_sha256": "a2b3498448c225c420bd86fb2cd146d7002711dcc44b037e91dc69dfacbc7075",
+      "widgets": 24,
+      "protected_styles": {
+        "sha256": "d1ee9e429aece27aeef8400d24b13f20478798a2f5dbbde92335aac5efbb737e",
+        "control_records": 294,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "object_selected": {
+      "geometry_sha256": "82ca7eab876435f3ffedf4190d09f13e1aebe96ade9ab70a5c5e7b34206feca1",
+      "widgets": 31,
+      "protected_styles": {
+        "sha256": "e8ab36b84b8c8bccd2d0b7159d1e63224f1647d5ad8d14644069222d4df05f1d",
+        "control_records": 588,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "material_dropdown": {
+      "geometry_sha256": "0be43e170ba96623399654150fdf87f7e94e0faaeb8ea4c4b7483bac5badccc6",
+      "widgets": 69,
+      "protected_styles": {
+        "sha256": "83ae814ff58e81eac277db2e659ba75ecc8cb9211c311bd1a4cf74ac6a671da1",
+        "control_records": 490,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "step_dropdown": {
+      "geometry_sha256": "0e77976aa5b501d7fb7c55a7f9928194046b1078d2bd730c4e8d4d9568a50e9e",
+      "widgets": 69,
+      "protected_styles": {
+        "sha256": "83ae814ff58e81eac277db2e659ba75ecc8cb9211c311bd1a4cf74ac6a671da1",
+        "control_records": 490,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "sleep_dropdown": {
+      "geometry_sha256": "c853311850f317870f76b76daac5f106bf0f85f75d7e4d6514871d6ecfadd01f",
+      "widgets": 33,
+      "protected_styles": {
+        "sha256": "4835d3e3bfd6f6eb99acc8652038e98168d3ecddf37c485a5648458649776bb8",
+        "control_records": 294,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "sound_off": {
+      "geometry_sha256": "1778df846406638fe39589fbfd979780661770d22992c34be4dce81bd2b63f37",
+      "widgets": 33,
+      "protected_styles": {
+        "sha256": "1b4f744ae11e297495c2e3942dbc08d742785d64cbdd1e8076ae55827bb7a3fa",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "confirm_cancel": {
+      "geometry_sha256": "e05b12f5d69677031e254e43229eff5cfed201538c8c8db12bc56fdcaede2640",
+      "widgets": 53,
+      "protected_styles": {
+        "sha256": "bf181b8e0f840529d3739df6a9a4686d8cffbc4a0e099497d628ff26c0238f19",
+        "control_records": 196,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "confirm_emergency": {
+      "geometry_sha256": "c599d67c7e4cc03c96df5c5a76133749418a3fc56d45d0b9b9b9c95e623260c0",
+      "widgets": 50,
+      "protected_styles": {
+        "sha256": "bf181b8e0f840529d3739df6a9a4686d8cffbc4a0e099497d628ff26c0238f19",
+        "control_records": 196,
+        "painted_scrollbars": 1
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "target_keypad": {
+      "geometry_sha256": "eee6bd59d0480578e0044af924217e850733a444e2842229773e13fb88ac78f8",
+      "widgets": 102,
+      "protected_styles": {
+        "sha256": "2fb2309540835ab1581fa7cb2402b0b93df7abdbde2fc824b656c6c24db42e30",
+        "control_records": 1764,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "tuning": {
+      "geometry_sha256": "f513ed43c044c27898ebf2893423a520bbb7ab3c16417fb20a6458e3dcaf60f5",
+      "widgets": 89,
+      "protected_styles": {
+        "sha256": "53c1923c608625f601d70e7f3f0d71f1ca117fc5ba962cc20e18d4f166c898ea",
+        "control_records": 392,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "wifi": {
+      "geometry_sha256": "8ffeae6d4b269818bc75e0d9d916ef026a57c7226e5d690d0f56010f8a8a66e5",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "993ee53331a3b7ae32c73bfab209d9044267d49994a17ab7261d7e54d774ae22",
+        "control_records": 931,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "wifi_keyboard": {
+      "geometry_sha256": "688bd2600a335d96c3921cf15c02fabd47a20cfb7f4b3dcb964b8e0610804f72",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "c4d7b5d4fc87e3b9b6ddc670880c1914116f2985455ae9684a1e4790a5516152",
+        "control_records": 980,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "wifi_password": {
+      "geometry_sha256": "b04f2b2619853c1a5cf6d49050940263afb0aebb354bea13e98162e92634d017",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "c4d7b5d4fc87e3b9b6ddc670880c1914116f2985455ae9684a1e4790a5516152",
+        "control_records": 980,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "moonraker": {
+      "geometry_sha256": "8beb3988d1c6fe7019896b869c0018f0036eb656fc56cd72d6ca4d585f3966de",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "0ddb02cb6835521d389ffcd4c16aca78c06907c34706cffc8b19d2372bc2fcac",
+        "control_records": 882,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "moonraker_keyboard": {
+      "geometry_sha256": "0e06ddfc2d61056c598b5d5a8fc6a012a29e4d11a3605f2c1a46189a160e16c8",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "78a0b4ebd1e27246bd7de0d7b79e2c91a54d473a7d9d4b7662a10d17326f4a75",
+        "control_records": 931,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    },
+    "wifi_dropdown": {
+      "geometry_sha256": "9a647f1505b8f54d24ef2ade3b7da2322fa05f668eeea1c7b2ececce83593365",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "ca3ddc1374c1030571765cb5a973934b5bb93cc85f936948575fa92a3f862e57",
+        "control_records": 1029,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {},
+      "text_button_pixels": {}
+    }
+  },
+  "thermal_pixel_mask": "Opaque interior: omit 8 px on either side and 1 px top/bottom to exclude rounded corners exposing the surrounding surface. Recomputed solely from archived pre-edit frames."
+}
