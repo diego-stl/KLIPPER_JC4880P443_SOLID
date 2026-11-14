@@ -1,6 +1,7 @@
 #include "sdkconfig.h"
 #include "device_network.h"
 #include "network_validation.h"
+#include "panel_settings.h"
 #include "serial_menu.h"
 #include "display_settings_mailbox.h"
 
@@ -39,6 +40,12 @@
 // WiFi configuration changes only this namespace/key; panel settings are separate.
 #define WIFI_NAMESPACE "jc_wifi"
 #define WIFI_KEY "station_v1"
+#define PANEL_NAMESPACE "jc_panel"
+#define PANEL_KEY "settings_v2"
+#define PANEL_LEGACY_KEY "settings_v1"
+#define PANEL_DEFAULT_PORT 7125
+#define PANEL_DEFAULT_BRIGHTNESS 70
+#define PANEL_DEFAULT_SLEEP_MINUTES 1
 
 typedef struct {
     uint8_t version;
@@ -51,7 +58,10 @@ typedef struct {
 
 static const char *TAG = "device_network";
 static portMUX_TYPE s_snapshot_lock = portMUX_INITIALIZER_UNLOCKED;
-static device_network_snapshot_t s_snapshot = {.moonraker_port=7125, .brightness=70, .sleep_minutes=1};
+static device_network_snapshot_t s_snapshot = {
+    .moonraker_port=PANEL_DEFAULT_PORT, .brightness=PANEL_DEFAULT_BRIGHTNESS,
+    .saver_brightness=DEVICE_NETWORK_DEFAULT_SAVER_BRIGHTNESS, .sleep_minutes=PANEL_DEFAULT_SLEEP_MINUTES
+};
 static bool s_started;
 static bool s_console_active;
 static device_network_console_handler_t s_console_handler;
@@ -704,10 +714,10 @@ static void wifi_connection_run(void)
             else if (!strcmp(action,"moonraker") || !strcmp(action,"i")) configure_moonraker();
             else if (!strcmp(action,"status")) {
                 device_network_snapshot_t snapshot; device_network_snapshot(&snapshot);
-                printf("Panel: WiFi listo=%d IP=%s Moonraker=%s puerto=%u brillo=%u timeout=%u min\n",
+                printf("Panel: WiFi listo=%d IP=%s Moonraker=%s puerto=%u brillo=%u timeout=%u min brillo_reposo=%u\n",
                        snapshot.wifi_ready,snapshot.has_ip?snapshot.ip:"sin IP",
                        snapshot.moonraker_host[0]?snapshot.moonraker_host:"SIN CONFIGURAR",
-                       snapshot.moonraker_port,snapshot.brightness,snapshot.sleep_minutes);
+                       snapshot.moonraker_port,snapshot.brightness,snapshot.sleep_minutes,snapshot.saver_brightness);
                 printf("Red guardada=%d; detalle=%s\n",s_saved,
                        snapshot.error[0]?snapshot.error:"sin error");
                 device_network_display_status_t display;device_network_display_status(&display);
@@ -761,58 +771,60 @@ prompt:
     }
 }
 
-// Panel settings are an independent, versioned blob; the station blob is unchanged.
-typedef struct {
-    uint8_t version;
-    uint8_t brightness;
-    uint16_t sleep_minutes;
-    uint16_t port;
-    char host[64];
-} panel_settings_t;
-static SemaphoreHandle_t s_settings_mutex;
+// After startup the network worker alone owns the committed panel record.
+static panel_settings_t s_persisted_panel;
 
 static esp_err_t persist_panel(const panel_settings_t *settings)
 {
     nvs_handle_t handle;
-    esp_err_t error=nvs_open("jc_panel",NVS_READWRITE,&handle);
+    esp_err_t error=nvs_open(PANEL_NAMESPACE,NVS_READWRITE,&handle);
     if(error!=ESP_OK)return error;
-    error=nvs_set_blob(handle,"settings_v1",settings,sizeof(*settings));
+    error=nvs_set_blob(handle,PANEL_KEY,settings,sizeof(*settings));
     if(error==ESP_OK)error=nvs_commit(handle);
     nvs_close(handle);
+    if(error==ESP_OK)s_persisted_panel=*settings;
     return error;
-}
-static panel_settings_t current_panel(void)
-{
-    device_network_snapshot_t snapshot;device_network_snapshot(&snapshot);
-    panel_settings_t settings={.version=1,.brightness=snapshot.brightness,
-        .sleep_minutes=snapshot.sleep_minutes,.port=snapshot.moonraker_port};
-    memcpy(settings.host,snapshot.moonraker_host,sizeof(settings.host));
-    return settings;
 }
 static void load_panel(void)
 {
+    s_persisted_panel=(panel_settings_t){.version=PANEL_SETTINGS_VERSION,.brightness=PANEL_DEFAULT_BRIGHTNESS,
+        .sleep_minutes=PANEL_DEFAULT_SLEEP_MINUTES,.port=PANEL_DEFAULT_PORT,
+        .saver_brightness=DEVICE_NETWORK_DEFAULT_SAVER_BRIGHTNESS};
     nvs_handle_t handle;
-    if(nvs_open("jc_panel",NVS_READONLY,&handle)!=ESP_OK)return;
-    panel_settings_t settings={0};size_t size=sizeof(settings);
-    esp_err_t error=nvs_get_blob(handle,"settings_v1",&settings,&size);nvs_close(handle);
-    if(error!=ESP_OK || size!=sizeof(settings) || settings.version!=1 ||
-       settings.brightness>100 || settings.sleep_minutes>120 || !settings.port ||
-       !memchr(settings.host,0,sizeof(settings.host)) ||
-       (settings.host[0] && !panel_host_valid(settings.host)))return;
+    if(nvs_open(PANEL_NAMESPACE,NVS_READONLY,&handle)==ESP_OK){
+        panel_settings_t settings;
+        size_t size=sizeof(settings);
+        if(nvs_get_blob(handle,PANEL_KEY,&settings,&size)==ESP_OK &&
+           panel_settings_decode(&settings,size,PANEL_SETTINGS_VERSION)){
+            s_persisted_panel=settings;
+        }else{
+            size=sizeof(settings);
+            if(nvs_get_blob(handle,PANEL_LEGACY_KEY,&settings,&size)==ESP_OK &&
+               panel_settings_decode(&settings,size,PANEL_SETTINGS_LEGACY_VERSION))s_persisted_panel=settings;
+        }
+        nvs_close(handle);
+    }
     portENTER_CRITICAL(&s_snapshot_lock);
-    s_snapshot.brightness=settings.brightness;s_snapshot.sleep_minutes=settings.sleep_minutes;
-    s_snapshot.moonraker_port=settings.port;
-    memcpy(s_snapshot.moonraker_host,settings.host,sizeof(settings.host));
-    s_snapshot.endpoint_generation=settings.host[0]?1:0;
+    s_snapshot.brightness=s_persisted_panel.brightness;
+    s_snapshot.saver_brightness=s_persisted_panel.saver_brightness;
+    s_snapshot.sleep_minutes=s_persisted_panel.sleep_minutes;
+    s_snapshot.moonraker_port=s_persisted_panel.port;
+    memcpy(s_snapshot.moonraker_host,s_persisted_panel.host,sizeof(s_snapshot.moonraker_host));
+    s_snapshot.endpoint_generation=s_persisted_panel.host[0]?1:0;
+    s_display_settings.brightness=s_persisted_panel.brightness;
+    s_display_settings.saver_brightness=s_persisted_panel.saver_brightness;
+    s_display_settings.sleep_minutes=s_persisted_panel.sleep_minutes;
     portEXIT_CRITICAL(&s_snapshot_lock);
 }
-esp_err_t device_network_set_display(uint8_t brightness,uint16_t sleep_minutes)
+esp_err_t device_network_set_display(uint8_t brightness,uint8_t saver_brightness,uint16_t sleep_minutes)
 {
-    if(brightness>100 || sleep_minutes>120)return ESP_ERR_INVALID_ARG;
-    if(!s_settings_mutex)return ESP_ERR_INVALID_STATE;
+    if(brightness>100 || saver_brightness>100 || sleep_minutes>120)return ESP_ERR_INVALID_ARG;
     portENTER_CRITICAL(&s_snapshot_lock);
-    display_settings_submit(&s_display_settings,brightness,sleep_minutes);
-    s_snapshot.brightness=brightness;s_snapshot.sleep_minutes=sleep_minutes;
+    if(!s_started){portEXIT_CRITICAL(&s_snapshot_lock);return ESP_ERR_INVALID_STATE;}
+    display_settings_submit(&s_display_settings,brightness,saver_brightness,sleep_minutes);
+    s_snapshot.brightness=brightness;
+    s_snapshot.saver_brightness=saver_brightness;
+    s_snapshot.sleep_minutes=sleep_minutes;
     portEXIT_CRITICAL(&s_snapshot_lock);
     return ESP_OK;
 }
@@ -824,10 +836,11 @@ static void display_settings_process(void)
     portEXIT_CRITICAL(&s_snapshot_lock);
     if(!pending)return;
     int64_t start=esp_timer_get_time();
-    xSemaphoreTake(s_settings_mutex,portMAX_DELAY);
-    panel_settings_t settings=current_panel();settings.brightness=request.brightness;settings.sleep_minutes=request.sleep_minutes;
+    panel_settings_t settings=s_persisted_panel;
+    settings.brightness=request.brightness;
+    settings.saver_brightness=request.saver_brightness;
+    settings.sleep_minutes=request.sleep_minutes;
     esp_err_t error=persist_panel(&settings);
-    xSemaphoreGive(s_settings_mutex);
     uint32_t elapsed=(uint32_t)(esp_timer_get_time()-start);
     portENTER_CRITICAL(&s_snapshot_lock);
     display_settings_complete(&s_display_settings,&request,error,elapsed);
@@ -836,7 +849,7 @@ static void display_settings_process(void)
 }
 static void configure_moonraker(void)
 {
-    char host[64]={0},port_text[8]={0};uint16_t port=7125;
+    char host[64]={0},port_text[8]={0};uint16_t port=PANEL_DEFAULT_PORT;
     printf("Host/IP Moonraker (sin protocolo, puerto ni ruta; ESC cancela): ");fflush(stdout);
     if(read_line(host,sizeof(host),false,true)<=0 || !panel_host_valid(host)){
         printf("Host invalido/cancelado; configuracion conservada.\n");return;
@@ -852,8 +865,8 @@ static void configure_moonraker(void)
 static esp_err_t store_endpoint(const char *host,uint16_t port)
 {
     if(!panel_host_valid(host) || !port)return ESP_ERR_INVALID_ARG;
-    xSemaphoreTake(s_settings_mutex,portMAX_DELAY);
-    panel_settings_t settings=current_panel();snprintf(settings.host,sizeof(settings.host),"%s",host);settings.port=port;
+    panel_settings_t settings=s_persisted_panel;
+    snprintf(settings.host,sizeof(settings.host),"%s",host);settings.port=port;
     esp_err_t error=persist_panel(&settings);
     if(error==ESP_OK){
         portENTER_CRITICAL(&s_snapshot_lock);
@@ -863,7 +876,6 @@ static esp_err_t store_endpoint(const char *host,uint16_t port)
         portEXIT_CRITICAL(&s_snapshot_lock);
         printf("MOONRAKER_SAVED host=%s port=%u\n",host,port);
     }
-    xSemaphoreGive(s_settings_mutex);
     return error;
 }
 
@@ -1043,15 +1055,14 @@ esp_err_t device_network_start(void)
     // Never erase an existing/incompatible/full NVS partition automatically.
     esp_err_t error=nvs_flash_init();
     if(error!=ESP_OK){set_error(esp_err_to_name(error));return error;}
-    s_settings_mutex=xSemaphoreCreateMutex();if(!s_settings_mutex)return ESP_ERR_NO_MEM;
     s_settings_queue=xQueueCreate(1,sizeof(settings_request_t));
-    if (!s_settings_queue) { vSemaphoreDelete(s_settings_mutex);s_settings_mutex=NULL;return ESP_ERR_NO_MEM; }
+    if (!s_settings_queue) return ESP_ERR_NO_MEM;
     load_panel();
-    s_display_settings.brightness=s_snapshot.brightness;s_display_settings.sleep_minutes=s_snapshot.sleep_minutes;
     if(!s_snapshot.moonraker_host[0])ESP_LOGI(TAG,"MOONRAKER_SETUP_REQUIRED: consola moonraker o I");
     if(xTaskCreate(network_worker,"device_network",10240,NULL,3,NULL)!=pdPASS){
         vQueueDelete(s_settings_queue);s_settings_queue=NULL;
-        vSemaphoreDelete(s_settings_mutex);s_settings_mutex=NULL;return ESP_ERR_NO_MEM;
+        return ESP_ERR_NO_MEM;
     }
-    s_started=true;return ESP_OK;
+    portENTER_CRITICAL(&s_snapshot_lock);s_started=true;portEXIT_CRITICAL(&s_snapshot_lock);
+    return ESP_OK;
 }

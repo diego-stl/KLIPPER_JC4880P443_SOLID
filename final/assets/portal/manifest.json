@@ -4,7 +4,9 @@
   "margin_per_side": 4,
   "approved_selection_sha256": "2b350733d1bb91bd07cb2741426f2176dcd3aa54f04c66e931591ba6efbb3520",
   "approval": "User approved lamina-iconos-logos-v2.png in this chat",
-  "credit": "Uicons by Flaticon - www.flaticon.com/uicons",
+  "icon_revision": "JC4880P443 - Interfaz Portal revisada v3.pptx",
+  "icon_revision_sha256": "a6e281e1748847b17d140bb1c84425d0740cfe60b7d8d05fe2604e4d7edd7477",
+  "credit": "Uicons by Flaticon, Pictogrammers, Google Material Symbols, Lucide/Feather",
   "format": "LVGL9 RGB565A8 planar, little endian",
   "source_project": "KLIPPER_ES3C28P_SOLID/assets/glados",
   "images": [
@@ -125,13 +127,18 @@
       "packed_sha256": "3b68e61cca71d2b52200f3773007516e05ebf445052705784a44877d7b7bdeb9"
     },
     {
-      "source": "assets\\portal\\approved-icons\\print.png",
-      "source_sha256": "b84cb094f42a9a4db9e1f2b1338e00489307fec477db5b4547f499c8265c1ec1",
+      "source": "assets/portal/icons-v3/print.png",
+      "source_sha256": "2f485e351ac65120e35177ce424ec86a0bcd1d2758acb897849b18e78820f1b1",
       "approved_id": 1,
       "provenance": {
-        "family": "UIcons Solid Rounded",
-        "name": "print",
-        "codepoint": 64181
+        "file": "print.png",
+        "sha256": "2f485e351ac65120e35177ce424ec86a0bcd1d2758acb897849b18e78820f1b1",
+        "family": "Pictogrammers",
+        "license": "Apache-2.0",
+        "urls": [
+          "https://pictogrammers.com/library/mdi/icon/printer-3d-nozzle-outline/",
+          "https://pictogrammers.com/library/mdi/icon/cube-outline/"
+        ]
       },
       "recolorable": true,
       "canvas": [
@@ -140,10 +147,10 @@
       ],
       "stride": 128,
       "data_size": 12288,
-      "packed_sha256": "3eff574a1b3a7f4cdf7da73daa0ad9afd30654eeff1d70e9604bfe224e5214a7"
+      "packed_sha256": "e488371e91abc9af08be6f2dd084988bd0a27bb123b6f86ee23b3fe874790e4d"
     },
     {
-      "source": "assets\\portal\\approved-icons\\file.png",
+      "source": "assets/portal/approved-icons/file.png",
       "source_sha256": "dcd95e3af027a5244ad53c6ed88ff856b2d293006659f154f1e1b1a5ee7e5474",
       "approved_id": 28,
       "provenance": {
@@ -161,13 +168,18 @@
       "packed_sha256": "e2030404e8cc48b52f85c01aab3923cca454b3d1e34e126d39a0ceabb8f18f4c"
     },
     {
-      "source": "assets\\portal\\approved-icons\\move.png",
-      "source_sha256": "439670d9f86dc18e527bc4a7ff66f03718d94a66d3290a19ce16c13b6dc8cbb7",
+      "source": "assets/portal/icons-v3/move.png",
+      "source_sha256": "2cb9c22ed020f095db4f5f4d794a48d2cd3c5e88e2bb65a6dd6131a9c463837f",
       "approved_id": 2,
       "provenance": {
-        "family": "UIcons Solid Rounded",
-        "name": "arrows",
-        "codepoint": 61901
+        "file": "move.png",
+        "sha256": "2cb9c22ed020f095db4f5f4d794a48d2cd3c5e88e2bb65a6dd6131a9c463837f",
+        "family": "Lucide / Feather",
+        "license": "ISC / MIT",
+        "urls": [
+          "https://lucide.dev/icons/move",
+          "https://lucide.dev/license"
+        ]
       },
       "recolorable": true,
       "canvas": [
@@ -176,10 +188,10 @@
       ],
       "stride": 128,
       "data_size": 12288,
-      "packed_sha256": "bfb8d538430f5f3a14df1a9938f04c556427918a577c043d743c66e3d154ab8f"
+      "packed_sha256": "5458ca5f3dbef76ead4ec1e30b79bd701e625941f23368763067814c11ff61d4"
     },
     {
-      "source": "assets\\portal\\approved-icons\\details.png",
+      "source": "assets/portal/approved-icons/details.png",
       "source_sha256": "b7fb2a1de53f6ca4f833800c05a6dc9ff70c10dac9f6591e9fec935c96a5c8f8",
       "approved_id": 20,
       "provenance": {
@@ -197,13 +209,17 @@
       "packed_sha256": "3eae2e36333b40aa4f589ac9906a4cb3558096e90a1dedf663b3aa0969476d9a"
     },
     {
-      "source": "assets\\portal\\approved-icons\\settings.png",
-      "source_sha256": "6c3a5821b645f67eff7d303eb718007011d587dbaa8972b377af9684a61009be",
+      "source": "assets/portal/icons-v3/settings.png",
+      "source_sha256": "e6ddc3abc6141a229e5c6ccc64fffed4cd92b9d1c71ad98a543b33cef9c29ce0",
       "approved_id": 4,
       "provenance": {
-        "family": "UIcons Solid Rounded",
-        "name": "settings",
-        "codepoint": 64428
+        "file": "settings.png",
+        "sha256": "e6ddc3abc6141a229e5c6ccc64fffed4cd92b9d1c71ad98a543b33cef9c29ce0",
+        "family": "Pictogrammers",
+        "license": "Apache-2.0",
+        "urls": [
+          "https://pictogrammers.com/library/mdi/icon/cog-outline/"
+        ]
       },
       "recolorable": true,
       "canvas": [
@@ -212,10 +228,10 @@
       ],
       "stride": 128,
       "data_size": 12288,
-      "packed_sha256": "c9b25c67442a325da7d63c0ea484c4effe07dbdc42318d9260dbe6052e389480"
+      "packed_sha256": "0eeff9443e21bd64133d19b94ea3072ccf8b4e7ea34f55af5d13e7bfa4a16453"
     },
     {
-      "source": "assets\\portal\\approved-icons\\macro.png",
+      "source": "assets/portal/approved-icons/macro.png",
       "source_sha256": "8b7313768c7c16309bc0b75582cb4711d69bfcbde3d84fbcb2441b3fb1ff2300",
       "approved_id": 5,
       "provenance": {
@@ -233,13 +249,17 @@
       "packed_sha256": "221d7f9b9054108f1b77d0eb79f72f4957914cc160c74fc6ab149a140134f32e"
     },
     {
-      "source": "assets\\portal\\approved-icons\\stop.png",
-      "source_sha256": "a96da9a703e94f0b5efbb1b218fa6f346d2e32fcc00e0ad7f8ce08e9b56e1fb7",
+      "source": "assets/portal/icons-v3/stop.png",
+      "source_sha256": "e35fbb346a30e932c04d9b13781ec58a16c4639acc2c784c04a6237e89c57117",
       "approved_id": 6,
       "provenance": {
-        "family": "UIcons Solid Rounded",
-        "name": "stop-circle",
-        "codepoint": 64720
+        "file": "stop.png",
+        "sha256": "e35fbb346a30e932c04d9b13781ec58a16c4639acc2c784c04a6237e89c57117",
+        "family": "Google Material Symbols Rounded",
+        "license": "Apache-2.0",
+        "urls": [
+          "https://fonts.google.com/icons?selected=Material+Symbols+Rounded:report"
+        ]
       },
       "recolorable": true,
       "canvas": [
@@ -248,10 +268,10 @@
       ],
       "stride": 128,
       "data_size": 12288,
-      "packed_sha256": "6ac868180328ae3e4652ac22dc7067ab770f62f23714ba23543fcb0c28656469"
+      "packed_sha256": "42addd10029201ebc2a874cd4ec4f582cb71a9d646aca4486470e567300628f7"
     },
     {
-      "source": "assets\\portal\\approved-icons\\pause.png",
+      "source": "assets/portal/approved-icons/pause.png",
       "source_sha256": "1b754a2352983b4a65d1eba806d23b2a1aeb5c88c389bb548b272b014e7a816c",
       "approved_id": 7,
       "provenance": {
@@ -269,7 +289,7 @@
       "packed_sha256": "8083a7e5a6d3c4b48c15a989084536d8a65d7bd072da4f8b48ac6c2a151331e0"
     },
     {
-      "source": "assets\\portal\\approved-icons\\play.png",
+      "source": "assets/portal/approved-icons/play.png",
       "source_sha256": "4475dbe23019ad804d9ff6f4d63ae736c9b61ad336b0df51740816d102d111a0",
       "approved_id": 8,
       "provenance": {
@@ -287,7 +307,7 @@
       "packed_sha256": "6506262b102966ca4a76af9d2d3b7675fa33ea0d178dcf8ec23d465cb9e96f4e"
     },
     {
-      "source": "assets\\portal\\approved-icons\\cancel.png",
+      "source": "assets/portal/approved-icons/cancel.png",
       "source_sha256": "8c8d29114fee1cc076d1ee8d376485febe9d4a080affac089a4efa577dce5e6e",
       "approved_id": 9,
       "provenance": {
@@ -305,7 +325,7 @@
       "packed_sha256": "bd35dd027cedb05c824075f3c976018c7c982bedbbf3d7b7f624872679ea63b4"
     },
     {
-      "source": "assets\\portal\\approved-icons\\extrude.png",
+      "source": "assets/portal/approved-icons/extrude.png",
       "source_sha256": "01f7ae6f95271e73d35f299e8e45d0c3357e5400d29b008bd1a79b381cb3dc93",
       "approved_id": 11,
       "provenance": {
@@ -323,7 +343,7 @@
       "packed_sha256": "79b65e8eb80639d2b740aa2496f94d7f8b806dfaf663801a7dc6e3d25db6a8a8"
     },
     {
-      "source": "assets\\portal\\approved-icons\\retract.png",
+      "source": "assets/portal/approved-icons/retract.png",
       "source_sha256": "9c63813f1a891881723fea1a3f885edd8eddb447ab28c3d99a116c358800b2ec",
       "approved_id": 12,
       "provenance": {
@@ -341,14 +361,17 @@
       "packed_sha256": "3ffa8b27e76d648cd66b6af2d339c13ec55824cf322ee2451e1d3e729d037413"
     },
     {
-      "source": "assets\\portal\\approved-icons\\nozzle.png",
-      "source_sha256": "082d96e1473e9d45dc65d2f615e23b6035ffa12a9856fc121457e92565c40bd5",
+      "source": "assets/portal/icons-v3/nozzle.png",
+      "source_sha256": "112094bf4821e3ca1ac7a7b4734b5b8a88a74354b687469717ece3955615f61d",
       "approved_id": 13,
       "provenance": {
-        "file": "boquilla-1518427.png",
-        "id": 1518427,
-        "url": "https://www.magnific.com/es/icono/alfiler_1518427",
-        "sha256": "464e7e707f3cefd16eb70ae5a2c758a9788b71573032894f2cac30c6563eaaf4"
+        "file": "nozzle.png",
+        "sha256": "112094bf4821e3ca1ac7a7b4734b5b8a88a74354b687469717ece3955615f61d",
+        "family": "Pictogrammers",
+        "license": "Apache-2.0",
+        "urls": [
+          "https://pictogrammers.com/library/mdi/icon/printer-3d-nozzle/"
+        ]
       },
       "recolorable": true,
       "canvas": [
@@ -357,10 +380,10 @@
       ],
       "stride": 128,
       "data_size": 12288,
-      "packed_sha256": "541fa1e5ae971dc21a2696802c41af8b0a8fbf918404ff3c36c4449f59ce53c4"
+      "packed_sha256": "2ed59ae8350089cb86fe5cab0669af31581ff6711f8d1bbbfce46717c8c98770"
     },
     {
-      "source": "assets\\portal\\approved-icons\\bed.png",
+      "source": "assets/portal/approved-icons/bed.png",
       "source_sha256": "f6f32a4b1b54b3cba0f081e53c81d9599612be19c32db07cb1c424a257d8967b",
       "approved_id": 14,
       "provenance": {
@@ -379,13 +402,17 @@
       "packed_sha256": "ca51e614303b5d05b2d23786d79231ff2b05604c4d7fb852917678f88ddce391"
     },
     {
-      "source": "assets\\portal\\approved-icons\\home.png",
-      "source_sha256": "8160186a369c68d15559e57f6f20731540506ed5647f52910bbcd64085017395",
+      "source": "assets/portal/icons-v3/home.png",
+      "source_sha256": "2bf53644f7d81836d947fe1c2227546b38258ac5fedd268ede7d5c322320cd6a",
       "approved_id": 15,
       "provenance": {
-        "family": "UIcons Solid Rounded",
-        "name": "home",
-        "codepoint": 63405
+        "file": "home.png",
+        "sha256": "2bf53644f7d81836d947fe1c2227546b38258ac5fedd268ede7d5c322320cd6a",
+        "family": "Google Material Symbols Rounded",
+        "license": "Apache-2.0",
+        "urls": [
+          "https://fonts.google.com/icons?selected=Material+Symbols+Rounded:my_location"
+        ]
       },
       "recolorable": true,
       "canvas": [
@@ -394,10 +421,10 @@
       ],
       "stride": 128,
       "data_size": 12288,
-      "packed_sha256": "a7d40d756015751cd2381e563a76e994dc6aa11b351e8f1e8355dd7e9dde2aa1"
+      "packed_sha256": "d6d50ef3e2c84cc903d024bf1ff5079de2eaf9caaa955e6d1268a21037b0e99e"
     },
     {
-      "source": "assets\\portal\\approved-icons\\refresh.png",
+      "source": "assets/portal/approved-icons/refresh.png",
       "source_sha256": "fb70ba683776f7f4271830708c1287381e3e30eab4732abe7cc87a5b2797feeb",
       "approved_id": 16,
       "provenance": {
@@ -415,7 +442,7 @@
       "packed_sha256": "3cc0b51d203d5f9b91581550bbd84b6da2ecec7e736840248559c9d1d06553a0"
     },
     {
-      "source": "assets\\portal\\approved-icons\\power.png",
+      "source": "assets/portal/approved-icons/power.png",
       "source_sha256": "3f5af9df4a0140e3d35d28cf592c6ddf76d1b070bcc9bc5fcdc6e526efa45cec",
       "approved_id": 17,
       "provenance": {
@@ -433,7 +460,7 @@
       "packed_sha256": "03c54c433f9f8831c578e04bc68594706a0d86b488036e739d58c4f8815fda81"
     },
     {
-      "source": "assets\\portal\\approved-icons\\back.png",
+      "source": "assets/portal/approved-icons/back.png",
       "source_sha256": "a0fbb984e2f51670fa8653f76b27f34ec48b6323498340a047140ee7ec2d0cd8",
       "approved_id": 18,
       "provenance": {
@@ -451,7 +478,7 @@
       "packed_sha256": "4cef9b4806483b8aeaab17dde3f3724199403755a9020467ed2200ea4009b120"
     },
     {
-      "source": "assets\\portal\\approved-icons\\plus.png",
+      "source": "assets/portal/approved-icons/plus.png",
       "source_sha256": "b15adb3e78a7bbcefd58a56aa7634579520b0df8721c05fe889ed5548e8f0ffa",
       "approved_id": 21,
       "provenance": {
@@ -469,7 +496,7 @@
       "packed_sha256": "83835b364961aa2c8ba0ca5a5d363ce7b447c501bfa51118d5345b24652830e4"
     },
     {
-      "source": "assets\\portal\\approved-icons\\minus.png",
+      "source": "assets/portal/approved-icons/minus.png",
       "source_sha256": "2f26d284aaf2d2daf8896c68dfa249229c58bd99c266ee01f2d22d6525e9fb4f",
       "approved_id": 22,
       "provenance": {
@@ -487,7 +514,7 @@
       "packed_sha256": "37a9e2a45af5bb988a6b0f26c882fc2f653957a577feee3ca43c47b3a7d6cf83"
     },
     {
-      "source": "assets\\portal\\approved-icons\\backspace.png",
+      "source": "assets/portal/approved-icons/backspace.png",
       "source_sha256": "5a3885f8db06177bda0e33c8a194090e4e0715deb1a1c3366dc0add5a0964247",
       "approved_id": 23,
       "provenance": {
@@ -505,7 +532,7 @@
       "packed_sha256": "0aad62b80b5064e8e33635e887c7a9f0e50ec48ab9a9a235365084ebc359624d"
     },
     {
-      "source": "assets\\portal\\approved-icons\\up.png",
+      "source": "assets/portal/approved-icons/up.png",
       "source_sha256": "89caae74b2130fae1f6a67732b56b365c09a2bbdba1b2023ce2b338bf221cc0c",
       "approved_id": 26,
       "provenance": {
@@ -523,7 +550,7 @@
       "packed_sha256": "f26ef07deb1ea9a94133047fe9060dd9a809f2d1455e41d1d053e85520a82d70"
     },
     {
-      "source": "assets\\portal\\approved-icons\\down.png",
+      "source": "assets/portal/approved-icons/down.png",
       "source_sha256": "364f72e48fe7ba9722c2f71fcd01e473bef3a71e851650b8ea1688a12bb4b445",
       "approved_id": 27,
       "provenance": {
@@ -541,7 +568,7 @@
       "packed_sha256": "67eb0c7e70e466c174cb5cb78d6c80c0e87a43cc90f9274026f12cf516e2704f"
     },
     {
-      "source": "assets\\portal\\approved-icons\\left.png",
+      "source": "assets/portal/approved-icons/left.png",
       "source_sha256": "98eda6559541a659a929bea8fdfa081e733ad5442ada3eefaf6d32136c97e3fb",
       "approved_id": 24,
       "provenance": {
@@ -559,7 +586,7 @@
       "packed_sha256": "104bf8902787dbfda4c15ab2394ffe3d2e4ad02aeac8571caa6888b4fb9e14ba"
     },
     {
-      "source": "assets\\portal\\approved-icons\\right.png",
+      "source": "assets/portal/approved-icons/right.png",
       "source_sha256": "cebb4d8bef5c893393e007fcd368187ffec99b02c786a846bbded7ba75d49d95",
       "approved_id": 25,
       "provenance": {
@@ -577,7 +604,7 @@
       "packed_sha256": "cca7d962bc073ae8cec0098b22abbfb89c1a20e7ac009ade4a2f998f66cb8fcd"
     },
     {
-      "source": "assets\\portal\\approved-icons\\wifi.png",
+      "source": "assets/portal/approved-icons/wifi.png",
       "source_sha256": "4a96749a4279b0be8b872ce738bda6c4925642bd469bf1b7c2a2990d87a3c826",
       "approved_id": 19,
       "provenance": {
@@ -595,7 +622,7 @@
       "packed_sha256": "a5e7e7738142a1cfc487eca87cd5f9758b537243e77c11a2a8204fa2b2563e50"
     },
     {
-      "source": "assets\\portal\\approved-icons\\exclude.png",
+      "source": "assets/portal/approved-icons/exclude.png",
       "source_sha256": "f0cc85fcde1d2a154f754d4cec9385535c20c510dd664e5792c72628057a24b5",
       "approved_id": 10,
       "provenance": {
@@ -613,7 +640,7 @@
       "packed_sha256": "e5773a130029b680b98033f2ebe623ee84b5fc924966200eb7b3a9c2b6427eed"
     },
     {
-      "source": "assets\\portal\\approved-icons\\last_job.png",
+      "source": "assets/portal/approved-icons/last_job.png",
       "source_sha256": "54bd27e1b492ad10f0a9fdaba37a7f4744d03fb14acc471d7c426d2e1ff7f14a",
       "approved_id": 3,
       "provenance": {
@@ -631,7 +658,7 @@
       "packed_sha256": "e2f4ee8726422a0923f518a04fa38723b41f071df7aaef50331fbc25f2c4313a"
     },
     {
-      "source": "assets\\portal\\approved-icons\\audio.png",
+      "source": "assets/portal/approved-icons/audio.png",
       "source_sha256": "7bd130330fd659ed0f21b870a9b80a9a5aa884f1a3ea5b8d8672069b76dc203d",
       "approved_id": 29,
       "provenance": {
@@ -649,7 +676,7 @@
       "packed_sha256": "925b6958bfd8187fb5f8cf5d2a615ad4ba75dded03a3e31ae2e70e62fb4f5d99"
     },
     {
-      "source": "assets\\portal\\approved-icons\\mute.png",
+      "source": "assets/portal/approved-icons/mute.png",
       "source_sha256": "4722b97d81abaf2429f3f8d9bad2b9d319d781086def11df1f5fc6876d1537d8",
       "approved_id": 30,
       "provenance": {
@@ -667,7 +694,7 @@
       "packed_sha256": "23b583eccfb3a65105e591ce1104e4636fa749058f58c9cf77e6e8c09723ad1f"
     },
     {
-      "source": "assets\\portal\\approved-icons\\cool.png",
+      "source": "assets/portal/approved-icons/cool.png",
       "source_sha256": "066774d80c7d0ea637b3aa40438b6bba8709f4ddb180cd824b57edcc4b399676",
       "approved_id": 31,
       "provenance": {
@@ -685,7 +712,7 @@
       "packed_sha256": "5948d55ef3aeb6945ca5c384a5b2a5cba10ab5d4aae6e4571cb652be1c00bd9b"
     },
     {
-      "source": "assets\\portal\\approved-icons\\motors_off.png",
+      "source": "assets/portal/approved-icons/motors_off.png",
       "source_sha256": "68f6b9546b399c37c633af1fe81b8f28bc8a5259086fd9e6583573306f8704b1",
       "approved_id": 32,
       "provenance": {
@@ -909,9 +936,139 @@
       "data_size": 11163,
       "packed_sha256": "9527d43980d8bf3a5e6de0a3a425f7bcb5736841791157caa2bdadb08f9d88ae",
       "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/blue-iris.png",
+      "source_sha256": "b3011e0ef556c3d8b8cb8008966b8fa59191d943bf38560848a5ddc1d04cfd8c",
+      "canvas": [
+        1,
+        131
+      ],
+      "format": "RGB565",
+      "stride": 2,
+      "data_size": 262,
+      "packed_sha256": "d62be3ee654c181ddb8e5c25f8ce736f96a2843ec4f143adb71e284e9b5d88e4",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/blue-lens.png",
+      "source_sha256": "4f2605105265c357107a3a9ea4cdb009a189aba4b4d290e270dccf38934bb276",
+      "canvas": [
+        55,
+        55
+      ],
+      "format": "RGB565A8",
+      "stride": 110,
+      "data_size": 9075,
+      "packed_sha256": "1867677f74cfb12eb7fec617c24a4f357f69a61d1fdfc274070b9e11a4cfb0f4",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/green-iris.png",
+      "source_sha256": "201bb3122258147240c40545f546c7a3f2042b6c8326fa942b6719554cffeab6",
+      "canvas": [
+        1,
+        130
+      ],
+      "format": "RGB565",
+      "stride": 2,
+      "data_size": 260,
+      "packed_sha256": "f1ea93f03f3a1c1a9a7e501ae9baf5c59ebfbfa1c8fdbe438a92444fbb86979e",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/green-lens.png",
+      "source_sha256": "cbe387e2c38e5e8b511078689e61a88ff9c0d5d3b22d03ff7e40d6ba98bcc1fd",
+      "canvas": [
+        78,
+        68
+      ],
+      "format": "RGB565A8",
+      "stride": 156,
+      "data_size": 15912,
+      "packed_sha256": "baaf86a9a74f9b33fab72534f250e2a990098c01fb8f488fe571ab843f671c9d",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/yellow-iris.png",
+      "source_sha256": "bf0834eecd706eee066bca225338a507d26c6bfa6637bc3e648bf680509868bc",
+      "canvas": [
+        1,
+        132
+      ],
+      "format": "RGB565",
+      "stride": 2,
+      "data_size": 264,
+      "packed_sha256": "bc0e75dcbb11a2fe4edfbb08bb88746327cf383d2e051161f3e99d6f172d5f20",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/yellow-lens.png",
+      "source_sha256": "0106cbc64fd4c638bbb93569cc257212ab7f075902642af55cc5fc9aef0b198d",
+      "canvas": [
+        56,
+        56
+      ],
+      "format": "RGB565A8",
+      "stride": 112,
+      "data_size": 9408,
+      "packed_sha256": "ee162216219c8e918f6da4082a992e967f9fed70315f789f017064df1b88e3d1",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/red-iris.png",
+      "source_sha256": "dec0169d2450259407dcf994cc953802567a5c80175c4c18579a5bf4a5a4d1d3",
+      "canvas": [
+        1,
+        131
+      ],
+      "format": "RGB565",
+      "stride": 2,
+      "data_size": 262,
+      "packed_sha256": "39f6697127c53045b4d5132a0ed870aaf2c71af100111912f6e113040940685c",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/saver/red-lens.png",
+      "source_sha256": "e060a04d327f7d4d4e4b6b7b84e01f7dc39fdc144e5520194d2f6eaabb26476d",
+      "canvas": [
+        65,
+        65
+      ],
+      "format": "RGB565A8",
+      "stride": 130,
+      "data_size": 12675,
+      "packed_sha256": "addf2ce0db8add54071513fcd476b3394fa903fc07b135d73575fcd3c04a1ab9",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/warning.png",
+      "source_sha256": "51e150bef1feb96e0bd87a31c6970d87c27fb6c974f6be0b68db60f50f18f01a",
+      "canvas": [
+        49,
+        37
+      ],
+      "format": "RGB565A8",
+      "stride": 98,
+      "data_size": 5439,
+      "packed_sha256": "4ba4cf9129b7a4c25418669b203de25b5411b7ae8c6c0502d0d6612ce07a7a3a",
+      "recolorable": false
+    },
+    {
+      "source": "assets/portal/cores/offline.png",
+      "source_sha256": "f7c37700ddaaa6ffa5f40307ddccdefd88e1aff7c961dfcd915769a3d8a42c0f",
+      "canvas": [
+        1,
+        135
+      ],
+      "format": "RGB565",
+      "stride": 2,
+      "data_size": 270,
+      "packed_sha256": "557464bd56502308e398d3aef3694a77a3ec37b7c09cb10eda815a4d28db0ce6",
+      "recolorable": false
     }
   ],
-  "total_pixel_bytes": 1550714,
+  "total_pixel_bytes": 1604541,
   "icon_pixel_bytes": 393216,
   "symbol_aliases": {
     "FILE": "file",

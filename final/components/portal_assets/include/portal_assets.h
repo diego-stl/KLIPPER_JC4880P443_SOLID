@@ -61,6 +61,16 @@ extern const lv_image_dsc_t portal_saver_iris_yellow;
 extern const lv_image_dsc_t portal_saver_lens_yellow;
 extern const lv_image_dsc_t portal_saver_iris_red;
 extern const lv_image_dsc_t portal_saver_lens_red;
+extern const lv_image_dsc_t portal_core_iris_blue;
+extern const lv_image_dsc_t portal_core_lens_blue;
+extern const lv_image_dsc_t portal_core_iris_green;
+extern const lv_image_dsc_t portal_core_lens_green;
+extern const lv_image_dsc_t portal_core_iris_yellow;
+extern const lv_image_dsc_t portal_core_lens_yellow;
+extern const lv_image_dsc_t portal_core_iris_red;
+extern const lv_image_dsc_t portal_core_lens_red;
+extern const lv_image_dsc_t portal_core_lens_warning;
+extern const lv_image_dsc_t portal_core_iris_offline;
 const lv_font_t *portal_font(const lv_font_t *font);
 extern const lv_font_t portal_saver_progress_font;
 /* Approved monochrome sources: 64 px main; scale 128 gives 32 px controls. */

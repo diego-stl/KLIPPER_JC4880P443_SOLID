@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <climits>
 #include <cmath>
+#include <cstdlib>
 #include <cstring>
 
 namespace klipper {
@@ -23,6 +24,11 @@ static cJSON *item(cJSON *p, const char *key) {
 }
 static const char *text(cJSON *p) {
   return cJSON_IsString(p) && p->valuestring ? p->valuestring : "";
+}
+static StatusField<std::string> status_text(cJSON *p, const char *key) {
+  auto value = item(p, key);
+  return cJSON_IsString(value) ? StatusField<std::string>{true, text(value)}
+                              : StatusField<std::string>{};
 }
 static double number(cJSON *p, double fallback = 0) {
   return cJSON_IsNumber(p) && std::isfinite(p->valuedouble) ? p->valuedouble
@@ -90,6 +96,7 @@ extern "C" void klipper_client_snapshot(klipper_snapshot_t *out) {
   out->revision = c.revision + c.files_revision + c.macros_revision +
                   c.objects_revision + c.metadata_revision;
   out->endpoint_generation = c.generation;
+  out->error_revision = c.status.klippy.revision;
   out->metadata_revision = c.metadata_revision;
   out->socket_connected = c.socket_open;
   out->available = c.connected;
@@ -154,6 +161,22 @@ extern "C" void klipper_client_snapshot(klipper_snapshot_t *out) {
     dst.center_x = src.cx;
     dst.center_y = src.cy;
   }
+}
+extern "C" char *klipper_client_copy_error_detail(uint32_t expected_generation,
+                                                   uint32_t expected_error_revision) {
+  auto &c = klipper::client;
+  device_network_snapshot_t net{};
+  device_network_snapshot(&net);
+  c.sync_endpoint(net);
+  std::lock_guard<std::mutex> lock(c.mutex);
+  const auto &klippy = c.status.klippy;
+  if (c.generation != expected_generation || klippy.revision != expected_error_revision ||
+      !klippy.faulted() || klippy.message.empty())
+    return nullptr;
+  const auto size = klippy.message.size() + 1;
+  auto copy = static_cast<char *>(std::malloc(size));
+  if (copy) std::memcpy(copy, klippy.message.c_str(), size);
+  return copy;
 }
 static bool copy_metadata(klipper_metadata_t *out, const std::shared_ptr<const Metadata> &m,
                           uint32_t revision, uint32_t generation) {
@@ -431,7 +454,9 @@ void Client::sync_endpoint(const device_network_snapshot_t &) {
   }
   connected = false;
   invalidate_tuning();
+  const auto error_revision = status.klippy.revision + 1;
   status = {};
+  status.klippy.revision = error_revision;
   pause = {};
   last_job = {};
   job_metadata.reset();
@@ -1121,20 +1146,15 @@ static MoonrakerStatusDelta<std::string> delta_from(cJSON *s) {
                ? StatusField<float>{true, value}
                : StatusField<float>{};
   };
-  auto tp = [](cJSON *o, const char *key) {
-    auto p = item(o, key);
-    return cJSON_IsString(p) ? StatusField<std::string>{true, text(p)}
-                             : StatusField<std::string>{};
-  };
   d.hotendTemp = fp(item(s, "extruder"), "temperature");
   d.hotendTarget = fp(item(s, "extruder"), "target");
   d.bedTemp = fp(item(s, "heater_bed"), "temperature");
   d.bedTarget = fp(item(s, "heater_bed"), "target");
   d.progress = fp(item(s, "virtual_sdcard"), "progress");
-  d.filename = tp(item(s, "print_stats"), "filename");
-  d.printState = tp(item(s, "print_stats"), "state");
-  d.klippyState = tp(item(s, "webhooks"), "state");
-  d.stateMessage = tp(item(s, "webhooks"), "state_message");
+  d.filename = status_text(item(s, "print_stats"), "filename");
+  d.printState = status_text(item(s, "print_stats"), "state");
+  d.klippyState = status_text(item(s, "webhooks"), "state");
+  d.stateMessage = status_text(item(s, "webhooks"), "state_message");
   const auto tuning = [&](const char *object_name, const char *field_name, bool fan) {
     auto object = item(s, object_name);
     if (!object) return PrintTuning::Field{};
@@ -1187,6 +1207,18 @@ bool Client::send_rpc(const char *method, uint32_t &pending, cJSON *params) {
   restart = true;
   unavailable("No se pudo enviar consulta WebSocket");
   return false;
+}
+void Client::probe_klippy(bool detailed) {
+  if (server_id || printer_id) return;
+  {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (ws_generation != generation || !current(generation)) return;
+    state_rpc_revision = status.klippy.revision;
+  }
+  if (detailed)
+    send_rpc("printer.info", printer_id);
+  else
+    send_rpc("server.info", server_id);
 }
 static bool optional_bool(cJSON *p, bool &value) {
   if (cJSON_IsBool(p)) { value = cJSON_IsTrue(p); return true; }
@@ -1254,9 +1286,7 @@ bool Client::apply(cJSON *obj, double eventtime, bool snapshot) {
   if (!cJSON_IsObject(obj) || !std::isfinite(eventtime) || eventtime < 0)
     return false;
   auto delta = delta_from(obj);
-  if (!snapshot && !subscribed) {
-    if (!subscribe_id)
-      return true;
+  if (!snapshot && !subscribed && subscribe_id) {
     if (before_snapshot.size() == 8)
       return false;
     before_snapshot.push_back({eventtime, std::move(delta)});
@@ -1267,10 +1297,25 @@ bool Client::apply(cJSON *obj, double eventtime, bool snapshot) {
   std::lock_guard<std::mutex> lock(mutex);
   if (ws_generation != generation || !current(generation))
     return true;
+  if (!snapshot && !subscribed) {
+    // A shutdown delta can follow its lifecycle notification before bootstrap.
+    // A message-only delta needs an observed WebSocket baseline for this fault.
+    const bool fault_update = delta.klippyState.present
+        ? delta.klippyState.value == "shutdown" || delta.klippyState.value == "error"
+        : delta.stateMessage.present && last_event >= 0;
+    if (status.klippy.faulted() && fault_update) {
+      status.klippy.apply(delta.klippyState, delta.stateMessage);
+      last_event = eventtime;
+      ++revision;
+    }
+    return true;
+  }
   if (snapshot) {
     if (!delta.klippyState.present)
       return false;
+    auto klippy = std::move(status.klippy);
     status = {};
+    status.klippy = std::move(klippy);
     ++tuning_epoch;
   }
   cJSON *timelapse = item(obj, "gcode_macro TIMELAPSE_TAKE_FRAME");
@@ -1378,7 +1423,7 @@ bool Client::apply(cJSON *obj, double eventtime, bool snapshot) {
     last_job_metadata = job_metadata;
   }
   pause.update(status.printState(), now_ms(), snapshot);
-  connected = subscribed && status.klippyState == "ready";
+  connected = subscribed && status.klippy.state == "ready";
   if (!connected) invalidate_tuning();
   if (snapshot || previous_speed_valid != status.speedFactorValid ||
       previous_flow_valid != status.flowFactorValid || previous_fan_valid != status.fanSpeedValid ||
@@ -1412,21 +1457,35 @@ void Client::message(const std::string &payload) {
   } else if (method == "notify_klippy_ready" ||
              method == "notify_klippy_shutdown" ||
              method == "notify_klippy_disconnected") {
-    subscribed = false;
-    server_id = printer_id = subscribe_id = timelapse_id = 0;
-    timelapse_supported = timelapse_taking = timelapse_paused = false;
-    before_snapshot.clear();
-    last_event = -1;
+    const bool shutdown = method == "notify_klippy_shutdown";
     {
       std::lock_guard<std::mutex> lock(mutex);
+      if (ws_generation != generation || !current(generation)) {
+        cJSON_Delete(doc);
+        return;
+      }
+      if (!shutdown) {
+        subscribed = false;
+        timelapse_supported = timelapse_taking = timelapse_paused = false;
+        last_event = -1;
+      }
+      server_id = printer_id = subscribe_id = timelapse_id = 0;
       connected = false;
       invalidate_tuning();
-      status.klippyState = method == "notify_klippy_ready" ? "ready"
-                           : method == "notify_klippy_shutdown"
-                               ? "shutdown"
-                               : "disconnected";
-      status.stateMessage = "Klipper: " + status.klippyState;
-      if (method == "notify_klippy_shutdown" && !job_filename.empty() &&
+      status.klippy.apply({true, shutdown ? "shutdown" :
+                          method == "notify_klippy_ready" ? "ready" : "disconnected"});
+      if (shutdown) {
+        for (const auto &b : before_snapshot) {
+          const auto &state = b.delta.klippyState;
+          if (b.time >= last_event && state.present &&
+              (state.value == "shutdown" || state.value == "error")) {
+            status.klippy.apply(state, b.delta.stateMessage);
+            last_event = b.time;
+          }
+        }
+      }
+      before_snapshot.clear();
+      if (shutdown && !job_filename.empty() &&
           (status.jobState == "printing" || status.jobState == "paused")) {
         last_job = {};
         last_job.valid = true;
@@ -1443,10 +1502,8 @@ void Client::message(const std::string &payload) {
     }
     if (method == "notify_klippy_ready")
       subscribe();
-    else {
-      send_rpc("server.info", server_id);
-      send_rpc("printer.info", printer_id);
-    }
+    else
+      probe_klippy(shutdown);
   } else if (method.empty()) {
     uint32_t id = uint32_t(number(item(doc, "id")));
     bool si = server_id && id == server_id, pi = printer_id && id == printer_id,
@@ -1479,27 +1536,37 @@ void Client::message(const std::string &payload) {
         } else
           printer_id = 0;
       } else {
-        auto state = item(result, si ? "klippy_state" : "state");
-        if (!cJSON_IsString(state)) {
+        const auto state = status_text(result, si ? "klippy_state" : "state");
+        if (!state.present) {
           restart = true;
           unavailable("Respuesta de estado invalida");
-        } else if (!(pi && subscribed)) {
+        } else {
+          const auto detail = pi ? status_text(result, "state_message")
+                                 : StatusField<std::string>{};
           {
             std::lock_guard<std::mutex> lock(mutex);
+            const bool was_faulted = status.klippy.faulted();
+            if (ws_generation != generation || !current(generation) ||
+                !status.klippy.applyProbe(state_rpc_revision, state, detail, si)) {
+              cJSON_Delete(doc);
+              return;
+            }
             connected = false;
             invalidate_tuning();
-            status.klippyState = text(state);
-            status.stateMessage = pi ? text(item(result, "state_message"))
-                                     : "Klipper: " + status.klippyState;
+            if (status.klippy.state == "disconnected" || status.klippy.state == "startup" ||
+                (status.klippy.state == "ready" && was_faulted)) {
+              subscribed = false;
+              timelapse_supported = timelapse_taking = timelapse_paused = false;
+              last_event = -1;
+              before_snapshot.clear();
+            }
             error.clear();
             ++revision;
           }
-          if (si) {
-            if (std::strcmp(text(state), "ready") == 0)
-              subscribe();
-            else
-              send_rpc("printer.info", printer_id);
-          }
+          if (state.value == "ready")
+            subscribe();
+          else if (si && state.value != "disconnected")
+            probe_klippy(true);
         }
       }
     }
@@ -1524,7 +1591,7 @@ void Client::ws_event(int32_t id, esp_websocket_event_data_t *ev) {
     frame.clear();
     fragmented = false;
     unavailable("WebSocket conectado: sincronizando");
-    send_rpc("server.info", server_id);
+    probe_klippy();
     return;
   }
   if (id == WEBSOCKET_EVENT_DISCONNECTED || id == WEBSOCKET_EVENT_ERROR ||
@@ -1640,9 +1707,15 @@ void Client::ws_worker() {
             (fragmented && now - fragment_started >= 5000)) {
           restart = true;
           unavailable("Respuesta WebSocket incompleta");
-        } else if (!subscribed && !server_id && !subscribe_id &&
-                   now - bootstrap >= 2000)
-          send_rpc("server.info", server_id);
+        } else if (!server_id && !printer_id && !subscribe_id &&
+                   now - bootstrap >= 2000) {
+          bool needs_probe;
+          {
+            std::lock_guard<std::mutex> lock(mutex);
+            needs_probe = !subscribed || status.klippy.faulted();
+          }
+          if (needs_probe) probe_klippy();
+        }
       }
     }
     vTaskDelay(pdMS_TO_TICKS(100));

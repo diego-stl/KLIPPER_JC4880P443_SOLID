@@ -1,5 +1,5 @@
 // Ejecutar con el compilador del proyecto:
-// xtensa-esp32s3-elf-g++ -std=gnu++20 -fsyntax-only tests/moonraker_status_regression.cpp
+// riscv32-esp-elf-g++ -std=gnu++20 -fsyntax-only tests/klipper_status_regression.cpp
 // Evalua el modelo utilizado por el firmware, sin red, UI ni impresora.
 #include "../components/klipper_client/private/MoonrakerStatus.h"
 #include <limits>
@@ -31,7 +31,7 @@ constexpr bool snapshotPopulatesAllFields() {
     return status.hotendTemp == 205 && status.hotendTarget == 210 &&
         status.bedTemp == 58 && status.bedTarget == 60 &&
         status.filename == "pieza.gcode" && status.printState() == "printing" &&
-        status.klippyState == "ready" && status.errorMessage().empty() &&
+        status.klippy.state == "ready" && status.errorMessage().empty() &&
         status.progress == 0.25f && status.printDuration == 1200 &&
         status.timeRemaining == 3600;
 }
@@ -119,6 +119,60 @@ constexpr bool faultOverridesJobStateAndReadyRestoresIt(Text fault) {
     return status.printState() == "printing" && status.errorMessage().empty();
 }
 
+constexpr bool faultDetailSurvivesCoarseOrEmptyUpdates() {
+    auto status = initialSnapshot();
+    constexpr Text detail = "MCU 'mcu' shutdown: ADC out of range\nCheck the thermistor.";
+    status.klippy.apply({true, "shutdown"}, {true, detail});
+    auto revision = status.klippy.revision;
+    status.klippy.apply({true, "shutdown"}); // notify_klippy_shutdown and server.info
+    status.klippy.apply({true, "shutdown"}, {true, " \t\n"});
+    status.klippy.apply({true, "shutdown"}, {true, ""});
+    Delta temperature;
+    temperature.hotendTemp = {true, 206};
+    status.apply(temperature);
+    if (status.errorMessage() != detail || revision != status.klippy.revision) return false;
+    // error and shutdown can be reported for the same fault while Klippy initializes.
+    status.klippy.apply({true, "error"});
+    return status.errorMessage() == detail;
+}
+
+constexpr bool updatedDetailSupersedesAnOutstandingPoll() {
+    auto status = initialSnapshot();
+    status.klippy.apply({true, "shutdown"});
+    const auto pendingPoll = status.klippy.revision;
+    Delta correction;
+    correction.stateMessage = {true, "MCU 'mcu' shutdown\nCheck USB."};
+    status.apply(correction);
+    if (status.klippy.applyProbe(pendingPoll, {true, "ready"}, {}, true) ||
+        status.klippy.applyProbe(pendingPoll, {true, "shutdown"}, {true, "Outdated diagnosis"}, false) ||
+        status.errorMessage() != correction.stateMessage.value) return false;
+    correction.stateMessage.value = "MCU 'mcu' shutdown\nCheck the CAN wiring.";
+    return status.klippy.applyProbe(status.klippy.revision, {true, "shutdown"}, correction.stateMessage, false) &&
+        status.errorMessage() == correction.stateMessage.value;
+}
+
+constexpr bool startupProbeKeepsFaultUntilKlippyConfirmsRecovery() {
+    auto status = initialSnapshot();
+    constexpr Text detail = "Configuration error\nCheck printer.cfg.";
+    status.klippy.apply({true, "error"}, {true, detail});
+    const auto revision = status.klippy.revision;
+    if (!status.klippy.applyProbe(revision, {true, "startup"}, {}, true) ||
+        !status.klippy.faulted() || status.errorMessage() != detail ||
+        status.klippy.revision != revision) return false;
+    return status.klippy.applyProbe(revision, {true, "startup"}, {}, false) &&
+        !status.klippy.faulted() && status.errorMessage().empty();
+}
+
+constexpr bool newLifecycleLosesPreviousDetail(Text recoveredState) {
+    auto status = initialSnapshot();
+    status.klippy.apply({true, "shutdown"}, {true, "Fault from the previous session"});
+    const auto revision = status.klippy.revision;
+    status.klippy.apply({true, recoveredState});
+    if (!status.errorMessage().empty() || revision == status.klippy.revision) return false;
+    status.klippy.apply({true, "shutdown"});
+    return status.errorMessage().empty();
+}
+
 constexpr bool invalidFloatingValuesPreservePreviousData() {
     auto status = initialSnapshot();
     Delta delta;
@@ -164,6 +218,12 @@ static_assert(sameFilenamePreservesProgress(), "Repetir filename no reinicia el 
 static_assert(faultOverridesJobStateAndReadyRestoresIt("shutdown"), "Shutdown precede al trabajo");
 static_assert(faultOverridesJobStateAndReadyRestoresIt("error"), "Error precede al trabajo");
 static_assert(faultOverridesJobStateAndReadyRestoresIt("startup"), "Startup precede al trabajo");
+static_assert(faultDetailSurvivesCoarseOrEmptyUpdates());
+static_assert(updatedDetailSupersedesAnOutstandingPoll());
+static_assert(startupProbeKeepsFaultUntilKlippyConfirmsRecovery());
+static_assert(newLifecycleLosesPreviousDetail("ready"));
+static_assert(newLifecycleLosesPreviousDetail("startup"));
+static_assert(newLifecycleLosesPreviousDetail("disconnected"));
 static_assert(invalidFloatingValuesPreservePreviousData(), "No publicar NaN, infinito o progreso fuera de rango");
 static_assert(etaBoundsAreSafe(), "Evitar desbordamiento y ETA sin progreso suficiente");
 

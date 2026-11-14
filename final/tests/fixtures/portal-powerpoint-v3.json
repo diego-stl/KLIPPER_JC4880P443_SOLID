@@ -1,0 +1,252 @@
+{
+  "description": "Approved Portal PowerPoint v3 UI revision",
+  "cases": {
+    "view_00": {
+      "geometry_sha256": "5a87125d6a3999cfde8d919165ab857850dc7aa34be7162a4d165d86ee9d4bd4"
+    },
+    "view_01": {
+      "geometry_sha256": "53d691c35b32a5db26bedcdad085a28696e20628d3ffbaa17df4c853efe7e54d",
+      "thermal_pixels": {
+        "350": "3e198499bf961054dea9e1d5a8b4fa1e4ffb809fb437ca6fc0bb5e116ede628c",
+        "408": "aaecea0b38a3c4ac837c3c5ddf81117320afef44d98dd0228b12fdeb90402a23"
+      }
+    },
+    "view_02": {
+      "geometry_sha256": "1c56bb70eb2655d6653e4d41448a18eb21d7d9d059cba7ffb49b526e4a31fe90",
+      "widgets": 45,
+      "thermal_pixels": {
+        "350": "3e198499bf961054dea9e1d5a8b4fa1e4ffb809fb437ca6fc0bb5e116ede628c",
+        "408": "aaecea0b38a3c4ac837c3c5ddf81117320afef44d98dd0228b12fdeb90402a23"
+      }
+    },
+    "view_03": {
+      "geometry_sha256": "3ef06015428078fb5306207263802ea7c804c88bacc744e729a5e5c733a08c50",
+      "widgets": 45,
+      "thermal_pixels": {
+        "350": "3e198499bf961054dea9e1d5a8b4fa1e4ffb809fb437ca6fc0bb5e116ede628c",
+        "408": "aaecea0b38a3c4ac837c3c5ddf81117320afef44d98dd0228b12fdeb90402a23"
+      }
+    },
+    "view_04": {
+      "geometry_sha256": "6a647b1a2f414aba0f29429b02f32fada293e4990ccb02172b8fc30d39bdbd24",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "bbaa2719a2bb56ebc624266b2368e9b3e64cd127b1544e58c12f710c51977948",
+        "control_records": 1274,
+        "painted_scrollbars": 0
+      },
+      "thermal_pixels": {
+        "12": "3dfa02842a4122434294b48a57ba31fe961fc56c90c55fd20cc49724b3061cb8",
+        "158": "0487c4b23682425070e630b74666b76e438c4fd5d8d25cf9aa2a43ef3b9bc61f"
+      }
+    },
+    "view_05": {
+      "geometry_sha256": "1ebdfdcbbdac2da07003d4c74b1c948d86e6f9a0f07aa1ccd107d05f0642da8d",
+      "widgets": 29,
+      "protected_styles": {
+        "sha256": "eb29ea990618de383f6bf4a34f5204d6bb007e9e1f1e504a69940037837354f8",
+        "control_records": 392,
+        "painted_scrollbars": 2
+      },
+      "text_button_pixels": {
+        "disabled_interior": "77c30359404a68166afa16f2ff1b97ba84c126d91b2f1d00e7be96f55b54133e"
+      }
+    },
+    "view_06": {
+      "geometry_sha256": "9b088f61095d414fd8e37078ffdcdd7e7cb6be9e1c11269705ed06e58f4c6774",
+      "widgets": 26,
+      "protected_styles": {
+        "sha256": "221e86011fa2ca3d88d8f07bef0262cf1f7fcdf854d73ba80e137bb7e57f187b",
+        "control_records": 392,
+        "painted_scrollbars": 1
+      }
+    },
+    "view_07": {
+      "geometry_sha256": "e6aafc48a1b4ad6dd6db2a9e3170e47e6b6bfec8bd418ef015e5b42b199d27f4",
+      "widgets": 30,
+      "protected_styles": {
+        "sha256": "3fe1e9cf6ba413da47905734c9a4f897d077349a455ac4ef3055897c76fea2b5",
+        "control_records": 686,
+        "painted_scrollbars": 1
+      }
+    },
+    "view_08": {
+      "geometry_sha256": "5a23c39d09a178aa5c3d6ecbc0c306e6f04e98de5240aad48ba3babecb76b901",
+      "widgets": 41,
+      "protected_styles": {
+        "sha256": "95b83e891b15f8bdf346d30e17980c287b6a648eb99062503e44ebb13577b731",
+        "control_records": 343,
+        "painted_scrollbars": 0
+      }
+    },
+    "view_09": {
+      "geometry_sha256": "89319c6be44771398b77f5eb313eef581cac5a1df8ebd71dd4c361243b399df9",
+      "widgets": 24
+    },
+    "view_10": {
+      "geometry_sha256": "5c64c57dc7684b065dbe773289ddcedad0e8c1509fec23dace19d3ab0cb910f1",
+      "widgets": 25,
+      "protected_styles": {
+        "sha256": "4c3808a963161ece63d85315eb0f4f1d651e8f3c1b03b09eb66be991f9daf4b1",
+        "control_records": 196,
+        "painted_scrollbars": 0
+      },
+      "text_button_pixels": {
+        "disabled_interior": "7d602e0ca5c11ec326210332fde676e8f4b8f67b0cdf672f87708dc65a9355eb"
+      }
+    },
+    "file_selected": {
+      "geometry_sha256": "9f3ff3861eac30fe558be64735ba7a175180ac57af838c03f1d56b658cb630d0",
+      "widgets": 25,
+      "protected_styles": {
+        "sha256": "9be83e2004486f4b042aca969137e099ac6ff61db367cac503168a14313f06bd",
+        "control_records": 392,
+        "painted_scrollbars": 2
+      }
+    },
+    "macro_selected": {
+      "geometry_sha256": "9b088f61095d414fd8e37078ffdcdd7e7cb6be9e1c11269705ed06e58f4c6774",
+      "widgets": 26,
+      "protected_styles": {
+        "sha256": "5e03cd2c1571bd34623a84d5a533bf623a1391f243072743b6e8a73c1f0aa855",
+        "control_records": 392,
+        "painted_scrollbars": 1
+      }
+    },
+    "object_selected": {
+      "geometry_sha256": "0e3ca81286426f9d308c41988339a3c51d2429e0b580932598ba32fe1c653c94",
+      "widgets": 30,
+      "protected_styles": {
+        "sha256": "5f3116ef4ae2563ab75e16fa9ab90f4e2f94f29333134f3bd7cd5296ae61da9e",
+        "control_records": 686,
+        "painted_scrollbars": 1
+      }
+    },
+    "material_dropdown": {
+      "geometry_sha256": "6ae0e77344d52249fe7d013bc10189c06ed52807c487e8574db223d24af899e2",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "d27a14f12d3c3cc4c654b12383177e30a947e551e5f3dda1ee6f349dc6314821",
+        "control_records": 1372,
+        "painted_scrollbars": 0
+      }
+    },
+    "step_dropdown": {
+      "geometry_sha256": "f0764c13fe496b1c06e061cf0e8a557736df65b94c829ae4be0027532df79e1b",
+      "widgets": 72,
+      "protected_styles": {
+        "sha256": "d27a14f12d3c3cc4c654b12383177e30a947e551e5f3dda1ee6f349dc6314821",
+        "control_records": 1372,
+        "painted_scrollbars": 0
+      }
+    },
+    "sleep_dropdown": {
+      "geometry_sha256": "13969a63c549e1e1ed380537f0bacf5cbcec07469a7368d3623ad47d27d4c9c4",
+      "widgets": 41,
+      "protected_styles": {
+        "sha256": "1cb2247695e8213eefaffb43a57ee76dd4652baceb01dc43de580e1d5f75953f",
+        "control_records": 441,
+        "painted_scrollbars": 0
+      }
+    },
+    "sound_off": {
+      "geometry_sha256": "0a74d5e0cf509f16203b267a694a60a8081265edd6ab596f087c632b33762f06",
+      "widgets": 41,
+      "protected_styles": {
+        "sha256": "95b83e891b15f8bdf346d30e17980c287b6a648eb99062503e44ebb13577b731",
+        "control_records": 343,
+        "painted_scrollbars": 0
+      }
+    },
+    "confirm_cancel": {
+      "geometry_sha256": "93ae9cb75641ae192fc91f2a929f72cae22a3dbaeabccb760a7e5cba5392bf9a",
+      "widgets": 55,
+      "protected_styles": {
+        "sha256": "bc4a62b25494a6def172c726d4be1de541a26856d170b064a5278510b6676687",
+        "control_records": 196,
+        "painted_scrollbars": 1
+      }
+    },
+    "confirm_emergency": {
+      "geometry_sha256": "b03507804e03f43a072adf1ce5824a0c8947d0194441608619bd86bfffa910e4",
+      "widgets": 49,
+      "protected_styles": {
+        "sha256": "7378139b3514f21187d54adf42d57f81947aa0898b037bc1fe4473fda130f085",
+        "control_records": 196,
+        "painted_scrollbars": 1
+      }
+    },
+    "target_keypad": {
+      "geometry_sha256": "a1cffd378f85f07a7cb9a50eab5df875cd4ad8223f186f7ca0c894fd903f9869",
+      "widgets": 110,
+      "protected_styles": {
+        "sha256": "20fb01b5a50d448edbfae0be90aefab750d6fc225956d85572112d18178bc0ab",
+        "control_records": 2646,
+        "painted_scrollbars": 0
+      }
+    },
+    "tuning": {
+      "geometry_sha256": "76bb0a0fadb8bfbac5f49087e0990512b7fce968ea7b8f21b82d0d837655bfbb",
+      "widgets": 86,
+      "protected_styles": {
+        "sha256": "617d56069178db3de885ff449221982fc3e11b8074994ca898c2bd0c35eb97e9",
+        "control_records": 735,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi": {
+      "geometry_sha256": "919a128580e2779414465378beb84b6264433a22dcea7cf29a143cbecd5424ec",
+      "widgets": 80,
+      "protected_styles": {
+        "sha256": "a0e31b42d0242e7f3b1cbe1f2e570393278d7c6722555810b7413dc46734c299",
+        "control_records": 1078,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi_keyboard": {
+      "geometry_sha256": "fff3204bbd47e4d7e1c3896f59066ff83f0aa2204ab928053d22e6f03e86ef4d",
+      "widgets": 80,
+      "protected_styles": {
+        "sha256": "ed4e7362fbb47ccf746f2b0e7e564a1164b4a043aa894b7c3957b8203fd3c4d3",
+        "control_records": 1127,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi_password": {
+      "geometry_sha256": "5768673a4b69d161a580c0bcec2c3afe2c038902785cbdab06d36bd1a1dfad00",
+      "widgets": 80,
+      "protected_styles": {
+        "sha256": "ed4e7362fbb47ccf746f2b0e7e564a1164b4a043aa894b7c3957b8203fd3c4d3",
+        "control_records": 1127,
+        "painted_scrollbars": 0
+      }
+    },
+    "moonraker": {
+      "geometry_sha256": "a63abf0eccc9930bcf361c5450a53c8adbbbb9d9fea34938a3ce1ce1acdfd668",
+      "widgets": 80,
+      "protected_styles": {
+        "sha256": "4679615b8b3a0e9f5b141f3d1c5090ca4f247f33e112f0405ea3c6f20ac00e35",
+        "control_records": 1029,
+        "painted_scrollbars": 0
+      }
+    },
+    "moonraker_keyboard": {
+      "geometry_sha256": "2240945f75ee9a8737dcc965ce368d5c97dc72903e288658e4592ce73d34fcb6",
+      "widgets": 80,
+      "protected_styles": {
+        "sha256": "d5280c0065b97415d1d279ca95e464bb4e8ddcdeaf5a25f3874a3212afc8d72a",
+        "control_records": 1078,
+        "painted_scrollbars": 0
+      }
+    },
+    "wifi_dropdown": {
+      "geometry_sha256": "a8aa898404326008429632e9e120012424cdafb3a3794d4ba00e0cba482d2415",
+      "widgets": 80,
+      "protected_styles": {
+        "sha256": "2bf90438bbfcef24e7ac6eda5fc8e6e1229feb09acf0068fb5ece9d3e46a7ab0",
+        "control_records": 1176,
+        "painted_scrollbars": 0
+      }
+    }
+  }
+}

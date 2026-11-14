@@ -9,6 +9,7 @@
 enum { ACT_CLOSE=1,ACT_WIFI,ACT_ENDPOINT,ACT_SCAN,ACT_WIFI_SAVE,ACT_ENDPOINT_SAVE,ACT_TEST };
 static lv_obj_t *s_overlay,*s_body,*s_wifi,*s_endpoint,*s_keyboard,*s_status,*s_link;
 static lv_obj_t *s_networks,*s_ssid,*s_password,*s_host,*s_port;
+static lv_obj_t *s_wifi_tab,*s_endpoint_tab;
 static bool (*s_guard)(void);
 static bool s_selecting,s_raw_selection,s_closing;
 static char s_selected_ssid[33];
@@ -17,10 +18,40 @@ static uint32_t s_generation,s_revision;
 static device_network_settings_snapshot_t s_state;
 static device_network_operation_t s_audio_operation;
 
+static const char *const s_ipv4_keys[]={
+    "1","2","3",LV_SYMBOL_KEYBOARD,"\n",
+    "4","5","6","Listo","\n",
+    "7","8","9",LV_SYMBOL_BACKSPACE,"\n",
+    "0",".",LV_SYMBOL_LEFT,LV_SYMBOL_RIGHT,""
+};
+static const char *const s_port_keys[]={
+    "1","2","3",LV_SYMBOL_KEYBOARD,"\n",
+    "4","5","6","Listo","\n",
+    "7","8","9",LV_SYMBOL_BACKSPACE,"\n",
+    "0",LV_SYMBOL_LEFT,LV_SYMBOL_RIGHT,""
+};
+static const lv_buttonmatrix_ctrl_t s_ipv4_weights[]={1,1,1,2,1,1,1,2,1,1,1,2,3,3,2,2};
+static const lv_buttonmatrix_ctrl_t s_port_weights[]={1,1,1,2,1,1,1,2,1,1,1,2,6,2,2};
+
 static void erase(void *memory,size_t length)
 { volatile unsigned char *p=memory;while(length--) *p++=0; }
 static bool blocked(void)
 { return s_guard && s_guard(); }
+static void select_tab(bool endpoint)
+{
+    if(endpoint){
+        lv_obj_add_flag(s_wifi,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_remove_flag(s_endpoint,LV_OBJ_FLAG_HIDDEN);
+    }else{
+        lv_obj_remove_flag(s_wifi,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(s_endpoint,LV_OBJ_FLAG_HIDDEN);
+    }
+    lv_obj_set_style_bg_color(s_wifi_tab,lv_color_hex(endpoint?0xE3E9EE:0x00688F),0);
+    lv_obj_set_style_bg_color(s_endpoint_tab,lv_color_hex(endpoint?0x00688F:0xE3E9EE),0);
+    lv_obj_set_style_text_color(lv_obj_get_child(s_wifi_tab,0),lv_color_hex(endpoint?0x142532:0xF6FAFF),0);
+    lv_obj_set_style_text_color(lv_obj_get_child(s_endpoint_tab,0),lv_color_hex(endpoint?0xF6FAFF:0x142532),0);
+    lv_obj_set_pos(s_status,20,endpoint?310:381);
+}
 static void surface(lv_obj_t *object,uint32_t color)
 {
     lv_obj_set_style_bg_color(object,lv_color_hex(color),0);
@@ -53,6 +84,12 @@ static void keyboard_event(lv_event_t *event)
     lv_event_code_t code=lv_event_get_code(event);
     // LV_EVENT_ALL also delivers DELETE while the overlay is being destroyed.
     // Never inspect the guard or re-enter teardown for lifecycle events.
+    if (code==LV_EVENT_VALUE_CHANGED && !s_closing && s_overlay){
+        uint32_t index=lv_keyboard_get_selected_button(s_keyboard);
+        const char *key=lv_keyboard_get_button_text(s_keyboard,index);
+        if(key&&!strcmp(key,"Listo"))lv_obj_send_event(s_keyboard,LV_EVENT_READY,NULL);
+        return;
+    }
     if (code!=LV_EVENT_READY && code!=LV_EVENT_CANCEL) return;
     if (s_closing || !s_overlay) return;
     if (blocked()) { portal_network_settings_close();return; }
@@ -62,8 +99,12 @@ static void focus_event(lv_event_t *event)
 {
     if (blocked()) { portal_network_settings_close();return; }
     lv_obj_t *textarea=lv_event_get_target(event);
-    lv_keyboard_set_mode(s_keyboard,(textarea==s_host || textarea==s_port)?
-        LV_KEYBOARD_MODE_NUMBER:LV_KEYBOARD_MODE_TEXT_LOWER);
+    if(textarea==s_host||textarea==s_port){
+        bool ipv4=textarea==s_host;
+        lv_keyboard_set_map(s_keyboard,LV_KEYBOARD_MODE_NUMBER,ipv4?s_ipv4_keys:s_port_keys,
+                            ipv4?s_ipv4_weights:s_port_weights);
+        lv_keyboard_set_mode(s_keyboard,LV_KEYBOARD_MODE_NUMBER);
+    }else lv_keyboard_set_mode(s_keyboard,LV_KEYBOARD_MODE_TEXT_LOWER);
     lv_keyboard_set_textarea(s_keyboard,textarea);
     lv_obj_remove_flag(s_keyboard,LV_OBJ_FLAG_HIDDEN);
     lv_obj_set_height(s_body,134);
@@ -134,8 +175,7 @@ static void action_event(lv_event_t *event)
     if (action==ACT_CLOSE) { portal_network_settings_close();return; }
     if (action==ACT_WIFI || action==ACT_ENDPOINT) {
         keyboard_hide();
-        if (action==ACT_WIFI) { lv_obj_remove_flag(s_wifi,LV_OBJ_FLAG_HIDDEN);lv_obj_add_flag(s_endpoint,LV_OBJ_FLAG_HIDDEN); }
-        else { lv_obj_remove_flag(s_endpoint,LV_OBJ_FLAG_HIDDEN);lv_obj_add_flag(s_wifi,LV_OBJ_FLAG_HIDDEN); }
+        select_tab(action==ACT_ENDPOINT);
         return;
     }
     if(s_audio_operation!=DEVICE_NETWORK_OP_NONE){
@@ -199,17 +239,18 @@ void portal_network_settings_open(lv_obj_t *parent,bool (*input_blocked)(void))
     portal_preserve_text_backdrops(backdrop);
     lv_obj_set_style_bg_grad_dir(backdrop,LV_GRAD_DIR_NONE,0);lv_obj_set_style_shadow_width(backdrop,0,0);
     lv_obj_remove_flag(backdrop,LV_OBJ_FLAG_SCROLLABLE);
-    label(s_overlay,"RED Y MOONRAKER",24,24,540);
+    lv_obj_t *title=label(s_overlay,"Red y Moonraker",24,22,540);
+    lv_obj_set_style_text_font(title,portal_font(&lv_font_montserrat_20),0);
     button(s_overlay,"Cerrar",648,12,120,ACT_CLOSE);
-    button(s_overlay,"Wi-Fi",20,52,170,ACT_WIFI);
-    button(s_overlay,"Moonraker",202,52,200,ACT_ENDPOINT);
+    s_wifi_tab=button(s_overlay,"Wi-Fi",20,52,170,ACT_WIFI);
+    s_endpoint_tab=button(s_overlay,"Moonraker",202,52,200,ACT_ENDPOINT);
     s_body=lv_obj_create(s_overlay);lv_obj_remove_style_all(s_body);
     lv_obj_set_pos(s_body,20,108);lv_obj_set_size(s_body,760,282);
     lv_obj_set_scroll_dir(s_body,LV_DIR_VER);
     s_wifi=form(s_body);s_endpoint=form(s_body);lv_obj_add_flag(s_endpoint,LV_OBJ_FLAG_HIDDEN);
     s_networks=lv_dropdown_create(s_wifi);lv_obj_set_pos(s_networks,0,0);lv_obj_set_size(s_networks,544,44);
     lv_obj_set_ext_click_area(s_networks,2);
-    lv_obj_set_style_text_font(s_networks,&lv_font_montserrat_20,0);
+    lv_obj_set_style_text_font(s_networks,portal_font(&lv_font_montserrat_20),0);
     surface(s_networks,0x0c151e);lv_dropdown_set_options(s_networks,"SSID manual / selecciona red");
     lv_obj_add_event_cb(s_networks,select_event,LV_EVENT_VALUE_CHANGED,NULL);
     button(s_wifi,"Escanear",556,0,180,ACT_SCAN);
@@ -234,6 +275,7 @@ void portal_network_settings_open(lv_obj_t *parent,bool (*input_blocked)(void))
     button(s_endpoint,"Guardar Moonraker",376,152,360,ACT_ENDPOINT_SAVE);
     s_status=label(s_overlay,"Red iniciando...",20,398,760);
     s_link=label(s_overlay,"",20,446,760);
+    select_tab(false);
     s_keyboard=lv_keyboard_create(s_overlay);lv_obj_set_align(s_keyboard,LV_ALIGN_TOP_LEFT);
     lv_obj_set_pos(s_keyboard,0,254);lv_obj_set_size(s_keyboard,800,226);
     lv_obj_set_style_bg_color(s_keyboard,lv_color_hex(PORTAL_STATUS_COLOR),LV_PART_MAIN);
@@ -250,6 +292,7 @@ void portal_network_settings_close(void)
     // Teardown uses only these local pointers, whose objects are still alive.
     s_overlay=s_body=s_wifi=s_endpoint=s_keyboard=s_status=s_link=NULL;
     s_networks=s_ssid=s_password=s_host=s_port=NULL;s_guard=NULL;
+    s_wifi_tab=s_endpoint_tab=NULL;
     s_selecting=s_raw_selection=s_requires_password=false;
     erase(s_selected_ssid,sizeof(s_selected_ssid));erase(&s_state,sizeof(s_state));
     if (overlay) {

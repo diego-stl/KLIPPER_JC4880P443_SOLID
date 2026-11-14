@@ -19,6 +19,7 @@ MARGIN = 4
 ICON_SIZE = 64
 REVIEW = ROOT / "design/revision-0.6.1"
 APPROVED = ROOT / "assets/portal/approved-icons"
+REVISED_ICONS = ROOT / "assets/portal/icons-v3"
 SOURCES = (
     ("glados_suspended.png", "portal_head_image", (288, 248)),
     ("potatOS.png", "portal_potato_image", (248, 240)),
@@ -51,8 +52,8 @@ def approved_manifest():
     return manifest
 
 
-def icon(name):
-    image = Image.open(APPROVED / (name + ".png")).convert("RGBA")
+def icon(path):
+    image = Image.open(path).convert("RGBA")
     assert image.size == (ICON_SIZE, ICON_SIZE) and image.getchannel("A").getbbox()
     return image
 
@@ -122,6 +123,49 @@ def saver_artwork():
         yield source, f"portal_saver_lens_{face}", lens, packed_pixels(lens), "RGB565A8", lens_width * 2
 
 
+def animated_core_artwork():
+    for face, lens_width in {"blue": 55, "green": 78, "yellow": 56, "red": 65}.items():
+        source = SAVER_ART / f"{face}-iris.png"
+        iris = Image.open(source).convert("RGBA")
+        # The exposed coating is a vertical gradient. Pack one color per row
+        # and leave the original bezel and outer artwork in the state PNG.
+        middle = iris.width // 2
+        profile = iris.crop((middle, 2, middle + 1, iris.height - 2))
+        yield source, f"portal_core_iris_{face}", profile, packed_pixels(profile)[:profile.height * 2], "RGB565", 2
+
+        source = SAVER_ART / f"{face}-lens.png"
+        lens = Image.open(source).convert("RGBA")
+        lens = lens.crop(lens.getchannel("A").getbbox())
+        height = round(lens.height * lens_width / lens.width)
+        lens = lens.resize((lens_width, height), Image.Resampling.LANCZOS)
+        yield source, f"portal_core_lens_{face}", lens, packed_pixels(lens), "RGB565A8", lens_width * 2
+
+    source = ROOT / "assets/portal/cores/warning.png"
+    warning = Image.open(source).convert("RGBA")
+    lens = Image.new("RGBA", (49, 47))
+    # The blue warning glyph was exported over its iris. Recover its coverage
+    # by comparing the red channel to the gradient on the same scanline.
+    for y in range(lens.height):
+        row = y + 106
+        background = warning.getpixel((76, row))[0]
+        for x in range(lens.width):
+            red = warning.getpixel((x + 82, row))[0]
+            alpha = 255 * max(0, background - red) // max(1, background)
+            lens.putpixel((x, y), (0, 120, 174, alpha))
+    lens = lens.crop(lens.getchannel("A").getbbox())
+    yield source, "portal_core_lens_warning", lens, packed_pixels(lens), "RGB565A8", lens.width * 2
+
+    source = ROOT / "assets/portal/cores/offline.png"
+    offline = Image.open(source).convert("RGBA")
+    top = offline.getpixel((129, 162))[0]
+    bottom = offline.getpixel((129, 190))[0]
+    profile = Image.new("RGBA", (1, 135))
+    for y in range(profile.height):
+        shade = max(0, min(255, top + (bottom - top) * (y - 76) // 28))
+        profile.putpixel((0, y), (shade, shade, shade, 255))
+    yield source, "portal_core_iris_offline", profile, packed_pixels(profile)[:profile.height * 2], "RGB565", 2
+
+
 def final_artwork():
     source = ROOT / "IMAGENES/fondo.png"
     background = Image.open(source).convert("RGBA").convert("L").resize((800, 480), Image.Resampling.LANCZOS)
@@ -134,6 +178,7 @@ def final_artwork():
         sprite = sprite.quantize(colors=256, method=Image.Quantize.FASTOCTREE)
         yield source, f"portal_core_{state}", sprite, png_bytes(sprite, optimize=True), "RAW_ALPHA", 0
     yield from saver_artwork()
+    yield from animated_core_artwork()
 
 
 def montserrat_glyphs(size, points, bpp):
@@ -159,7 +204,7 @@ def montserrat_glyphs(size, points, bpp):
 def spanish_font_definitions():
     # LVGL's stock Montserrat covers ASCII, degree and its own symbols.
     # Add only the missing glyphs, using the same upstream font.
-    points = sorted(ord(c) for c in "¡¿ÁÉÍÓÚÜÑáéíóúüñ…")
+    points = sorted(ord(c) for c in "¡¿ÁÉÍÓÚÜÑáéíóúüñ·…")
     first = points[0]
     offsets = ", ".join(str(point - first) for point in points)
     definitions = [f"static const uint16_t spanish_points[] = {{{offsets}}};",
@@ -167,7 +212,7 @@ def spanish_font_definitions():
                    f"    .range_start = {first}, .range_length = {points[-1] - first + 1}, .glyph_id_start = 1,",
                    f"    .unicode_list = spanish_points, .list_length = {len(points)}, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY",
                    "};"]
-    for size in (14, 16, 20):
+    for size in (14, 16, 20, 28):
         bitmap, metrics = montserrat_glyphs(size, points, 8)
         definitions.extend([
             f"static const uint8_t spanish_pixels_{size}[] = {{\n{c_bytes(bitmap)}\n}};",
@@ -184,10 +229,10 @@ def spanish_font_definitions():
     definitions.extend([
         "const lv_font_t *portal_font(const lv_font_t *font)",
         "{",
-        "    static lv_font_t localized[3];",
-        "    static const lv_font_t *const base[] = {&lv_font_montserrat_14, &lv_font_montserrat_16, &lv_font_montserrat_20};",
-        "    static const lv_font_t *const fallback[] = {&spanish_fallback_14, &spanish_fallback_16, &spanish_fallback_20};",
-        "    for (unsigned i = 0; i < 3; ++i) {",
+        "    static const lv_font_t *const base[] = {&lv_font_montserrat_14, &lv_font_montserrat_16, &lv_font_montserrat_20, &lv_font_montserrat_28};",
+        "    static const lv_font_t *const fallback[] = {&spanish_fallback_14, &spanish_fallback_16, &spanish_fallback_20, &spanish_fallback_28};",
+        "    static lv_font_t localized[sizeof(base) / sizeof(*base)];",
+        "    for (unsigned i = 0; i < sizeof(base) / sizeof(*base); ++i) {",
         "        if (font != base[i]) continue;",
         "        if (!localized[i].fallback) {",
         "            localized[i] = *font;",
@@ -275,10 +320,14 @@ def contact_sheet(sprites):
 def generate(source_dir: Path) -> dict[Path, bytes]:
     approved = approved_manifest()
     selected = {item["name"]: item for item in approved["icons"]}
+    revised = json.loads((REVISED_ICONS / "manifest.json").read_text(encoding="utf-8"))
+    assert set(revised["icons"]).issubset(selected)
     outputs, sprites, declarations = {}, {}, []
     metadata = {"pillow_version": pillow_version, "alpha_crop_threshold": 16,
                 "margin_per_side": MARGIN, "approved_selection_sha256": approved["selection_sha256"],
-                "approval": approved["approval"], "credit": "Uicons by Flaticon - www.flaticon.com/uicons",
+                "approval": approved["approval"], "icon_revision": revised["reference"],
+                "icon_revision_sha256": revised["reference_sha256"],
+                "credit": "Uicons by Flaticon, Pictogrammers, Google Material Symbols, Lucide/Feather",
                 "format": "LVGL9 RGB565A8 planar, little endian",
                 "source_project": "KLIPPER_ES3C28P_SOLID/assets/glados", "images": []}
     definitions = ['/* Generated by tools/generate_portal_assets.py; do not edit. */',
@@ -307,9 +356,14 @@ def generate(source_dir: Path) -> dict[Path, bytes]:
     for source, symbol, sprite in logos():
         images.append((symbol, sprite, {"source": source, "source_sha256": hashlib.sha256((ROOT / source).read_bytes()).hexdigest(), "recolorable": False}))
     for name in ICON_NAMES:
-        images.append((f"portal_icon_{name}", icon(name), {"source": str((APPROVED / selected[name]["file"]).relative_to(ROOT)),
-                         "source_sha256": selected[name]["sha256"], "approved_id": selected[name]["approved_id"],
-                         "provenance": selected[name]["source"], "recolorable": True}))
+        original = selected[name]
+        replacement = revised["icons"].get(name)
+        item = replacement or original
+        path = (REVISED_ICONS if replacement else APPROVED) / item["file"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"], path
+        images.append((f"portal_icon_{name}", icon(path), {"source": path.relative_to(ROOT).as_posix(),
+                         "source_sha256": item["sha256"], "approved_id": original["approved_id"],
+                         "provenance": replacement or original["source"], "recolorable": True}))
     for symbol, sprite, item in images:
         size = sprite.size
         packed = packed_pixels(sprite)

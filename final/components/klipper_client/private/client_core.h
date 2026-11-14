@@ -126,6 +126,7 @@ private:
   bool timelapse_supported{}, timelapse_taking{}, timelapse_paused{};
   esp_websocket_client_handle_t ws{};
   uint32_t rpc_next{}, server_id{}, printer_id{}, subscribe_id{}, timelapse_id{};
+  uint32_t state_rpc_revision{};
   uint64_t rpc_sent{}, bootstrap{}, fragment_started{};
   double last_event{-1};
   std::vector<BufferedDelta> before_snapshot;
@@ -151,6 +152,7 @@ private:
   void ws_event(int32_t, esp_websocket_event_data_t *);
   static void event_cb(void *, esp_event_base_t, int32_t, void *);
   bool send_rpc(const char *, uint32_t &, cJSON *params = nullptr);
+  void probe_klippy(bool detailed = false);
   void message(const std::string &);
   bool apply(cJSON *, double, bool);
   void subscribe(bool augment_timelapse = false);

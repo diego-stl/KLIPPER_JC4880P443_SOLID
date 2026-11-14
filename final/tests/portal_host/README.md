@@ -42,8 +42,8 @@ state while awaiting WebSocket confirmation. Tests cover pending, completed,
 rejected and UNKNOWN responses, stale repeated touches, pause transitions,
 and attempts to enter movement or jog after a print begins externally.
 
-Printing and paused grids use the settings artwork for AJUSTES IMPRESION.
-The real three-row overlay is exercised through its LVGL buttons: opening,
+Printing and paused grids open general Ajustes; printing also exposes Ajustes
+de impresión through Macros. The three-row overlay is exercised through its LVGL buttons: opening,
 closing and editing drafts send no commands; each Apply targets only its
 speed, flow or layer-fan control, binds endpoint/job identity and sends once
 while pending. Boundary tests clamp at 10–200%, 50–150% and 0–100%.
@@ -59,14 +59,15 @@ buttons, long file names, one/two/ten/missing color sets, duplicate colors
 from distinct tools, and an eight-slot Orca case with only T0/T1/T2/T7
 consuming filament. The UI shows only their four color chips. Tests retain
 last-job details after reset and after the current file is cleared, and
-hidden macro prefixes. The original GLaDOS head must appear in standby,
-complete, cancelled and error states; its lens color assertions remain active.
+hidden macro prefixes. The suite checks motion and visor-only redraws of all
+core expressions and validates the screensaver preview, independent brightness
+and wake gesture. Error checks verify scrollable diagnostics and stable revisions.
 
 PNG assertions inspect the real LVGL image descriptors and rendered scales:
 The G-Code list contains only filenames, without thumbnail cache APIs or
 images. Exactly one selected RAW PNG appears on the Files screen. Both
-100/300-pixel sources scale to 300 pixels; printing remains at 200 and
-details at 300. A missing selected image shows NO DATA. The Files footer is
+100/300-pixel sources scale to 300 pixels; printing shows them at 180 and
+details at 300. A missing selected image shows Sin vista previa. The Files footer is
 a text-only 48-pixel print button. File metadata quantities remain present
 in the mocked backend and details, but are absent from the Files color strip.
 Color-chip assertions inspect small opaque LVGL objects by their metadata
@@ -183,7 +184,7 @@ it restores each state and emits no device or printer commands. Reports are
 The framebuffer uses RGB565, so PNG colors reflect 16-bit quantization; exact
 24-bit surface constants are checked on the LVGL objects before conversion.
 
-## Portal laboratory mosaic (2026-11-06)
+## Portal visual contract
 
 The final PowerPoint UI uses the grayscale background and six transparent
 core exports. The startup screen uses its gold palette. The simulator
@@ -193,9 +194,10 @@ checks the main core alignment across states and the separate warning layout.
 pre-edit reference is `tests/fixtures/portal-pre-mosaic-2026-11-06.json`, captured
 from the user's existing working tree before applying the mosaic. The
 PowerPoint revisions record changes in
-`tests/fixtures/portal-powerpoint-2026-11-10.json` and
-`tests/fixtures/portal-powerpoint-final.json`. Protected controls and thermal
-card interiors are checked against the resulting reference.
+`tests/fixtures/portal-powerpoint-2026-11-10.json`,
+`tests/fixtures/portal-powerpoint-final.json`, `tests/fixtures/portal-screensaver.json`
+and `tests/fixtures/portal-powerpoint-v3.json`. Protected controls and thermal card
+interiors are checked against the resulting reference.
 The contract compares 28 contexts in seven interaction states. `@geometry` includes all hidden/visible
 objects, absolute bounds, extended touch rectangles, clickable/scroll/hidden
 flags, font metrics, label text, padding, native borders and image dimensions
@@ -213,8 +215,8 @@ baseline, never for making a failing comparison pass.
 
 The functional suite additionally checks the exact 24-bit icon-button colors,
 a pointer swipe starting in the mosaic gap, and real captures of the symbols
-and uppercase keyboard modes. `@keyboardmode:N` only selects an existing LVGL
-keyboard mode inside the host; no production keyboard styles were modified.
+and uppercase keyboard modes. `@keyboardmode:N` selects an existing LVGL
+keyboard mode inside the host. The IPv4 and port keypads each use their own map.
 Reports are `mosaic_contract_report.json`, `action_report.json` and
 `render_report.json`. The final screenshots are real RGB565 LVGL frames at
 800 x 480; contact sheets alone are scaled for browsing. No hardware is used.

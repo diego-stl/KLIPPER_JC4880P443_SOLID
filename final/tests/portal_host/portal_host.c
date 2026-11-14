@@ -23,6 +23,7 @@ static uint8_t panel_brightness;
 static lv_indev_t *host_input;
 static lv_indev_data_t host_pointer;
 static klipper_snapshot_t snapshot;
+static char mock_error_detail[1024];
 static klipper_metadata_t metadata;
 static klipper_metadata_t last_metadata;
 static klipper_last_job_t last_job;
@@ -37,7 +38,7 @@ static lv_obj_t *saved_button;
 static bool record(const char *kind,const char *value);
 static unsigned backend_calls, events_sent, clipped_labels;
 static unsigned display_writes,volume_writes;
-static display_settings_mailbox_t display_mailbox={.brightness=80,.sleep_minutes=10};
+static display_settings_mailbox_t display_mailbox={.brightness=80,.saver_brightness=DEVICE_NETWORK_DEFAULT_SAVER_BRIGHTNESS,.sleep_minutes=10};
 void device_network_display_status(device_network_display_status_t *out) {*out=display_mailbox.status;}
 static bool inspect_colors=true;
 static bool protected_styles_only;
@@ -104,9 +105,9 @@ static esp_err_t endpoint_submit(const char *host,const char *port,device_networ
 }
 esp_err_t device_network_save_endpoint_async(const char *host,const char *port) { return endpoint_submit(host,port,DEVICE_NETWORK_OP_ENDPOINT_SAVE); }
 esp_err_t device_network_test_endpoint_async(const char *host,const char *port) { return endpoint_submit(host,port,DEVICE_NETWORK_OP_ENDPOINT_TEST); }
-esp_err_t device_network_set_display(uint8_t brightness, uint16_t sleep_minutes) {
-    display_settings_submit(&display_mailbox,brightness,sleep_minutes);
-    network.brightness = brightness; network.sleep_minutes = sleep_minutes;
+esp_err_t device_network_set_display(uint8_t brightness, uint8_t saver_brightness, uint16_t sleep_minutes) {
+    display_settings_submit(&display_mailbox,brightness,saver_brightness,sleep_minutes);
+    network.brightness = brightness; network.saver_brightness=saver_brightness; network.sleep_minutes = sleep_minutes;
     backend_calls++; printf("CALL settings_submit brightness=%u sleep=%u\n", brightness, sleep_minutes); return ESP_OK;
 }
 esp_err_t board_display_set_brightness(uint8_t brightness) {
@@ -115,6 +116,14 @@ esp_err_t board_display_set_brightness(uint8_t brightness) {
 esp_err_t board_display_set_backlight(bool enabled) { backend_calls++; printf("CALL backlight %s\n",enabled?"on":"off"); return ESP_OK; }
 esp_err_t klipper_client_start(void) { return ESP_OK; }
 void klipper_client_snapshot(klipper_snapshot_t *out) { *out = snapshot; }
+char *klipper_client_copy_error_detail(uint32_t generation,uint32_t revision)
+{
+    if(generation!=snapshot.endpoint_generation||revision!=snapshot.error_revision||!*mock_error_detail)return NULL;
+    size_t length=strlen(mock_error_detail)+1;
+    char *copy=malloc(length);
+    if(copy)memcpy(copy,mock_error_detail,length);
+    return copy;
+}
 bool klipper_client_metadata(klipper_metadata_t *out) { *out = metadata; return metadata.valid; }
 bool klipper_client_last_job(klipper_last_job_t *out) { *out=last_job;return last_job.valid; }
 bool klipper_client_last_job_metadata(klipper_metadata_t *out) { *out=last_metadata;return last_metadata.valid; }
@@ -179,7 +188,7 @@ void klipper_client_fetch_metadata(const char *name) { record("fetch_metadata", 
 
 static void mock_view(unsigned view) {
     memset(&snapshot, 0, sizeof(snapshot)); memset(&network, 0, sizeof(network)); memset(&metadata, 0, sizeof(metadata));
-    network.wifi_ready = true; network.has_ip = true; network.brightness = 80; network.sleep_minutes = 10;
+    network.wifi_ready = true; network.has_ip = true; network.brightness = 80; network.saver_brightness=DEVICE_NETWORK_DEFAULT_SAVER_BRIGHTNESS; network.sleep_minutes = 10;
     memset(&network_settings,0,sizeof(network_settings));network_settings.ready=true;network_settings.revision=1;
     strcpy(network_settings.message,"Listo para configurar");
     memset(&last_job,0,sizeof(last_job));memset(&last_metadata,0,sizeof(last_metadata));
@@ -194,6 +203,7 @@ static void mock_view(unsigned view) {
     snapshot.progress=63.0f; snapshot.print_duration=6240; snapshot.time_remaining=3540;
     strcpy(snapshot.filename, "aperture_companion_cube.gcode"); strcpy(snapshot.connection_detail,"Moonraker conectado");
     strcpy(snapshot.error,"Extrude below minimum temp: revisa el hotend antes de continuar");
+    mock_error_detail[0]=0;
     snapshot.homed_x=snapshot.homed_y=snapshot.homed_z=true; snapshot.position_x=110; snapshot.position_y=95; snapshot.position_z=12.4f;
     snapshot.bed_bounds_valid=true; snapshot.bed_max_x=220; snapshot.bed_max_y=220;
     snapshot.files_count=3; strcpy(snapshot.files[0],"aperture_companion_cube.gcode"); strcpy(snapshot.files[1],"portal_turret.gcode"); strcpy(snapshot.files[2],"calibration_cube.gcode");
@@ -310,13 +320,14 @@ static bool button_artwork(const char *caption,const char *semantic,unsigned siz
     printf("EXPECT_BUTTON_ARTWORK %s icon=%s size=%u text_clear=1 %s\n",caption,semantic,size,pass?"PASS":"FAIL");return pass;
 }
 static bool grid_artwork(void) {
-    static const char *captions[3][6]={{"IMPRIMIR","Control manual","ÚLTIMO TRABAJO","AJUSTES","MACROS","PARADA"},
-        {"PAUSAR","CANCELAR","MACROS","EXCLUIR","AJUSTES DE IMPRESIÓN","PARADA"},
-        {"REANUDAR","CANCELAR","EXTRUIR 50 mm","RETRAER 50 mm","AJUSTES DE IMPRESIÓN","PARADA"}};
+    static const char *captions[3][6]={{"IMPRIMIR","Control manual","ÚLTIMO TRABAJO","AJUSTES","MACROS","PARADA DE EMERGENCIA"},
+        {"PAUSAR","CANCELAR IMPRESIÓN","MACROS","EXCLUIR OBJETOS","AJUSTES","PARADA DE EMERGENCIA"},
+        {"REANUDAR","CANCELAR IMPRESIÓN","EXTRUIR 50 mm\nde filamento","RETRAER 50 mm\nde filamento","AJUSTES","PARADA DE EMERGENCIA"}};
+    static const unsigned sizes[3][6]={{75,61,56,62,56,70},{56,56,56,56,62,70},{56,56,56,56,62,70}};
     static const char *semantics[3][6]={{"print","move","last_job","settings","macro","stop"},
         {"pause","cancel","macro","exclude","settings","stop"},{"play","cancel","extrude","retract","settings","stop"}};
     unsigned mode=find_label(lv_screen_active(),"PAUSAR")?1:find_label(lv_screen_active(),"REANUDAR")?2:0;
-    bool pass=true;for(unsigned i=0;i<6;i++)if(!button_artwork(captions[mode][i],semantics[mode][i],64))pass=false;
+    bool pass=true;for(unsigned i=0;i<6;i++)if(!button_artwork(captions[mode][i],semantics[mode][i],sizes[mode][i]))pass=false;
     printf("EXPECT_GRID_ARTWORK six visible semantic icons %s\n",pass?"PASS":"FAIL");return pass;
 }
 static unsigned matching_images(lv_obj_t *object,unsigned source,unsigned visual) {
@@ -484,30 +495,16 @@ static void geometry_record(lv_obj_t *obj,const char *path) {
 static bool laboratory_buttons(lv_obj_t *obj,unsigned *count,bool startup) {
     if(hidden(obj))return true;
     if(lv_obj_check_type(obj,&lv_button_class)){
-        lv_obj_t *image=NULL,*caption=NULL;
-        for(unsigned i=0;i<lv_obj_get_child_count(obj);i++){
-            lv_obj_t *child=lv_obj_get_child(obj,i);
-            if(lv_obj_check_type(child,&lv_image_class))image=child;
-            if(lv_obj_check_type(child,&lv_label_class))caption=child;
-        }
-        const void *src=image?lv_image_get_src(image):NULL;
-        if(src&&src!=portal_icon_for_symbol("backspace")){
-            unsigned expected=0x00a6ff;
-            if(src==portal_icon_for_symbol("home")||src==portal_icon_for_symbol("print")||src==portal_icon_for_symbol("pause")||
-               (caption&&!strcmp(lv_label_get_text(caption),"REANUDAR")))expected=0xff8a1c;
-            if(src==portal_icon_for_symbol("stop")||src==portal_icon_for_symbol("cancel")||src==portal_icon_for_symbol("power"))expected=0xd94a3a;
-            if(startup)expected=0xffff00;
-            lv_area_t bounds;lv_obj_get_coords(obj,&bounds);
-            int w=lv_obj_get_width(obj),h=lv_obj_get_height(obj);
-            bool grid_gray=w==208&&h==144&&((bounds.x1==361&&bounds.y1!=169)||(bounds.x1==581&&bounds.y1==169));
-            bool jog=w==76&&h==67&&src!=portal_icon_for_symbol("home");
-            bool error_secondary=bounds.y1>=307&&lv_screen_active()==lv_obj_get_parent(obj)&&
-                (src==portal_icon_for_symbol("power")||(w==232&&src==portal_icon_for_symbol("settings")));
-            unsigned fill=startup?0xeeae2e:error_secondary?0x6d7074:grid_gray||jog?0xbfbfbf:0xffffff;
-            if(src==portal_icon_for_symbol("exclude")&&w==280&&caption&&lv_obj_has_state(obj,LV_STATE_DISABLED)==false)fill=0xbfbfbf;
-            if((lv_color_to_u32(lv_obj_get_style_bg_color(obj,0))&0xffffff)!=fill||
-               (lv_color_to_u32(lv_obj_get_style_image_recolor(image,0))&0xffffff)!=expected||
-               (caption&&(lv_color_to_u32(lv_obj_get_style_text_color(caption,0))&0xffffff)!=(startup?0x17130b:error_secondary?0xf6faff:0x202429)))return false;
+        if(lv_obj_get_width(obj)<=0||lv_obj_get_height(obj)<=0)return false;
+        unsigned first=0;
+        lv_obj_t *image=find_type(obj,&lv_image_class,&first);
+        if(image){
+            const lv_image_dsc_t *src=lv_image_get_src(image);
+            uint32_t fill=lv_color_to_u32(lv_obj_get_style_bg_color(obj,0))&0xffffff;
+            uint32_t ink=lv_color_to_u32(lv_obj_get_style_image_recolor(image,0))&0xffffff;
+            if(src==portal_icon_for_symbol("stop")&&(fill!=0xfbe5e8||ink!=0xa32632)&&
+                !lv_obj_has_state(obj,LV_STATE_DISABLED))return false;
+            if(src==portal_icon_for_symbol("cancel")&&(fill!=0xf3eaed||ink!=0x753544))return false;
             (*count)++;
         }
     }
@@ -521,9 +518,10 @@ static bool surface_contract(lv_obj_t *obj,unsigned *panels,bool startup) {
         int w=lv_obj_get_width(obj),h=lv_obj_get_height(obj);
         bool medium=(w==338&&h==406)||(w==442&&h==394)||(w==312&&h==312);
         bool status=(w==332&&(h==149||h==200))||(w==776&&h==456&&lv_obj_get_parent(obj)==lv_screen_active())||
-            (w==736&&h==92)||(w==520&&h==340&&image_for_source(obj,&portal_core_warning))||(w==270&&h==146);
-        unsigned expected=startup?0xeeae2e:w==800&&h==480?0xd9d9d9:w==306&&h==210?0x081418:
-            w==296&&h==134?0x202429:medium?0x7f7f7f:status?0x6d7074:0xeeeeee;
+            (w==736&&h==92);
+        bool warning=w==520&&h==340&&image_for_source(obj,&portal_core_warning);
+        unsigned expected=startup?(w==376?0xf7c768:0xeeae2e):w==800&&h==480?0xd9d9d9:w==306&&h==210?0x081418:
+            w==296&&h==134?0x202429:warning||(w==263&&h==117)?0xe9eef1:medium?0x7f7f7f:status?0x344550:0xeeeeee;
         unsigned actual=lv_color_to_u32(lv_obj_get_style_bg_color(obj,0))&0xffffff;
         if(actual!=expected||lv_obj_get_style_bg_grad_dir(obj,0)!=LV_GRAD_DIR_NONE||lv_obj_get_style_shadow_width(obj,0)){
             printf("SURFACE_FAIL %dx%d color=%06x expected=%06x\n",w,h,actual,expected);return false;
@@ -561,16 +559,26 @@ static bool action(const char *text) {
         printf("EXPECT_BRIGHTNESS %u %s\n",panel_brightness,pass?"PASS":"FAIL");return pass;
     }
     if(sscanf(text,"@networkbrightness:%u",&value)==1&&value<=100){network.brightness=value;return true;}
-    if(!strcmp(text,"@expecteyemove")){
-        enum { X=113, Y=170, W=136, H=135 };
-        uint16_t before[W*H];
-        for(unsigned y=0;y<H;y++)memcpy(before+y*W,framebuffer+(Y+y)*800+X,W*sizeof(*before));
+    if(sscanf(text,"@networksaverbrightness:%u",&value)==1&&value<=100){network.saver_brightness=value;return true;}
+    if(!strcmp(text,"@expecteyemove")||!strcmp(text,"@expectnormaleyemove")||!strcmp(text,"@expectwarningeyemove")){
+        bool saver=!strcmp(text,"@expecteyemove"),warning=!strcmp(text,"@expectwarningeyemove");
+        unsigned x=saver?113:warning?190:85,y=saver?170:warning?120:75;
+        unsigned w=warning?150:170,h=warning?155:165;
+        uint16_t *before=malloc(sizeof(framebuffer));
+        if(!before)return false;
+        lv_refr_now(lv_display_get_default());
+        memcpy(before,framebuffer,sizeof(framebuffer));
         lv_tick_inc(3500);portal_ui_tick();lv_timer_handler();
         lv_tick_inc(200);portal_ui_tick();lv_timer_handler();lv_refr_now(lv_display_get_default());
-        bool changed=false;
-        for(unsigned y=0;y<H;y++)if(memcmp(before+y*W,framebuffer+(Y+y)*800+X,W*sizeof(*before)))changed=true;
-        bool pass=changed&&last_damage_pixels>0&&last_damage_pixels<=W*H;
-        printf("EXPECT_EYE changed=%d damage=%"PRIu32" %s\n",changed,last_damage_pixels,pass?"PASS":"FAIL");
+        bool changed=false,outside=false;
+        for(unsigned row=0;row<480;++row)for(unsigned col=0;col<800;++col){
+            if(before[row*800+col]==framebuffer[row*800+col])continue;
+            if(col>=x&&col<x+w&&row>=y&&row<y+h)changed=true;
+            else outside=true;
+        }
+        free(before);
+        bool pass=changed&&!outside&&last_damage_pixels>0&&last_damage_pixels<=w*h;
+        printf("EXPECT_EYE changed=%d outside=%d damage=%"PRIu32" %s\n",changed,outside,last_damage_pixels,pass?"PASS":"FAIL");
         return pass;
     }
     if(sscanf(text,"@expectdamage:%u",&value)==1){
@@ -587,7 +595,7 @@ static bool action(const char *text) {
         display_settings_request_t request;if(!display_settings_begin(&display_mailbox,&request))return true;
         esp_err_t result=!strcmp(text+17,"ok")?ESP_OK:ESP_FAIL;display_writes++;
         display_settings_complete(&display_mailbox,&request,result,12000);
-        printf("CALL settings_persist brightness=%u sleep=%u result=%d\n",request.brightness,request.sleep_minutes,result);return true;
+        printf("CALL settings_persist brightness=%u sleep=%u result=%d saver=%u\n",request.brightness,request.sleep_minutes,result,request.saver_brightness);return true;
     }
     if(sscanf(text,"@expectdisplaypending:%u",&value)==1){
         bool pass=display_mailbox.status.pending==(value!=0);
@@ -850,10 +858,18 @@ static bool action(const char *text) {
         if(keyboard){lv_area_t a;lv_obj_get_coords(keyboard,&a);printf("KEYBOARD (%d,%d)-(%d,%d)\n",a.x1,a.y1,a.x2,a.y2);pass=a.x1>=0&&a.x2<=800&&a.y1>=0&&a.y2<=480&&lv_obj_get_width(keyboard)==800&&lv_obj_get_height(keyboard)==226;}
         if(!value)pass=!keyboard;printf("EXPECT_KEYBOARD visible=%u %s\n",value,pass?"PASS":"FAIL");return pass;
     }
-    if(!strcmp(text,"@expectnumericdots")){
-        lv_obj_t *keyboard=visible_widget(&lv_keyboard_class,0);bool pass=keyboard&&lv_keyboard_get_mode(keyboard)==LV_KEYBOARD_MODE_NUMBER,has_dot=false;
-        if(keyboard){const char *const *map=lv_keyboard_get_map_array(keyboard);for(unsigned i=0;map&&map[i]&&*map[i];i++)if(!strcmp(map[i],"."))has_dot=true;}
-        pass=pass&&has_dot;printf("EXPECT_NUMERIC_DOTS %s\n",pass?"PASS":"FAIL");return pass;
+    if(!strcmp(text,"@expectnumericdots")||!strcmp(text,"@expectnumericport")){
+        lv_obj_t *keyboard=visible_widget(&lv_keyboard_class,0);
+        bool pass=keyboard&&lv_keyboard_get_mode(keyboard)==LV_KEYBOARD_MODE_NUMBER,has_dot=false,has_sign=false;
+        if(keyboard){
+            const char *const *map=lv_keyboard_get_map_array(keyboard);
+            for(unsigned i=0;map&&map[i]&&*map[i];i++){
+                has_dot|=!strcmp(map[i],".");
+                has_sign|=!strcmp(map[i],"+/-");
+            }
+        }
+        pass=pass&&!has_sign&&(has_dot==!strcmp(text,"@expectnumericdots"));
+        printf("EXPECT_NUMERIC_DOTS %s\n",pass?"PASS":"FAIL");return pass;
     }
     if(!strcmp(text,"@keyboarddone")){lv_obj_t *keyboard=visible_widget(&lv_keyboard_class,0);if(!keyboard)return false;events_sent++;lv_obj_send_event(keyboard,LV_EVENT_READY,NULL);return true;}
     if(!strcmp(text,"@expectpasswordempty")){lv_obj_t *field=visible_widget(&lv_textarea_class,1);bool pass=field&&!*lv_textarea_get_text(field);printf("EXPECT_PASSWORD_EMPTY %s\n",pass?"PASS":"FAIL");return pass;}
@@ -922,8 +938,13 @@ static bool action(const char *text) {
         bool pass=object&&lv_obj_has_state(object,LV_STATE_DISABLED);printf("EXPECT_BUTTON_DISABLED %s %s\n",text+22,pass?"PASS":"FAIL");return pass;
     }
     if(!strcmp(text,"@resultunknown")) { result_unknown_pending=true;printf("RESULT unknown queued\n");return true; }
-    if(!strcmp(text,"@booterror")) { snapshot.available=false;snapshot.initial_snapshot=false;snapshot.state=KLIPPER_ERROR;strcpy(snapshot.error,"MCU unavailable: cannot connect to printer MCU");return true; }
-    if(!strcmp(text,"@recover")) { snapshot.available=false;snapshot.state=KLIPPER_STARTUP;snapshot.error[0]=0;return true; }
+    if(!strcmp(text,"@booterror")) { snapshot.available=false;snapshot.initial_snapshot=false;snapshot.state=KLIPPER_ERROR;strcpy(snapshot.error,"MCU unavailable: cannot connect to printer MCU");snapshot.error_revision++;return true; }
+    if(!strcmp(text,"@recover")) { snapshot.available=false;snapshot.state=KLIPPER_STARTUP;snapshot.error[0]=0;snapshot.error_revision++;return true; }
+    if(!strncmp(text,"@fullerror:",11)){
+        snprintf(mock_error_detail,sizeof(mock_error_detail),"%s",text+11);
+        snapshot.error_revision++;
+        return true;
+    }
     if(!strcmp(text,"@tick")) { lv_tick_inc(250);portal_ui_tick();return true; }
     if(sscanf(text,"@homed:%u",&value)==1){
         snapshot.homed_x=(value&1)!=0;snapshot.homed_y=(value&2)!=0;snapshot.homed_z=(value&4)!=0;return true;
@@ -934,6 +955,7 @@ static bool action(const char *text) {
     if(!strncmp(text,"@expectnot:",11)) { bool found=any_label(lv_screen_active(),text+11)||any_label(lv_layer_top(),text+11);printf("EXPECT_ABSENT %s %s\n",text+11,!found?"PASS":"FAIL");return !found; }
     if(!strncmp(text,"@capture:",9)) { char path[2048];snprintf(path,sizeof(path),"%s/%s.rgb565",output_dir,text+9);lv_refr_now(lv_display_get_default());FILE *f=fopen(path,"wb");if(!f)return false;fwrite(framebuffer,sizeof(framebuffer),1,f);fclose(f);return true; }
     if(sscanf(text,"@generation:%u",&value)==1) { network.endpoint_generation=snapshot.endpoint_generation=value;printf("MOCK generation %u\n",value);return true; }
+    if(sscanf(text,"@networkgeneration:%u",&value)==1) { network.endpoint_generation=value;return true; }
     if(sscanf(text,"@state:%u",&value)==1) { snapshot.raw_state=snapshot.state=(klipper_state_t)value;printf("MOCK state %u\n",value);return true; }
     if(strncmp(text,"@filename:",10)==0) { snprintf(snapshot.filename,sizeof(snapshot.filename),"%s",text+10);printf("MOCK filename %s\n",snapshot.filename);return true; }
     if(sscanf(text,"@dropdown:%u:%u",&index,&value)==2) {

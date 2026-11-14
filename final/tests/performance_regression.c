@@ -1,6 +1,7 @@
 #include "display_orientation.h"
 #include "display_settings_mailbox.h"
 #include "gui_metrics_math.h"
+#include "panel_settings.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,31 +40,58 @@ static void damage_frames(void)
 }
 static void display_mailbox(void)
 {
-    display_settings_mailbox_t box={.brightness=80,.sleep_minutes=10};display_settings_request_t request;
-    display_settings_submit(&box,80,10);assert(!display_settings_begin(&box,&request));
-    display_settings_submit(&box,40,10);display_settings_submit(&box,55,5);
+    display_settings_mailbox_t box={.brightness=80,.saver_brightness=25,.sleep_minutes=10};
+    display_settings_request_t request;
+    display_settings_submit(&box,80,25,10);assert(!display_settings_begin(&box,&request));
+    display_settings_submit(&box,80,60,10);display_settings_submit(&box,55,60,5);
     assert(box.status.revision==2&&box.status.pending&&box.status.writes==0);
-    assert(display_settings_begin(&box,&request)&&request.brightness==55&&request.sleep_minutes==5);
+    assert(display_settings_begin(&box,&request));
+    assert(request.brightness==55&&request.saver_brightness==60&&request.sleep_minutes==5);
     assert(!display_settings_begin(&box,&request));
-    display_settings_submit(&box,70,1);display_settings_complete(&box,&request,ESP_OK,25000);
+    display_settings_submit(&box,55,0,5);display_settings_complete(&box,&request,ESP_OK,25000);
     assert(box.status.pending&&box.status.saved_revision==2&&box.status.revision==3);
-    assert(display_settings_begin(&box,&request)&&request.brightness==70);
+    assert(display_settings_begin(&box,&request));
+    assert(request.brightness==55&&request.saver_brightness==0&&request.sleep_minutes==5);
     display_settings_complete(&box,&request,ESP_FAIL,31000);
     assert(!box.status.pending&&box.status.result==ESP_FAIL&&box.status.saved_revision==2);
     assert(!display_settings_begin(&box,&request)); // Failure does not spin/rewrite NVS.
-    display_settings_submit(&box,70,1);assert(display_settings_begin(&box,&request));
+    display_settings_submit(&box,55,0,5);assert(display_settings_begin(&box,&request));
     display_settings_complete(&box,&request,ESP_OK,12000);
     assert(!box.status.pending&&box.status.saved_revision==4&&box.status.writes==3&&box.status.max_save_us==31000);
-    display_settings_submit(&box,70,1);assert(!box.status.pending);
+    display_settings_submit(&box,55,0,5);assert(!box.status.pending);
 }
+
+static void panel_schema(void)
+{
+    const unsigned char legacy[PANEL_SETTINGS_V1_SIZE]={1,73,0,0,0x21,0x1b,
+        'p','r','i','n','t','e','r','.','l','o','c','a','l'};
+    panel_settings_t settings;
+    memset(&settings,0xff,sizeof(settings));
+    memcpy(&settings,legacy,sizeof(legacy));
+    assert(!panel_settings_decode(&settings,sizeof(legacy)-1,PANEL_SETTINGS_LEGACY_VERSION));
+    assert(panel_settings_decode(&settings,sizeof(legacy),PANEL_SETTINGS_LEGACY_VERSION));
+    assert(settings.version==PANEL_SETTINGS_VERSION&&settings.saver_brightness==25&&settings.reserved==0);
+    assert(settings.brightness==73&&settings.sleep_minutes==0&&settings.port==6945);
+    assert(!strcmp(settings.host,"printer.local"));
+
+    settings.saver_brightness=0;
+    assert(panel_settings_decode(&settings,sizeof(settings),PANEL_SETTINGS_VERSION));
+    assert(settings.saver_brightness==0);
+    settings.saver_brightness=100;
+    assert(panel_settings_decode(&settings,sizeof(settings),PANEL_SETTINGS_VERSION));
+    assert(settings.saver_brightness==100);
+    settings.saver_brightness=101;
+    assert(!panel_settings_decode(&settings,sizeof(settings),PANEL_SETTINGS_VERSION));
+}
+
 int main(void)
 {
-    damage_frames();display_mailbox();
+    damage_frames();display_mailbox();panel_schema();
     assert(gui_cpu_busy_permille(10,1010,1000)==0);
     assert(gui_cpu_busy_permille(10,10,1000)==1000);
     assert(gui_cpu_busy_permille(0,250,1000)==750);
     assert(gui_cpu_busy_permille(0xfffffff0U,0x54U,1000)==900);
     assert(gui_cpu_busy_permille(0,1200,1000)==0);
     assert(gui_cpu_busy_permille(0,0,0)==0);
-    puts("PASS: 80 alternating dirty frames, rotation changes, active-buffer integrity, async saves, CPU counters");return 0;
+    puts("PASS: 80 alternating dirty frames, rotation changes, active-buffer integrity, async saves, panel schema, CPU counters");return 0;
 }

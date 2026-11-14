@@ -1,17 +1,21 @@
 # Recursos Portal para LVGL 9.3
 
-Los 32 iconos provienen de la lámina aprobada
+La selección base de 32 iconos proviene de la lámina aprobada
 `no nesesario/design/revision-0.6.1/lamina-iconos-logos-v2.png`.
-Se conservan los textos. Los iconos principales miden **64 × 64 px** y los
-secundarios **32 px**. Los botones bajos usan icono y texto en horizontal.
+La v3 reemplaza las máscaras de impresión, movimiento, ajustes, parada,
+boquilla y HOME. Los botones tienen iconos a escala según el espacio disponible.
 
 ## Fuentes y reproducción
 
 `design/revision-0.6.1/selection.json` contiene la selección aprobada. La fuente
 es UIcons **Solid Rounded** de Freepik/Flaticon, fijada en `sources-manifest.json`.
-Boquilla y cama usan los PNG elegidos: **1518427** y **952538**. La licencia está
-en `design/revision-0.6.1/sources/LICENSE.txt`. Crédito de los iconos:
-**Uicons by Flaticon | www.flaticon.com/uicons**.
+La cama usa el PNG **952538**. El crédito de la selección base corresponde a
+**Uicons by Flaticon | www.flaticon.com/uicons**. [Licencia de Uicons](../design/revision-0.6.1/sources/LICENSE.txt)
+
+Las máscaras extraídas del PowerPoint v3 se almacenan en `assets/portal/icons-v3/`.
+El generador las normaliza a PNG de 64 × 64 px y LVGL aplica el tinte.
+El icono de impresión combina una boquilla y un cubo de Pictogrammers.
+[Fuentes y hashes](../assets/portal/icons-v3/manifest.json) · [Apache 2.0](../assets/portal/icons-v3/LICENSE-Apache-2.0.txt) · [ISC/MIT de Lucide y Feather](../assets/portal/icons-v3/LICENSE-Lucide.txt)
 
 `tools/export_approved_icons.cjs` exporta los glifos y máscaras locales aprobados
 a PNG blancos transparentes de 64 px, sin red. Se guardan en
@@ -25,7 +29,7 @@ python tools/generate_portal_assets.py --check
 ```
 
 La exportación inicial requiere Node/Playwright y Edge. Las regeneraciones y
-comprobaciones posteriores solo necesitan Python y Pillow 12.3.0.
+comprobaciones posteriores solo necesitan Python y Pillow 13.0.0.
 `assets/portal/contact-sheet.png` muestra los recursos empaquetados. Las fuentes
 y los PNG no se enlazan al firmware.
 
@@ -38,8 +42,9 @@ el recorte transparente aprobado. Se ajustan manteniendo proporción a canvases
 
 GLaDOS y potatOS conservan originales y algoritmo de exportación anterior en
 `assets/portal/originals/`. La lente mantiene centro **(152,145)** y radio **7**,
-exportados como `PORTAL_EYE_*`. GLaDOS continúa en los estados principales y
-Aperture + **NO DATA** cuando falta una vista previa de G-code válida.
+exportados como `PORTAL_EYE_*`. Los cores comparten nueve poses por expresión
+y actualizan el visor mientras están visibles. Aperture acompaña el estado
+**Sin vista previa** cuando falta una miniatura de G-code válida.
 
 ## Contrato LVGL
 

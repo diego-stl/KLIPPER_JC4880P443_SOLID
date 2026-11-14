@@ -2,7 +2,7 @@
 
 Run: python tests/klipper_simulator.py --port 17125
 Self-test: python tests/klipper_simulator.py --self-test
-Admin POST /__test/control accepts state, job_state, filename, progress,
+Admin POST /__test/control accepts state, state_message, job_state, filename, progress,
 delay_post, drop_post, reject_post, malformed_post, truncated_png, print_duration,
 metadata_overrides. Use delta to emit partial and optional timelapse fields.
 GET /__test/requests returns received POST requests (including uncertain ones).
@@ -53,7 +53,7 @@ class Fixture:
         self.publish_lock = threading.RLock()
         self.clients = set()
         self.requests = []
-        self.options = dict(state='ready', job_state='standby', filename='', progress=0,
+        self.options = dict(state='ready', state_message='', job_state='standby', filename='', progress=0,
                             delay_post=0, drop_post=False, reject_post=False,
                             malformed_post=False, truncated_png=False, fragment_ws=False,
                             metadata_overrides={}, print_duration=120, timelapse=False,
@@ -61,13 +61,20 @@ class Fixture:
         self.simulation = Simulation(self.options) if interactive else None
         self.last_tick = time.monotonic()
 
+    def klippy_status(self):
+        with self.lock:
+            state = self.options['state']
+            return dict(state=state, state_message=self.options['state_message']
+                        or 'Simulated Klipper: ' + state)
+
     def status(self):
         with self.lock:
             o = self.options.copy()
+            klippy = self.klippy_status()
         result = dict(extruder=dict(temperature=205, target=210), heater_bed=dict(temperature=58, target=60),
                     print_stats=dict(filename=o['filename'], state=o['job_state'], print_duration=o['print_duration']),
                     virtual_sdcard=dict(progress=o['progress']),
-                    webhooks=dict(state=o['state'], state_message='Simulated Klipper: ' + o['state']),
+                    webhooks=klippy,
                     toolhead=dict(homed_axes='xyz', position=[100, 80, 5, 0],
                                   axis_minimum=[0, 0, 0, 0], axis_maximum=[300, 250, 250, 0]))
         if o['timelapse']:
@@ -78,7 +85,6 @@ class Fixture:
             result['gcode_move'] = dict(speed_factor=o['speed_factor'], extrude_factor=o['extrude_factor'])
             result['fan'] = dict(speed=o['fan_speed'])
             result['toolhead'].update(position=o['position'][:], homed_axes=o['homed_axes'])
-            result['webhooks']['state_message'] = o['state_message'] or 'Simulated Klipper: ' + o['state']
         return result
 
     def update(self, changes):
@@ -87,6 +93,8 @@ class Fixture:
 
     def _update(self, changes):
         with self.lock:
+            if 'state' in changes and 'state_message' not in changes and changes['state'] != self.options['state']:
+                self.options['state_message'] = ''
             self.options.update({k: v for k, v in changes.items() if k in self.options})
             self.last_tick = time.monotonic()
             clients = list(self.clients)
@@ -198,10 +206,8 @@ class Handler(BaseHTTPRequestHandler):
                                                klippy_state=state, components=['file_manager'],
                                                failed_components=[], warnings=[])))
         if self.path == '/printer/info':
-            with self.fixture.lock:
-                state = self.fixture.options['state']
-            return self.reply(dict(result=dict(state=state, state_message='Simulated Klipper: ' + state,
-                                               hostname='moonraker-mock', software_version='mock-1.0')))
+            return self.reply(dict(result=dict(self.fixture.klippy_status(), hostname='moonraker-mock',
+                                               software_version='mock-1.0')))
         if self.path == '/websocket':
             return self.websocket()
         if self.path == '/__test/requests':
@@ -399,7 +405,7 @@ class Handler(BaseHTTPRequestHandler):
                 if method == 'server.info':
                     result = dict(klippy_state=self.fixture.options['state'])
                 elif method == 'printer.info':
-                    result = dict(state=self.fixture.options['state'], state_message='Simulated Klipper')
+                    result = self.fixture.klippy_status()
                 elif method == 'printer.objects.subscribe':
                     result = dict(status=self.fixture.status(), eventtime=time.monotonic())
                 else:
@@ -542,9 +548,24 @@ def self_test():
         assert snapshot['result']['status']['toolhead']['axis_maximum'][:2] == [300, 250]
         post('/__test/control', dict(delta={'extruder': {'target': 0}}))
         assert receive()['params'][0] == {'extruder': {'target': 0}}
+        detail = "MCU 'mcu' shutdown: ADC out of range\n" + "Check the thermistor wiring.\n" * 16
+        post('/__test/control', dict(state='shutdown', state_message=detail))
+        assert receive()['method'] == 'notify_klippy_shutdown'
+        assert receive()['params'][0]['webhooks']['state_message'] == detail
+        rpc('server.info', 3)
+        assert receive()['result'] == {'klippy_state': 'shutdown'}
+        rpc('printer.info', 4)
+        assert receive()['result'] == {'state': 'shutdown', 'state_message': detail}
+        assert get('/printer/info')['result']['state_message'] == detail
+        updated = "MCU 'mcu' shutdown: communication interrupted\nCheck the CAN wiring."
+        post('/__test/control', dict(state_message=updated, delta={'webhooks': {'state_message': updated}}))
+        assert receive()['params'][0] == {'webhooks': {'state_message': updated}}
+        rpc('printer.info', 5)
+        assert receive()['result']['state_message'] == updated
         post('/__test/control', dict(state='disconnected'))
         assert get('/server/info')['result']['klippy_connected'] is False
-        assert get('/printer/info')['result']['state'] == 'disconnected'
+        disconnected = get('/printer/info')['result']
+        assert disconnected['state'] == 'disconnected' and disconnected['state_message'] != updated
         stream.close()
         sock.close()
         print('PASS: local HTTP endpoints, valid/truncated PNG, POST rejection/malformed/uncertain response, command log, WebSocket bootstrap/snapshot/delta/fragmentation')

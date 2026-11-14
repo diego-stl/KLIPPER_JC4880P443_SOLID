@@ -10,16 +10,16 @@ Firmware para usar el panel táctil **Guition JC4880P443C (ESP32-P4)** como inte
 
 *Capturas del simulador LVGL con datos de ejemplo.*
 
-La pantalla principal combina un fondo gris geométrico, iconos de color y un core que cambia de expresión según el estado de Klipper. Durante la inactividad, el salvapantallas usa un fondo oscuro y muestra el progreso, el tiempo restante estimado, el tiempo transcurrido y las temperaturas. El ojo y los párpados se animan entre nueve miradas al azar.
+La pantalla principal combina un fondo gris geométrico, iconos de color y un core cuya expresión indica el estado de Klipper. El ojo y los párpados pasan por nueve poses en las pantallas con core y en el salvapantallas. Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas con textos atenuados.
 
-En **Ajustes** puedes elegir 1, 5 o 10 minutos de inactividad. En el salvapantallas la retroiluminación queda limitada al 25 %. El primer toque restaura el brillo configurado sin accionar el control que quede debajo.
+En **Ajustes** puedes probar el salvapantallas, elegir 1, 5 o 10 minutos de inactividad y configurar su brillo por separado. El brillo inicial del salvapantallas es del 25 %. El primer toque restaura el brillo normal y se consume al despertar la pantalla.
 
 ## Funciones
 
 - **Impresión.** Selecciona un G-code reciente, consulta su miniatura y envíalo a imprimir. La vista muestra el estado confirmado por Klipper. Durante el trabajo puedes pausar, reanudar, cancelar, excluir objetos desde el mapa y ajustar velocidad, flujo y ventilador de capa.
 - **Control manual.** Consulta las posiciones absolutas de X, Y y Z, mueve los ejes por pasos y ejecuta HOME por eje o para todos. Ajusta la temperatura de boquilla y cama, aplica perfiles PLA, PETG, TPU o ABS y enfría ambos calentadores. En pausa están disponibles la extrusión y la retracción de 50 mm.
 - **Macros y último trabajo.** Ejecuta macros públicas y consulta el resultado, la miniatura, el tiempo estimado y el consumo de filamento cuando estén disponibles.
-- **Conexión y alertas.** Configura Wi-Fi, la dirección y el puerto de Moonraker desde el panel. La pantalla de error muestra el mensaje de Klipper tal como llega. El panel incluye parada de emergencia, reinicio de Klipper y apagado del equipo anfitrión.
+- **Conexión y alertas.** Configura Wi-Fi, la dirección y el puerto de Moonraker desde **Ajustes**, también al imprimir o estar en pausa. La pantalla de error presenta el diagnóstico completo de Klipper en un área desplazable. El panel incluye parada de emergencia, reinicio de Klipper y apagado del equipo anfitrión.
 - **Sonido y diagnóstico.** El saludo de GLaDOS y los efectos de Portal acompañan los estados y las acciones del panel. Puedes ajustar o silenciar el volumen. La consola USB permite consultar la conexión, inspeccionar pantallas y medir el rendimiento.
 
 En OrcaSlicer puedes configurar las miniaturas como `100x100/PNG,300x300/PNG`. El panel prefiere la de 300 × 300, hasta 128 KiB.
@@ -44,4 +44,4 @@ En el panel, abre **Ajustes → Wi-Fi y Moonraker** para seleccionar la red, ind
 
 La compilación y las pruebas de simulación pasan. Queda pendiente verificar el brillo y la fluidez del salvapantallas en el panel físico.
 
-Iconos: **Uicons by Flaticon**. [Licencia de los iconos](final/design/revision-0.6.1/sources/LICENSE.txt)
+Iconos de **Uicons by Flaticon**, **Pictogrammers**, **Google Material Symbols** y **Lucide/Feather**. [Atribuciones y licencias](final/docs/assets-portal.md#fuentes-y-reproducción)

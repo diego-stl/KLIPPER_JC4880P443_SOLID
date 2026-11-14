@@ -5,6 +5,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#define DEVICE_NETWORK_DEFAULT_SAVER_BRIGHTNESS 25
 typedef struct {
     bool wifi_ready;
     bool has_ip;
@@ -13,6 +14,7 @@ typedef struct {
     char moonraker_host[64];
     uint16_t moonraker_port;
     uint8_t brightness;
+    uint8_t saver_brightness;
     uint16_t sleep_minutes;
     uint32_t endpoint_generation;
 } device_network_snapshot_t;
@@ -21,8 +23,8 @@ esp_err_t device_network_start(void);
 void device_network_snapshot(device_network_snapshot_t *snapshot);
 // Nonblocking, last-request-wins save. Updates desired values immediately;
 // the network/settings worker persists them, independently of its WiFi mailbox.
-// Brightness 0..100; sleep 0 (never) or 1..120 minutes.
-esp_err_t device_network_set_display(uint8_t brightness, uint16_t sleep_minutes);
+// Both brightness values are 0..100; sleep is 0 (never) or 1..120 minutes.
+esp_err_t device_network_set_display(uint8_t brightness, uint8_t saver_brightness, uint16_t sleep_minutes);
 typedef struct {
     bool pending,busy;
     uint32_t revision,completed_revision,saved_revision,writes;

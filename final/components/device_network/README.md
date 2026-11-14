@@ -7,16 +7,19 @@ initializing Hosted. The project CMake must exclude Hosted's early constructor,
 as in BASE. The component checks the validated P4 pre-v3/360 MHz and SDIO1
 5 MHz pin configuration at compile time. It neither updates nor flashes the C6.
 
-No LVGL calls occur here. A critical section protects the public snapshot; a
-mutex serializes panel NVS updates from the GUI and console. Display settings
-are persisted only: the caller controls backlight and idle handling.
+No LVGL calls occur here. A critical section protects the public snapshot.
+The network worker serializes endpoint and display NVS updates, each based on
+the last successfully committed panel record. The caller controls the backlight
+and inactivity timer.
 
 WiFi persistence remains binary-compatible with BASE: `jc_wifi/station_v1`.
 Passwords are accepted at the masked local console or hidden touch field, never printed, and
 temporary credential buffers are explicitly wiped. No password or SSID is part
 of the public snapshot. No NVS partition is automatically erased. Panel host,
-port, brightness and sleep timeout use `jc_panel/settings_v1`; no endpoint is
-hardcoded. Empty host means the user must configure Moonraker.
+port, normal brightness, screensaver brightness and sleep timeout use
+`jc_panel/settings_v2`. On upgrade, `jc_panel/settings_v1` supplies the legacy
+settings and screensaver brightness starts at 25%. The next successful panel
+save writes version 2. Empty host means the user must configure Moonraker.
 
 USB console accepts case-insensitive commands (credential bytes are preserved):
 
@@ -50,7 +53,6 @@ all LVGL calls remain on the GUI owner. Dedicated touch testing, system diagnost
 and per-module log levels are marked pending and only print a notice.
 Audio volume/play entries show the existing full
 command syntax. GUI trace toggles work even if Hosted/WiFi initialization failed.
-No new LVGL API calls, worker tasks or NVS schemas are introduced.
 
 Moonraker accepts a DNS hostname or IPv4 address, up to 63 bytes, with port
 1..65535. URLs, paths, userinfo and IPv6 literals are rejected. Only a successful

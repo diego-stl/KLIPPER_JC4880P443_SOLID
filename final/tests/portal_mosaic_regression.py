@@ -16,6 +16,7 @@ DESIGN_DELTAS = (
     ROOT / "tests/fixtures/portal-powerpoint-2026-11-10.json",
     ROOT / "tests/fixtures/portal-powerpoint-final.json",
     ROOT / "tests/fixtures/portal-screensaver.json",
+    ROOT / "tests/fixtures/portal-powerpoint-v3.json",
 )
 
 
@@ -27,6 +28,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--host", type=Path, default=ROOT / "tests/portal_host/output")
     parser.add_argument("--record-baseline", action="store_true")
+    parser.add_argument("--write-design-delta", type=Path, metavar="PATH",
+                        help="Write the observed changes for a reviewed design revision")
     args = parser.parse_args()
     fingerprints = json.loads((args.host / "build_sources.json").read_text())
     if any(digest((ROOT / name).read_bytes()) != sha for name, sha in fingerprints.items()):
@@ -80,6 +83,15 @@ def main():
     for delta in DESIGN_DELTAS:
         for name, changes in json.loads(delta.read_text(encoding="utf-8"))["cases"].items():
             before[name].update(changes)
+    if args.write_design_delta:
+        changes = {name: {key: value for key, value in result.items()
+                          if before.get(name, {}).get(key) != value}
+                   for name, result in results.items()}
+        delta = {"description": "Approved Portal PowerPoint v3 UI revision",
+                 "cases": {name: change for name, change in changes.items() if change}}
+        args.write_design_delta.write_text(json.dumps(delta, indent=2) + "\n", encoding="utf-8")
+        print(f"Recorded reviewed design delta: {len(delta['cases'])} contexts")
+        return
     differences = {name: {"before": before.get(name), "after": result}
                    for name, result in results.items() if before.get(name) != result}
     report = {"contexts": len(results), "passed": len(results)-len(differences),

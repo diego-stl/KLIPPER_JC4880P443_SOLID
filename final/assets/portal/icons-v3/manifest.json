@@ -1,0 +1,62 @@
+{
+  "reference": "JC4880P443 - Interfaz Portal revisada v3.pptx",
+  "reference_sha256": "a6e281e1748847b17d140bb1c84425d0740cfe60b7d8d05fe2604e4d7edd7477",
+  "icons": {
+    "print": {
+      "file": "print.png",
+      "sha256": "2f485e351ac65120e35177ce424ec86a0bcd1d2758acb897849b18e78820f1b1",
+      "family": "Pictogrammers",
+      "license": "Apache-2.0",
+      "urls": [
+        "https://pictogrammers.com/library/mdi/icon/printer-3d-nozzle-outline/",
+        "https://pictogrammers.com/library/mdi/icon/cube-outline/"
+      ]
+    },
+    "move": {
+      "file": "move.png",
+      "sha256": "2cb9c22ed020f095db4f5f4d794a48d2cd3c5e88e2bb65a6dd6131a9c463837f",
+      "family": "Lucide / Feather",
+      "license": "ISC / MIT",
+      "urls": [
+        "https://lucide.dev/icons/move",
+        "https://lucide.dev/license"
+      ]
+    },
+    "settings": {
+      "file": "settings.png",
+      "sha256": "e6ddc3abc6141a229e5c6ccc64fffed4cd92b9d1c71ad98a543b33cef9c29ce0",
+      "family": "Pictogrammers",
+      "license": "Apache-2.0",
+      "urls": [
+        "https://pictogrammers.com/library/mdi/icon/cog-outline/"
+      ]
+    },
+    "stop": {
+      "file": "stop.png",
+      "sha256": "e35fbb346a30e932c04d9b13781ec58a16c4639acc2c784c04a6237e89c57117",
+      "family": "Google Material Symbols Rounded",
+      "license": "Apache-2.0",
+      "urls": [
+        "https://fonts.google.com/icons?selected=Material+Symbols+Rounded:report"
+      ]
+    },
+    "nozzle": {
+      "file": "nozzle.png",
+      "sha256": "112094bf4821e3ca1ac7a7b4734b5b8a88a74354b687469717ece3955615f61d",
+      "family": "Pictogrammers",
+      "license": "Apache-2.0",
+      "urls": [
+        "https://pictogrammers.com/library/mdi/icon/printer-3d-nozzle/"
+      ]
+    },
+    "home": {
+      "file": "home.png",
+      "sha256": "2bf53644f7d81836d947fe1c2227546b38258ac5fedd268ede7d5c322320cd6a",
+      "family": "Google Material Symbols Rounded",
+      "license": "Apache-2.0",
+      "urls": [
+        "https://fonts.google.com/icons?selected=Material+Symbols+Rounded:my_location"
+      ]
+    }
+  }
+}

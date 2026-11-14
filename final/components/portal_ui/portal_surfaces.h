@@ -7,14 +7,11 @@
 #define PORTAL_PANEL_COLOR 0xEEEEEE
 #define PORTAL_MEDIUM_COLOR 0x7F7F7F
 #define PORTAL_STATUS_COLOR 0x6D7074
-#define PORTAL_BUTTON_GRAY 0xBFBFBF
 #define PORTAL_TEXT_COLOR 0x202429
 #define PORTAL_LIGHT_TEXT 0xF6FAFF
 #define PORTAL_PALE_BLUE 0xE0F6FF
 #define PORTAL_PALE_ORANGE 0xFFF0D8
 #define PORTAL_PALE_RED 0xFFE0E4
-#define PORTAL_BLUE 0x00A6FF
-#define PORTAL_ORANGE 0xFF8A1C
 #define PORTAL_RED 0xD94A3A
 #define PORTAL_DARK_CARD_COLOR 0x202429
 
@@ -53,18 +50,4 @@ static inline void portal_background(lv_obj_t *object)
 {
     lv_obj_set_style_bg_image_src(object,&portal_background_image,0);
     portal_preserve_text_backdrops(object);
-}
-
-/* The inset is painted rather than changing border width or padding: LVGL
- * therefore keeps every label, image, content origin and touch area exact. */
-static inline void portal_icon_border_draw(lv_event_t *event)
-{
-    lv_obj_t *object=lv_event_get_target(event);lv_area_t area;lv_obj_get_coords(object,&area);
-    int inset=lv_obj_get_height(object)>=120?4:2;
-    area.x1+=inset;area.y1+=inset;area.x2-=inset;area.y2-=inset;
-    lv_draw_rect_dsc_t border;lv_draw_rect_dsc_init(&border);
-    border.bg_opa=LV_OPA_TRANSP;border.border_opa=LV_OPA_COVER;
-    border.border_color=lv_color_hex((uint32_t)(uintptr_t)lv_event_get_user_data(event));
-    border.border_width=lv_obj_get_height(object)>=120?3:2;border.radius=4;
-    lv_draw_rect(lv_event_get_layer(event),&border,&area);
 }

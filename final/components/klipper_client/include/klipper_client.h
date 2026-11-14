@@ -39,6 +39,7 @@ typedef struct {
 } klipper_object_t;
 typedef struct {
   uint32_t revision, endpoint_generation, metadata_revision;
+  uint32_t error_revision;
   bool socket_connected, available, initial_snapshot;
   klipper_state_t state, raw_state;
   bool pause_pending;
@@ -48,7 +49,7 @@ typedef struct {
   bool speed_factor_valid, flow_factor_valid, fan_speed_valid;
   float speed_percent, flow_percent, fan_percent;
   uint32_t print_duration, time_remaining;
-  char filename[256], error[384], connection_detail[160];
+  char filename[256], error[384], connection_detail[160]; // error is a preview.
   bool homed_x, homed_y, homed_z, bed_bounds_valid;
   float position_x, position_y, position_z, bed_min_x, bed_max_x, bed_min_y,
       bed_max_y;
@@ -122,6 +123,10 @@ bool klipper_client_set_print_tuning_with_context(klipper_tuning_t control, unsi
 // completion.
 esp_err_t klipper_client_start(void);
 void klipper_client_snapshot(klipper_snapshot_t *out);
+// Copies the full fault detail for these snapshot tokens. The caller owns the
+// result and releases it with free(). NULL means no matching detail or no memory.
+char *klipper_client_copy_error_detail(uint32_t expected_generation,
+                                       uint32_t expected_error_revision);
 bool klipper_client_metadata(klipper_metadata_t *out);
 bool klipper_client_last_job(klipper_last_job_t *out);
 bool klipper_client_last_job_metadata(klipper_metadata_t *out);
