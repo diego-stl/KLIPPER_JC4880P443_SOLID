@@ -108,6 +108,24 @@ quitarlos con `clear_faults`.
 
 ## Iniciar o actualizar el servidor
 
+Haz doble clic en [Iniciar_Moonraker.cmd](../../Iniciar_Moonraker.cmd) en la raíz
+del repositorio. El archivo arranca el simulador en segundo plano o confirma que
+ya está activo. Puedes cerrar la ventana cuando termine la comprobación.
+
+Desde la raíz, ejecuta en CMD o PowerShell:
+
+```bat
+.\Iniciar_Moonraker.cmd --no-pause
+```
+
+El mismo archivo funciona en Git Bash:
+
+```bash
+./Iniciar_Moonraker.cmd --no-pause
+```
+
+Para usar los comandos siguientes, entra primero en la carpeta `final`.
+
 PowerShell, en segundo plano:
 
 ```powershell

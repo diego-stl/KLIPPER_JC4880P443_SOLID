@@ -1,16 +1,19 @@
-# KLIPPER_JC4880P443_SOLID
+# KLIPPER_JC4880P443_SOLID · Desarrollo y pruebas
 
 Firmware para usar el panel táctil **Guition JC4880P443C (ESP32-P4)** como interfaz de una impresora 3D con Klipper y Moonraker. La interfaz PORTAL usa LVGL en horizontal a **800 × 480** y se conecta a Moonraker por Wi-Fi.
 
-## Diseño
+## Variantes en prueba
 
-| Pantalla principal | Salvapantallas durante la impresión |
-| --- | --- |
-| ![Pantalla principal con el core y los controles del panel](final/docs/img/panel.png) | ![Salvapantallas con el core, progreso, tiempos y temperaturas](final/docs/img/salvapantallas.png) |
+`develop` es la rama de integración. Las versiones [simple](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main) y [HD](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main-hd) comparten sus cambios de interfaz e íconos. Los commits de interfaz que pasan las pruebas se incorporan a ambas ramas.
 
-*Capturas del simulador LVGL con datos de ejemplo.*
+| Variante | Pantalla en reposo | Salvapantallas en reposo |
+| --- | --- | --- |
+| Simple | ![Panel con núcleo simple](final/docs/img/panel.png) | ![Salvapantallas con núcleo simple](final/docs/img/salvapantallas.png) |
+| HD | ![Panel con núcleo HD](final/docs/img/panel-hd.png) | ![Salvapantallas con núcleo HD](final/docs/img/salvapantallas-hd.png) |
 
-La pantalla principal combina un fondo gris geométrico, iconos de color y un core cuya expresión indica el estado de Klipper. El ojo y los párpados pasan por nueve poses en las pantallas con core y en el salvapantallas. Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas con textos atenuados.
+*Capturas de la interfaz LVGL con una impresora simulada. Las capturas HD usan un fotograma del clip incluido para microSD.*
+
+Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas junto al núcleo correspondiente al estado de Klipper.
 
 En **Ajustes** puedes probar el salvapantallas, elegir 1, 5 o 10 minutos de inactividad y configurar su brillo por separado. El brillo inicial del salvapantallas es del 25 %. El primer toque restaura el brillo normal y se consume al despertar la pantalla.
 
@@ -35,13 +38,31 @@ idf.py build
 
 En el panel, abre **Ajustes → Wi-Fi y Moonraker** para seleccionar la red, indicar la IP y el puerto del servidor y probar la conexión. Moonraker debe autorizar al panel en la red local. La conexión usa HTTP y WebSocket.
 
+## Probar ambas compilaciones
+
+El firmware de `develop` habilita el núcleo HD de forma predeterminada. Para probar el núcleo simple con una configuración y un directorio de compilación independientes, ejecuta desde `final/` lo siguiente.
+
+```powershell
+idf.py -B build/simple -D SDKCONFIG=build/sdkconfig.simple menuconfig
+```
+
+En **Klipper JC4880P443**, desactiva **Reproducir núcleos HD desde microSD** y compila con la misma configuración.
+
+```powershell
+idf.py -B build/simple -D SDKCONFIG=build/sdkconfig.simple build
+```
+
+Para las pruebas de interfaz usa `python tools/render_portal_firmware.py`, seguido de `python tests/portal_ui_regression.py` y `python tests/portal_mosaic_regression.py`. El [simulador Moonraker](final/docs/moonraker-falso.md) permite ensayar los estados de Klipper.
+
+## Preparar la microSD
+
+Copia la carpeta [animaciones](final/assets/portal/cores-hd/animaciones/) a la raíz de una tarjeta FAT32. El panel busca los seis paquetes en `animaciones/prueba_core/lz4/`. Consulta la [guía del firmware](final/README.md#lectura-de-microsd) para ver la asignación de estados y los diagnósticos USB.
+
 ## Documentación
 
 - [Cliente Klipper y Moonraker](final/docs/klipper_backend.md)
 - [Recursos gráficos](final/docs/assets-portal.md)
 - [Simulador Moonraker](final/docs/moonraker-falso.md)
 - [Pruebas de interfaz LVGL](final/tests/portal_host/README.md)
-
-La compilación y las pruebas de simulación pasan. Queda pendiente verificar el brillo y la fluidez del salvapantallas en el panel físico.
 
 Iconos de **Uicons by Flaticon**, **Pictogrammers**, **Google Material Symbols** y **Lucide/Feather**. [Atribuciones y licencias](final/docs/assets-portal.md#fuentes-y-reproducción)
