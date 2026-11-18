@@ -553,6 +553,8 @@ static bool action(const char *text) {
         bool pass=any_label(lv_layer_sys(),text+13);
         printf("EXPECT_SAVER %s %s\n",text+13,pass?"PASS":"FAIL");return pass;
     }
+    if(!strncmp(text,"@expectnotsaver:",16))
+        return !any_label(lv_layer_sys(),text+16);
     if(!strcmp(text,"@expectnosaver"))return !any_label(lv_layer_sys(),"Toca para volver");
     if(sscanf(text,"@expectbrightness:%u",&value)==1){
         bool pass=panel_brightness==value;
