@@ -28,3 +28,7 @@
 #define BOARD_TOUCH_I2C_HZ          100000
 #define BOARD_TOUCH_RESET_GPIO      GPIO_NUM_NC
 #define BOARD_TOUCH_INT_GPIO        GPIO_NUM_NC
+
+// TF_VCC is powered by VO4. The microSD pins are the P4 slot 0 IOMUX pins.
+#define BOARD_SD_LDO_CHANNEL        4
+#define BOARD_SD_LDO_MV             3300

@@ -7,11 +7,20 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "klipper_client.h"
+#include "sdkconfig.h"
 #include <inttypes.h>
 #include <stdatomic.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef CONFIG_PORTAL_CORE_HD
+#include "board_sd.h"
+#include "esp_rom_crc.h"
+#include "esp_wifi.h"
+#include <dirent.h>
+#include <errno.h>
+#include <strings.h>
+#endif
 
 static const char *TAG = "panel_console";
 static atomic_bool busy = false;
@@ -34,6 +43,95 @@ static uint32_t png_u32(const uint8_t *p) {
   return ((uint32_t)p[0] << 24) | ((uint32_t)p[1] << 16) |
          ((uint32_t)p[2] << 8) | p[3];
 }
+
+#ifdef CONFIG_PORTAL_CORE_HD
+static bool wifi_connected(void) {
+  device_network_snapshot_t network;
+  wifi_ap_record_t ap;
+  device_network_snapshot(&network);
+  return network.has_ip && esp_wifi_sta_get_ap_info(&ap) == ESP_OK;
+}
+
+static esp_err_t read_sd_png(void) {
+  static const char folder[] = BOARD_SD_MOUNT_PATH "/animaciones/codigo";
+  static const uint8_t signature[] = {137, 'P', 'N', 'G', 13, 10, 26, 10};
+  DIR *dir = opendir(folder);
+  if (!dir) {
+    int error = errno;
+    printf("SD_FOLDER path=%s errno=%d\n", folder, error);
+    return error == ENOENT ? ESP_ERR_NOT_FOUND : ESP_FAIL;
+  }
+
+  char filename[sizeof(((struct dirent *)0)->d_name)] = {0};
+  unsigned count = 0;
+  int list_error;
+  for (;;) {
+    errno = 0;
+    struct dirent *entry = readdir(dir);
+    if (!entry) {
+      list_error = errno;
+      break;
+    }
+    const char *ext = strrchr(entry->d_name, '.');
+    if (entry->d_type != DT_REG || !ext || strcasecmp(ext, ".png")) continue;
+    ++count;
+    if (!filename[0] || strcmp(entry->d_name, filename) < 0)
+      snprintf(filename, sizeof(filename), "%s", entry->d_name);
+  }
+  if (closedir(dir) != 0 || list_error) return ESP_FAIL;
+  printf("SD_FOLDER path=%s png=%u\n", folder, count);
+  if (!count) return ESP_ERR_NOT_FOUND;
+
+  char path[sizeof(folder) + sizeof(filename)];
+  snprintf(path, sizeof(path), "%s/%s", folder, filename);
+  FILE *file = fopen(path, "rb");
+  if (!file) {
+    printf("SD_READ open_errno=%d\n", errno);
+    return ESP_FAIL;
+  }
+  int64_t began = esp_timer_get_time();
+  uint8_t header[33];
+  size_t size = fread(header, 1, sizeof(header), file);
+  if (size != sizeof(header) || memcmp(header, signature, sizeof(signature)) ||
+      png_u32(header + 8) != 13 || memcmp(header + 12, "IHDR", 4)) {
+    bool io_error = ferror(file) != 0;
+    fclose(file);
+    return io_error ? ESP_FAIL : ESP_ERR_INVALID_RESPONSE;
+  }
+
+  uint32_t crc = esp_rom_crc32_le(0, header, sizeof(header));
+  uint8_t buffer[1024];
+  size_t bytes;
+  while ((bytes = fread(buffer, 1, sizeof(buffer), file))) {
+    crc = esp_rom_crc32_le(crc, buffer, bytes);
+    size += bytes;
+  }
+  bool read_failed = ferror(file) != 0;
+  if (fclose(file) != 0 || read_failed) return ESP_FAIL;
+
+  printf("SD_READ file=%s bytes=%u crc32=%08" PRIx32 " width=%" PRIu32
+         " height=%" PRIu32 " bit_depth=%u color_type=%u elapsed_us=%" PRId64 "\n",
+         filename, (unsigned)size, crc, png_u32(header + 16), png_u32(header + 20),
+         (unsigned)header[24], (unsigned)header[25], esp_timer_get_time() - began);
+  return ESP_OK;
+}
+
+static void test_sd(void) {
+  bool wifi_before = wifi_connected();
+  esp_err_t mount = board_sd_mount();
+  esp_err_t read = ESP_ERR_INVALID_STATE;
+  esp_err_t unmount = ESP_ERR_INVALID_STATE;
+  bool wifi_mounted = false;
+  if (mount == ESP_OK) {
+    read = read_sd_png();
+    wifi_mounted = wifi_connected();
+    unmount = board_sd_unmount();
+  }
+  printf("SD_TEST mount=%s read=%s unmount=%s wifi_before=%d wifi_mounted=%d wifi_after=%d\n",
+         esp_err_to_name(mount), esp_err_to_name(read), esp_err_to_name(unmount),
+         wifi_before, wifi_mounted, wifi_connected());
+}
+#endif
 static void print_metadata(const klipper_metadata_t *m) {
   unsigned width = 0, height = 0;
   if (m->thumbnail_size >= 24) {
@@ -311,13 +409,22 @@ done:
 bool panel_console_command(const char *command) {
   if (!command)
     return false;
+#ifdef CONFIG_PORTAL_CORE_HD
+  if (strcmp(command, "sd test") == 0) {
+    test_sd();
+    return true;
+  }
+#endif
   if (strcmp(command, "panel status") == 0) {
     print_status();
     return true;
   }
   if (strcmp(command, "panel") == 0 || strcmp(command, "panel help") == 0) {
-    printf("panel status | panel files | panel macros | panel objects | panel "
-           "metadata\n");
+    printf("panel status | panel files | panel macros | panel objects | panel metadata"
+#ifdef CONFIG_PORTAL_CORE_HD
+           " | sd test"
+#endif
+           "\n");
     return true;
   }
   unsigned mode = 0;

@@ -25,6 +25,14 @@ static bool application_console(const char *command)
 {
     return gui_port_console_command(command) || portal_ui_console_command(command) || audio_events_console_command(command) || audio_service_console_command(command) || panel_console_command(command);
 }
+
+#ifdef CONFIG_PORTAL_CORE_HD
+static void application_console_poll(void)
+{
+    portal_ui_start_standby_clip_load();
+    gui_port_console_poll();
+}
+#endif
 #endif
 void app_main(void)
 {
@@ -49,7 +57,11 @@ void app_main(void)
     ESP_ERROR_CHECK(gui_port_add_touch(display, NULL, &input));
     portal_ui_init(display, input);
     device_network_set_console_handler(application_console);
+#ifdef CONFIG_PORTAL_CORE_HD
+    device_network_set_console_poll_handler(application_console_poll);
+#else
     device_network_set_console_poll_handler(gui_port_console_poll);
+#endif
     ESP_ERROR_CHECK(device_network_start());
     ESP_ERROR_CHECK(klipper_client_start());
     esp_err_t audio = audio_service_start();

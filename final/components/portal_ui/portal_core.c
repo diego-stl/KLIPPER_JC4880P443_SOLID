@@ -382,7 +382,9 @@ void portal_core_tick(lv_obj_t *visible_core)
     tick_eye(s_active_core);
 }
 
-void portal_core_saver_create(lv_obj_t *parent, int x, int y)
+static lv_obj_t *s_saver_shell;
+
+lv_obj_t *portal_core_saver_create(lv_obj_t *parent, int x, int y)
 {
     lv_obj_t *visor = lv_canvas_create(parent);
     lv_obj_remove_flag(visor, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);
@@ -394,8 +396,21 @@ void portal_core_saver_create(lv_obj_t *parent, int x, int y)
     s_saver.height = SAVER_H;
     lv_obj_t *shell = lv_image_create(parent);
     lv_obj_remove_flag(shell, LV_OBJ_FLAG_CLICKABLE);
+    s_saver_shell = shell;
     lv_obj_set_pos(shell, x, y);
     lv_image_set_src(shell, &portal_saver_shell);
+    return shell;
+}
+
+void portal_core_saver_set_visible(bool visible)
+{
+    if (visible) {
+        lv_obj_remove_flag(s_saver.view, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_remove_flag(s_saver_shell, LV_OBJ_FLAG_HIDDEN);
+    } else {
+        lv_obj_add_flag(s_saver.view, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(s_saver_shell, LV_OBJ_FLAG_HIDDEN);
+    }
 }
 
 void portal_core_saver_set_face(portal_saver_face_t face, int lid, bool first)

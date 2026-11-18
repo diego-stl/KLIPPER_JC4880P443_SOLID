@@ -11,6 +11,9 @@ typedef enum {
 void portal_ui_init(lv_display_t *display, lv_indev_t *input);
 void portal_ui_tick(void);
 
+// Called by the network console worker after Hosted has initialized.
+void portal_ui_start_standby_clip_load(void);
+
 typedef struct {
     bool active, pending;
     portal_view_t view;

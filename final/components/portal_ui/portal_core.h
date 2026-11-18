@@ -23,7 +23,8 @@ typedef enum {
     PORTAL_SAVER_FACE_RED,
 } portal_saver_face_t;
 
-void portal_core_saver_create(lv_obj_t *parent, int x, int y);
+lv_obj_t *portal_core_saver_create(lv_obj_t *parent, int x, int y);
+void portal_core_saver_set_visible(bool visible);
 void portal_core_saver_set_face(portal_saver_face_t face, int lid, bool first);
 void portal_core_saver_tick(void);
 void portal_core_saver_stop(void);

@@ -1,6 +1,12 @@
 #include "portal_saver.h"
 #include "portal_assets.h"
 #include "portal_core.h"
+#ifndef PORTAL_UI_HOST_TEST
+#include "sdkconfig.h"
+#endif
+#ifdef CONFIG_PORTAL_CORE_HD
+#include "portal_core_clip.h"
+#endif
 #include <stdio.h>
 #include <string.h>
 
@@ -45,7 +51,11 @@ static const status_t s_statuses[] = {
 static lv_obj_t *s_root, *s_title, *s_file, *s_percent, *s_track, *s_fill;
 static lv_obj_t *s_time_group, *s_remaining, *s_elapsed, *s_nozzle, *s_bed, *s_reason;
 static lv_obj_t *s_idle_prompt, *s_error_footer;
+#ifdef CONFIG_PORTAL_CORE_HD
+static lv_obj_t *s_clip;
+#endif
 static bool s_active;
+static bool s_using_clip;
 static int s_state, s_progress;
 
 static lv_obj_t *surface(lv_obj_t *parent, int x, int y, int w, int h, uint32_t color)
@@ -87,7 +97,14 @@ static void create(lv_obj_t *layer)
 {
     s_root = surface(layer, 0, 0, 800, 480, SAVER_BG);
     lv_obj_add_flag(s_root, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_HIDDEN);
-    portal_core_saver_create(s_root, CORE_X, CORE_Y);
+    lv_obj_t *core = portal_core_saver_create(s_root, CORE_X, CORE_Y);
+#ifdef CONFIG_PORTAL_CORE_HD
+    s_clip = portal_core_clip_create(s_root, core);
+    lv_obj_set_style_image_recolor(s_clip, lv_color_black(), LV_PART_MAIN);
+    lv_obj_set_style_image_recolor_opa(s_clip, LV_OPA_40, LV_PART_MAIN);
+#else
+    (void)core;
+#endif
 
     s_title = label(s_root, "", 342, 74, 406, &lv_font_montserrat_28, SAVER_TITLE_BLUE);
     s_idle_prompt = label(s_root, "Que quieres\nimprimir ahora?", 365, 186, 383,
@@ -120,9 +137,22 @@ static void create(lv_obj_t *layer)
     lv_obj_set_style_text_align(hint, LV_TEXT_ALIGN_CENTER, 0);
 }
 
-void portal_saver_tick(void)
+void portal_saver_tick(int64_t now_us)
 {
-    if(s_active) portal_core_saver_tick();
+    if (!s_active) return;
+#ifdef CONFIG_PORTAL_CORE_HD
+    portal_core_clip_kind_t kind = portal_core_clip_for_state(s_state);
+    bool using_clip = portal_core_clip_update(s_clip, PORTAL_CLIP_SAVER, kind, now_us);
+    if (s_using_clip != using_clip) {
+        s_using_clip = using_clip;
+        portal_core_saver_set_visible(!using_clip);
+        if (using_clip) portal_core_saver_stop();
+        else portal_core_saver_set_face(s_statuses[s_state].face, s_statuses[s_state].lid, true);
+    }
+#else
+    (void)now_us;
+#endif
+    if (!s_using_clip) portal_core_saver_tick();
 }
 
 static void duration(lv_obj_t *object, uint32_t seconds, bool valid)
@@ -152,7 +182,7 @@ void portal_saver_update(const klipper_snapshot_t *printer)
     if(s_state != (int)state) {
         bool first = s_state < 0;
         s_state = state;
-        portal_core_saver_set_face(status->face, status->lid, first);
+        if (!s_using_clip) portal_core_saver_set_face(status->face, status->lid, first);
         set_text(s_title, status->title);
         lv_obj_set_pos(s_title, state == KLIPPER_STANDBY ? 365 : 342,
                        state == KLIPPER_STANDBY ? 86 : 74);
@@ -183,7 +213,7 @@ void portal_saver_update(const klipper_snapshot_t *printer)
         lv_obj_set_width(s_fill, 406 * progress / 100);
     }
     duration(s_remaining, state == KLIPPER_COMPLETE ? 0 : printer->time_remaining,
-             state == KLIPPER_COMPLETE || (active_job && value > .5f && printer->print_duration));
+              state == KLIPPER_COMPLETE || (active_job && value > .5f && printer->print_duration));
     duration(s_elapsed, printer->print_duration, true);
     char temperature[32];
     snprintf(temperature, sizeof(temperature), "Boquilla  %.0f °C", printer->hotend_temperature);
@@ -197,12 +227,13 @@ bool portal_saver_active(void)
     return s_active;
 }
 
-void portal_saver_show(lv_obj_t *layer, const klipper_snapshot_t *printer)
+void portal_saver_show(lv_obj_t *layer, const klipper_snapshot_t *printer, int64_t now_us)
 {
     if(!s_root) create(layer);
     s_active = true;
     s_state = s_progress = -1;
     portal_saver_update(printer);
+    portal_saver_tick(now_us);
     visible(s_root, true);
 }
 
@@ -212,4 +243,6 @@ void portal_saver_hide(void)
     s_active = false;
     portal_core_saver_stop();
     visible(s_root, false);
+    if (s_using_clip) portal_core_saver_set_visible(true);
+    s_using_clip = false;
 }

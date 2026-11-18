@@ -14,6 +14,10 @@
 #include "esp_log.h"
 #ifndef PORTAL_UI_HOST_TEST
 #include "esp_app_desc.h"
+#include "sdkconfig.h"
+#endif
+#ifdef CONFIG_PORTAL_CORE_HD
+#include "portal_core_clip.h"
 #endif
 #include "freertos/FreeRTOS.h"
 #include <inttypes.h>
@@ -106,6 +110,10 @@ static uint16_t s_sleep_minutes=10;
 static temperature_t s_main_temps[3][2];
 static preview_t s_previews[4];
 static lv_obj_t *s_standby_core,*s_error_core,*s_warning_core;
+#ifdef CONFIG_PORTAL_CORE_HD
+static lv_obj_t *s_standby_clip,*s_error_clip;
+static portal_core_clip_kind_t wanted_clip(void);
+#endif
 static lv_obj_t *s_standby_connected_actions[4];
 static lv_obj_t *s_progress_text[2],*s_print_file[2],*s_print_state[2];
 static lv_obj_t *s_start_status,*s_start_log,*s_start_wifi,*s_start_klipper;
@@ -170,10 +178,13 @@ static void apply_brightness(void)
 static void start_saver(void)
 {
     klipper_client_snapshot(&s_printer);
+#ifdef CONFIG_PORTAL_CORE_HD
+    portal_core_clip_select(wanted_clip());
+#endif
     portal_network_settings_close();
     if(s_modal&&s_modal_action!=0)close_modal();
     portal_core_tick(NULL);
-    portal_saver_show(lv_display_get_layer_sys(s_display),&s_printer);
+    portal_saver_show(lv_display_get_layer_sys(s_display),&s_printer,esp_timer_get_time());
     apply_brightness();
 }
 static void wake_display(void)
@@ -192,6 +203,14 @@ static bool current_endpoint(void)
 {
     return s_printer.endpoint_generation==s_network.endpoint_generation;
 }
+#ifdef CONFIG_PORTAL_CORE_HD
+static portal_core_clip_kind_t wanted_clip(void)
+{
+    if(current_endpoint()&&(s_printer.available||s_printer.state==KLIPPER_ERROR))
+        return portal_core_clip_for_state(s_printer.state);
+    return s_view==PORTAL_STARTUP?PORTAL_CLIP_NONE:PORTAL_CLIP_OFFLINE;
+}
+#endif
 static void inspection_publish(void)
 {
     portENTER_CRITICAL(&s_inspection_lock);
@@ -208,6 +227,20 @@ void portal_ui_inspection_status(portal_inspection_status_t *status)
 }
 bool portal_ui_console_command(const char *command)
 {
+#ifdef CONFIG_PORTAL_CORE_HD
+    if(command&&!strcmp(command,"core status")){
+        portal_core_clip_print_status();
+        return true;
+    }
+    if(command&&!strcmp(command,"core scan")){
+        portal_core_clip_scan_card();
+        return true;
+    }
+    if(command&&!strncmp(command,"core format ",12)){
+        portal_core_clip_set_format(command+12);
+        return true;
+    }
+#endif
     if(!command||(strncmp(command,"screen",6)!=0)||(command[6]&&command[6]!=' '))return false;
     if(!strcmp(command,"screen status")){
         portal_inspection_status_t status;portal_ui_inspection_status(&status);
@@ -508,6 +541,9 @@ static void create_standby(void)
 {
     lv_obj_t *s=s_screens[PORTAL_STANDBY];
     s_standby_core=portal_core_create(s,PORTAL_CORE_BASE,39,10);
+#ifdef CONFIG_PORTAL_CORE_HD
+    s_standby_clip=portal_core_clip_create(s,s_standby_core);
+#endif
     colored_panel(s,12,319,332,149,PORTAL_INFO_BG);
     s_standby_status=center_label(s,"Reposo",26,323,304,&lv_font_montserrat_20,PORTAL_PALE_BLUE);
     s_main_temps[0][0]=temperature(s,26,350,304,"BOQUILLA","nozzle");
@@ -818,6 +854,10 @@ static void create_error(void)
 {
     lv_obj_t *s=s_screens[PORTAL_ERROR];
     s_error_core=portal_core_create(s,PORTAL_CORE_ERROR,39,10);
+#ifdef CONFIG_PORTAL_CORE_HD
+    s_error_clip=portal_core_clip_create(s,s_error_core);
+    lv_obj_set_x(s_error_clip,4);
+#endif
     large_panel(s,12,342,264,126);
     center_label(s,"Klipper requiere atención",26,360,236,&lv_font_montserrat_14,PORTAL_TEXT_COLOR);
     lv_obj_t *message=large_panel(s,308,12,480,278);
@@ -1573,18 +1613,47 @@ void portal_ui_init(lv_display_t *display,lv_indev_t *input)
     lv_obj_set_style_border_color(inspection_banner,lv_color_hex(CYAN),0);
     s_inspection_label=center_label(inspection_banner,"",4,5,502,&lv_font_montserrat_14,CYAN);
     if(input)lv_indev_add_event_cb(input,input_event,LV_EVENT_ALL,NULL);
+#ifdef CONFIG_PORTAL_CORE_HD
+    portal_core_clip_track_present(display);
+#endif
     apply_brightness();lv_screen_load(s_screens[PORTAL_STARTUP]);
 }
+#ifdef CONFIG_PORTAL_CORE_HD
+void portal_ui_start_standby_clip_load(void)
+{
+    portal_core_clip_start_load();
+}
+#endif
+
 void portal_ui_tick(void)
 {
     int64_t now=esp_timer_get_time();
-    portal_saver_tick();
     lv_obj_t *core=NULL;
     if(!portal_saver_active()&&!s_inspecting){
         if(s_modal)core=s_warning_core;
         else if(s_view==PORTAL_STANDBY)core=s_standby_core;
         else if(s_view==PORTAL_ERROR)core=s_error_core;
     }
+#ifdef CONFIG_PORTAL_CORE_HD
+    bool awaiting_print=core==s_standby_core&&s_print_pending&&!s_print_uncertain&&
+                        s_printer.available&&current_endpoint();
+    portal_core_clip_kind_t clip=awaiting_print?PORTAL_CLIP_STANDBY:wanted_clip();
+    portal_core_clip_select(clip);
+#endif
+    portal_saver_tick(now);
+#ifdef CONFIG_PORTAL_CORE_HD
+    lv_obj_t *clip_image=NULL;
+    if(awaiting_print||(core==s_standby_core&&!s_print_pending&&
+       (clip==PORTAL_CLIP_STANDBY||clip==PORTAL_CLIP_OFFLINE||clip==PORTAL_CLIP_COMPLETE||
+        (clip==PORTAL_CLIP_ERROR&&s_printer.state==KLIPPER_CANCELLED))))
+        clip_image=s_standby_clip;
+    else if(core==s_error_core&&clip==PORTAL_CLIP_ERROR)clip_image=s_error_clip;
+    bool showing_clip=!portal_saver_active()&&
+        portal_core_clip_update(clip_image,PORTAL_CLIP_MAIN,clip,now);
+    visible(s_standby_core,!showing_clip||core!=s_standby_core);
+    visible(s_error_core,!showing_clip||core!=s_error_core);
+    if(showing_clip)core=NULL;
+#endif
     portal_core_tick(core);
     if(s_toast_until&&now>=s_toast_until){lv_obj_add_flag(s_toast,LV_OBJ_FLAG_HIDDEN);s_toast_until=0;}
     if(now<s_next_tick)return;

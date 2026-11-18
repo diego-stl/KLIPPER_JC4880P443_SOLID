@@ -5,4 +5,12 @@ menu "Klipper JC4880P443"
         help
             Para la aplicacion normal dejar desactivado. La prueba requiere
             desactivar Hosted/Wi-Fi y usar su configuracion respaldada.
+
+    config PORTAL_CORE_HD
+        bool "Reproducir núcleos HD desde microSD"
+        depends on !PANEL_ORIENTATION_TEST
+        default y
+        help
+            Carga animaciones HD desde microSD y conserva el núcleo
+            integrado como respaldo cuando el clip no está disponible.
 endmenu
