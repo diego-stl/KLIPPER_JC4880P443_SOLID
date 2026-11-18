@@ -6,11 +6,11 @@ Firmware para usar el panel táctil **Guition JC4880P443C (ESP32-P4)** como inte
 
 El núcleo animado se incluye en el firmware. El panel funciona sin microSD. La interfaz y los íconos son los mismos de la [versión HD](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main-hd).
 
-| Pantalla en reposo | Salvapantallas en reposo |
-| --- | --- |
-| ![Panel en reposo con el núcleo simple](final/docs/img/panel.png) | ![Salvapantallas con el núcleo simple](final/docs/img/salvapantallas.png) |
+| Pantalla en reposo | Salvapantallas en reposo | Animación de «En espera» |
+| --- | --- | --- |
+| ![Panel en reposo con el núcleo simple](final/docs/img/panel.png) | ![Salvapantallas con el núcleo simple](final/docs/img/salvapantallas.png) | ![GIF de En espera con el núcleo simple](final/docs/img/en-espera.gif) |
 
-*Capturas de la interfaz LVGL con una impresora simulada.*
+*Capturas y GIF generados en el simulador LVGL.*
 
 El ojo y los párpados del núcleo integrado recorren nueve poses según el estado de Klipper. Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas.
 
