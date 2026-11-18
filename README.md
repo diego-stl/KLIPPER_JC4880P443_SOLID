@@ -6,11 +6,11 @@ Firmware para usar el panel táctil **Guition JC4880P443C (ESP32-P4)** como inte
 
 Esta versión reproduce animaciones de 300 × 300 px a 12 fps desde microSD. Usa el núcleo integrado durante la carga o cuando falta el clip. Comparte la interfaz y los íconos de la [versión simple](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main).
 
-| Pantalla en reposo | Salvapantallas en reposo |
-| --- | --- |
-| ![Panel en reposo con el núcleo HD](final/docs/img/panel.png) | ![Salvapantallas con el núcleo HD](final/docs/img/salvapantallas.png) |
+| Pantalla en reposo | Salvapantallas en reposo | Animación de «En espera» |
+| --- | --- | --- |
+| ![Panel en reposo con el núcleo HD](final/docs/img/panel.png) | ![Salvapantallas con el núcleo HD](final/docs/img/salvapantallas.png) | ![GIF de En espera con el núcleo HD](final/docs/img/en-espera.gif) |
 
-*Capturas de la interfaz LVGL con una impresora simulada y un fotograma del clip incluido para microSD.*
+*Capturas y GIF generados en el simulador LVGL. El GIF HD reproduce el clip Pensativo de la microSD.*
 
 Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas junto al núcleo correspondiente al estado de Klipper.
 
