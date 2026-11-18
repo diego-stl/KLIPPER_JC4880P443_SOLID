@@ -6,12 +6,12 @@ Firmware para usar el panel táctil **Guition JC4880P443C (ESP32-P4)** como inte
 
 `develop` es la rama de integración. Las versiones [simple](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main) y [HD](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main-hd) comparten sus cambios de interfaz e íconos. Los commits de interfaz que pasan las pruebas se incorporan a ambas ramas.
 
-| Variante | Pantalla en reposo | Salvapantallas en reposo |
-| --- | --- | --- |
-| Simple | ![Panel con núcleo simple](final/docs/img/panel.png) | ![Salvapantallas con núcleo simple](final/docs/img/salvapantallas.png) |
-| HD | ![Panel con núcleo HD](final/docs/img/panel-hd.png) | ![Salvapantallas con núcleo HD](final/docs/img/salvapantallas-hd.png) |
+| Variante | Pantalla en reposo | Salvapantallas en reposo | Animación de «En espera» |
+| --- | --- | --- | --- |
+| Simple | ![Panel con núcleo simple](final/docs/img/panel.png) | ![Salvapantallas con núcleo simple](final/docs/img/salvapantallas.png) | ![GIF de En espera con el núcleo simple](final/docs/img/en-espera.gif) |
+| HD | ![Panel con núcleo HD](final/docs/img/panel-hd.png) | ![Salvapantallas con núcleo HD](final/docs/img/salvapantallas-hd.png) | ![GIF de En espera con el núcleo HD](final/docs/img/en-espera-hd.gif) |
 
-*Capturas de la interfaz LVGL con una impresora simulada. Las capturas HD usan un fotograma del clip incluido para microSD.*
+*Capturas y GIF generados en el simulador LVGL. El GIF HD reproduce el clip Pensativo de la microSD.*
 
 Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas junto al núcleo correspondiente al estado de Klipper.
 
