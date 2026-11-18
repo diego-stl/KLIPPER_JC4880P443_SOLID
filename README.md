@@ -1,16 +1,18 @@
-# KLIPPER_JC4880P443_SOLID
+# KLIPPER_JC4880P443_SOLID · Núcleo simple
 
 Firmware para usar el panel táctil **Guition JC4880P443C (ESP32-P4)** como interfaz de una impresora 3D con Klipper y Moonraker. La interfaz PORTAL usa LVGL en horizontal a **800 × 480** y se conecta a Moonraker por Wi-Fi.
 
-## Diseño
+## Núcleo simple
 
-| Pantalla principal | Salvapantallas durante la impresión |
+El núcleo animado se incluye en el firmware. El panel funciona sin microSD. La interfaz y los íconos son los mismos de la [versión HD](https://github.com/diego-stl/KLIPPER_JC4880P443_SOLID/tree/main-hd).
+
+| Pantalla en reposo | Salvapantallas en reposo |
 | --- | --- |
-| ![Pantalla principal con el core y los controles del panel](final/docs/img/panel.png) | ![Salvapantallas con el core, progreso, tiempos y temperaturas](final/docs/img/salvapantallas.png) |
+| ![Panel en reposo con el núcleo simple](final/docs/img/panel.png) | ![Salvapantallas con el núcleo simple](final/docs/img/salvapantallas.png) |
 
-*Capturas del simulador LVGL con datos de ejemplo.*
+*Capturas de la interfaz LVGL con una impresora simulada.*
 
-La pantalla principal combina un fondo gris geométrico, iconos de color y un core cuya expresión indica el estado de Klipper. El ojo y los párpados pasan por nueve poses en las pantallas con core y en el salvapantallas. Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas con textos atenuados.
+El ojo y los párpados del núcleo integrado recorren nueve poses según el estado de Klipper. Durante una impresión, el salvapantallas muestra el progreso, los tiempos y las temperaturas.
 
 En **Ajustes** puedes probar el salvapantallas, elegir 1, 5 o 10 minutos de inactividad y configurar su brillo por separado. El brillo inicial del salvapantallas es del 25 %. El primer toque restaura el brillo normal y se consume al despertar la pantalla.
 
@@ -41,7 +43,5 @@ En el panel, abre **Ajustes → Wi-Fi y Moonraker** para seleccionar la red, ind
 - [Recursos gráficos](final/docs/assets-portal.md)
 - [Simulador Moonraker](final/docs/moonraker-falso.md)
 - [Pruebas de interfaz LVGL](final/tests/portal_host/README.md)
-
-La compilación y las pruebas de simulación pasan. Queda pendiente verificar el brillo y la fluidez del salvapantallas en el panel físico.
 
 Iconos de **Uicons by Flaticon**, **Pictogrammers**, **Google Material Symbols** y **Lucide/Feather**. [Atribuciones y licencias](final/docs/assets-portal.md#fuentes-y-reproducción)
